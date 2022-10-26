@@ -34,7 +34,8 @@ private:
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
 	PhysBody* playerBody;
-
+	int jump=0;
+	int movement=0;
 };
 
 #endif // __PLAYER_H__
