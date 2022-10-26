@@ -60,6 +60,10 @@ bool Scene::Start()
 
 	app->win->SetTitle(title.GetString());
 
+	//SET CAMERA MAXIMS
+	maxCameraPosLeft = 1; //1 para evitar una linea de pixels negra
+	maxCameraPosRigth = -(app->map->mapData.width* app->map->mapData.tileWidth)+app->render->camera.w; //PosRigth es negativo ya que el mapa a moverse la camara se mueve a la izquierda
+
 	return true;
 }
 
@@ -79,17 +83,29 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	//if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 1;
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	//if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 		app->render->camera.y -= 1;
 
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT )
+	{
+		if (maxCameraPosLeft >= app->render->camera.x)
+		{
 		app->render->camera.x += 1;
+		}
+		
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x -= 1;
+	{
+		if (maxCameraPosRigth <= app->render->camera.x)
+		{
+		app->render->camera.x -= 1; 
+		}
+	}
+		
 
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 

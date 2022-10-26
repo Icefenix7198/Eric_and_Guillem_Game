@@ -39,6 +39,13 @@ public:
 	//L02: DONE 3: Declare a Player attribute 
 	Player* player;
 
+	//A que distancia del borde se empieza a mover la camara con el player
+	int cameraMargin = 4;
+
+	//Limites donde la camara dejara de moverse por salirse del mapa
+	int maxCameraPosLeft;
+	int maxCameraPosRigth;
+
 private:
 	SDL_Texture* img;
 

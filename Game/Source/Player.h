@@ -34,7 +34,10 @@ private:
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
 	PhysBody* playerBody;
+	
+	//Movimiento vertical del player (solo positivo de momento)
 	int jump=0;
+	//Movimiento horizontal del player
 	int movement=0;
 };
 

@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Map.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -47,6 +48,7 @@ bool Player::Update()
 	// L07 TODO 5: Add physics to the player - updated player position using physics
 	b2Vec2 velocity=b2Vec2(0,0);
 	
+	//En cada iteracion jump y movimiento se hacen un poco mas pequeñas, dando la impersion de que desacelera el player
 	if (jump<0)
 	{
 		velocity.y = jump;
@@ -86,6 +88,12 @@ bool Player::Update()
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 			jump = -30;
+		
+		//Mover la camara
+		if (app->scene->maxCameraPosLeft >= app->render->camera.x && -position.x+app->scene->cameraMargin*app->map->mapData.tileWidth >= app->render->camera.x)
+		{
+			app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		}
 
 	}
 
@@ -97,7 +105,7 @@ bool Player::Update()
 		jump = -30;
 	}
 		
-
+	
 	
 
 

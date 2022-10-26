@@ -1,9 +1,11 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "Map.h"
 
 #include "Defs.h"
 #include "Log.h"
+
 
 #define VSYNC true
 
@@ -47,6 +49,7 @@ bool Render::Awake(pugi::xml_node& config)
 		camera.h = app->win->screenSurface->h;
 		camera.x = 0;
 		camera.y = 0;
+		
 	}
 
 	return ret;
