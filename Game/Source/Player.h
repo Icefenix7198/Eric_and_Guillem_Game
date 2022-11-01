@@ -23,6 +23,8 @@ public:
 
 	bool CleanUp();
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 public:
 
 private:
@@ -34,6 +36,9 @@ private:
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
 	PhysBody* playerBody;
+
+	int pickCoinFxId;
+
 	
 	//Movimiento vertical del player (solo positivo de momento)
 	int jump=0;
