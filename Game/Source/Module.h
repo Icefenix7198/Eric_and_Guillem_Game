@@ -6,8 +6,6 @@
 #include "PugiXml/src/pugixml.hpp"
 
 class App;
-// L07 TODO 2: Add Physics Module
-
 class PhysBody;
 
 class Module
@@ -69,10 +67,9 @@ public:
 		return true;
 	}
 
-	// L07 TODO 2: Add Physics Module
 	virtual void OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
-	
+
 	}
 
 public:

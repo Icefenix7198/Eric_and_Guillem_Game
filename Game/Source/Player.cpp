@@ -56,7 +56,7 @@ bool Player::Update()
 	}
 	else
 	{
-		velocity.y = -GRAVITY_Y;
+		velocity.y = -GRAVITY_Y*0;
 	}
 
 	if (movement>0)
@@ -73,7 +73,18 @@ bool Player::Update()
 	{
 		velocity.x = GRAVITY_X;
 	}
+
+	//Mover la camara
+	if (app->scene->maxCameraPosLeft >= app->render->camera.x && -position.x+app->scene->cameraMargin*app->map->mapData.tileWidth >= app->render->camera.x && movement<0)
+	{
+		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+	}
+	if (app->scene->maxCameraPosRigth <= app->render->camera.x && position.x + app->scene->cameraMargin * app->map->mapData.tileWidth >= -app->render->camera.x+app->render->camera.w /*&& movement> 0*/)
+	{
+		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+	}
 	
+
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
@@ -89,11 +100,8 @@ bool Player::Update()
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
 			jump = -30;
 		
-		//Mover la camara
-		if (app->scene->maxCameraPosLeft >= app->render->camera.x && -position.x+app->scene->cameraMargin*app->map->mapData.tileWidth >= app->render->camera.x)
-		{
-			app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
-		}
+		
+		
 
 	}
 

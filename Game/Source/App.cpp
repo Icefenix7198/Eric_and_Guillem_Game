@@ -25,11 +25,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	//L07 TODO 2: Add Physics module
+	//L07 DONE 2: Add Physics module
+	physics = new Physics();
 	scene = new Scene();
 	entityManager = new EntityManager();
 	map = new Map();
-	physics = new Physics();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -37,13 +37,11 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	//L07 TODO 2: Add Physics module
-	AddModule(physics); // IMPORTANTE DEFINIRLO ANTES QUE EL MODULO SCENE , MAP AND ENTITYMANAGER YA QUE ESTA FUNCION ES LLAMADA POR ELLOS
-	AddModule(map);
+	//L07 DONE 2: Add Physics module
+	AddModule(physics);
 	AddModule(scene);
 	AddModule(entityManager);
-	
-	
+	AddModule(map);
 
 	// Render last to swap buffer
 	AddModule(render);

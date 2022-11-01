@@ -6,7 +6,7 @@
 #include "Input.h"
 #include "Render.h"
 
-struct Collider;
+class PhysBody;
 
 enum class EntityType
 {
@@ -69,7 +69,7 @@ public:
 		}
 	}
 
-	virtual void OnCollision(Collider* c1, Collider* c2) {
+	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 	
 	};
 

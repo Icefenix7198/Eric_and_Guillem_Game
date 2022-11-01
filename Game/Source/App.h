@@ -18,8 +18,8 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+//L07 DONE 2: Add Physics module
 class Physics;
-//L07 TODO 2: Add Physics module
 
 class App
 {
@@ -89,8 +89,8 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	//L07 DONE 2: Add Physics module
 	Physics* physics;
-	//L07 TODO 2: Add Physics module
 
 private:
 
