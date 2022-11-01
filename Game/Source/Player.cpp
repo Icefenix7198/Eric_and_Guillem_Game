@@ -56,7 +56,7 @@ bool Player::Update()
 	}
 	else
 	{
-		velocity.y = -GRAVITY_Y*0;
+		velocity.y = -GRAVITY_Y;
 	}
 
 	if (movement>0)
@@ -87,8 +87,11 @@ bool Player::Update()
 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && CanJump==true)
+	{
 		jump=-30;
+		CanJump = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		position.y += 1;
@@ -149,6 +152,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		if (CanJump == false) { CanJump = true; app->audio->PlayFx(pickCoinFxId);
+		}
+		break;
+	case ColliderType::WALL:
+		LOG("Collison WALL");
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
