@@ -102,20 +102,22 @@ bool Player::Update()
 	{
 		movement = -10;
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && CanJump == true)
+		{
 			jump = -30;
-		
-		
-		
-
+			CanJump = false;
+		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		movement=10;
 
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
-		jump = -30;
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && CanJump == true)
+		{
+			jump = -30;
+			CanJump = false;
+		}
 	}
 		
 	
