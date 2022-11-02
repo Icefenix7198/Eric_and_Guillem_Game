@@ -54,7 +54,7 @@ bool Player::Update()
 	if (jump<0)
 	{
 		velocity.y = jump;
-		jump += 1;
+		jump += 2;
 	}
 	else
 	{
