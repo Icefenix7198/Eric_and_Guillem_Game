@@ -10,6 +10,9 @@
 #include "Physics.h"
 #include "Map.h"
 
+#include "Item.h"
+#include "EntityManager.h"
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -29,7 +32,7 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	//active = false;
+	
 	return true;
 }
 
@@ -48,10 +51,11 @@ bool Player::Start() {
 
 bool Player::Update()
 {
-	if (active==false) //Si esta desactivado no se mueve
+	if (app->map->actualScene!=app->map->GAMEMAP)
 	{
 		return true;
 	}
+	
 	// L07 TODO 5: Add physics to the player - updated player position using physics
 	b2Vec2 velocity=b2Vec2(0,0);
 	
@@ -158,6 +162,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
+		physB->~PhysBody();
+		//app->entityManager->DestroyEntity();
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");

@@ -152,6 +152,15 @@ public:
 
 	// L04: DONE 1: Declare a variable data of the struct MapData
 	MapData mapData;
+	enum Scenes
+	{
+		INTRO,
+		GAMEMAP,
+		WIN,
+		LOSE
+	};
+	int actualScene;
+	bool colidersCreated=false;
 
 private:
 

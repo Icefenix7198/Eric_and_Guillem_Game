@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Entity.h"
 #include "List.h"
+#include "App.h"
 
 class EntityManager : public Module
 {

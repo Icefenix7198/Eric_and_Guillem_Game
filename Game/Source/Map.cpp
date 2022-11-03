@@ -8,6 +8,8 @@
 #include "Defs.h"
 #include "Log.h"
 
+#include "Player.h"
+
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
@@ -28,7 +30,7 @@ bool Map::Awake(pugi::xml_node& config)
 
     mapFileName = config.child("mapfile").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
-
+    actualScene = Scenes::INTRO;
     return ret;
 }
 
@@ -52,37 +54,63 @@ void Map::Draw()
 
     // L05: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
 
-    ListItem<MapLayer*>* mapLayerItem;
-    mapLayerItem = mapData.maplayers.start;
 
-    while (mapLayerItem != NULL) {
+    //SWITCH DE QUE PANTALLA SE PRINTA
+    switch (actualScene)
+    {
+    case Map::INTRO:
 
-        //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
-        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+            actualScene = Map::GAMEMAP;
+        
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
-            {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+        break;
+    case Map::GAMEMAP:
+
+
+        ListItem<MapLayer*>* mapLayerItem;
+        mapLayerItem = mapData.maplayers.start;
+
+        while (mapLayerItem != NULL) {
+
+            //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
+            if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+
+                for (int x = 0; x < mapLayerItem->data->width; x++)
                 {
-                    // L05: DONE 9: Complete the draw function
-                    int gid = mapLayerItem->data->Get(x, y);
+                    for (int y = 0; y < mapLayerItem->data->height; y++)
+                    {
+                        // L05: DONE 9: Complete the draw function
+                        int gid = mapLayerItem->data->Get(x, y);
 
-                    //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
-                    TileSet* tileset = GetTilesetFromTileId(gid);
+                        //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                        TileSet* tileset = GetTilesetFromTileId(gid);
 
-                    SDL_Rect r = tileset->GetTileRect(gid);
-                    iPoint pos = MapToWorld(x, y);
+                        SDL_Rect r = tileset->GetTileRect(gid);
+                        iPoint pos = MapToWorld(x, y);
 
-                    app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);
+                        app->render->DrawTexture(tileset->texture,
+                            pos.x,
+                            pos.y,
+                            &r);
+                    }
                 }
             }
-        }
-        mapLayerItem = mapLayerItem->next;
+            mapLayerItem = mapLayerItem->next;
 
+        }
+        break;
+    case Map::WIN:
+        break;
+    case Map::LOSE:
+        break;
+    default:
+        break;
     }
+
+
+
+    
 }
 
 // L05: DONE 8: Create a method that translates x,y coordinates from map positions to world positions
@@ -193,6 +221,8 @@ bool Map::Load()
     
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
+
+    
     PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
     // L07 DONE 7: Assign collider type
     c1->ctype = ColliderType::PLATFORM;
@@ -204,6 +234,9 @@ bool Map::Load()
     PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
     // L07 DONE 7: Assign collider type
     c3->ctype = ColliderType::PLATFORM;
+    
+
+    
 
     if(ret == true)
     {
