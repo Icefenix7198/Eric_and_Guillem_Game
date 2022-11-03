@@ -18,6 +18,7 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class FadeToBlack;
 //L07 DONE 2: Add Physics module
 class Physics;
 
@@ -89,6 +90,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	FadeToBlack* fade;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 

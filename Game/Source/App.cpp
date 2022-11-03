@@ -25,6 +25,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
+	//fade = new FadeToBlack(); //ERIC: Por que conchas da error? Provar a hacerlo de 0 
 	//L07 DONE 2: Add Physics module
 	physics = new Physics();
 	scene = new Scene();
@@ -37,6 +38,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
+	//AddModule(fade);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
 	AddModule(scene);

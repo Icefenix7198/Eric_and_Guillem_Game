@@ -29,6 +29,7 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	//active = false;
 	return true;
 }
 
@@ -47,6 +48,10 @@ bool Player::Start() {
 
 bool Player::Update()
 {
+	if (active==false) //Si esta desactivado no se mueve
+	{
+		return true;
+	}
 	// L07 TODO 5: Add physics to the player - updated player position using physics
 	b2Vec2 velocity=b2Vec2(0,0);
 	
