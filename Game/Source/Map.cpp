@@ -63,6 +63,7 @@ void Map::Draw()
         if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
             actualScene = Map::GAMEMAP;
         
+        app->render->DrawTexture()
 
         break;
     case Map::GAMEMAP:
