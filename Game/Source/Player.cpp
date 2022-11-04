@@ -51,7 +51,7 @@ bool Player::Start() {
 
 bool Player::Update()
 {
-	if (app->map->actualScene!=app->map->GAMEMAP)
+	if (app->scene->actualScene!=app->scene->GAMEMAP)
 	{
 		return true;
 	}

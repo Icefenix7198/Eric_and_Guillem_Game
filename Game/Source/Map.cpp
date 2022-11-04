@@ -30,7 +30,6 @@ bool Map::Awake(pugi::xml_node& config)
 
     mapFileName = config.child("mapfile").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
-    actualScene = Scenes::INTRO;
     return ret;
 }
 
@@ -56,17 +55,8 @@ void Map::Draw()
 
 
     //SWITCH DE QUE PANTALLA SE PRINTA
-    switch (actualScene)
+    if (app->scene->actualScene == app->scene->Scenes::GAMEMAP)
     {
-    case Map::INTRO:
-
-        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-            actualScene = Map::GAMEMAP;
-        
-        
-
-        break;
-    case Map::GAMEMAP:
 
 
         ListItem<MapLayer*>* mapLayerItem;
@@ -100,14 +90,7 @@ void Map::Draw()
             mapLayerItem = mapLayerItem->next;
 
         }
-        break;
-    case Map::WIN:
-        break;
-    case Map::LOSE:
-        break;
-    default:
-        break;
-    }
+    }   
 
 
 

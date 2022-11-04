@@ -19,6 +19,7 @@ class Scene;
 class EntityManager;
 class Map;
 class FadeToBlack;
+class Intro;
 //L07 DONE 2: Add Physics module
 class Physics;
 
@@ -91,6 +92,7 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	FadeToBlack* fade;
+	Intro* intro;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 

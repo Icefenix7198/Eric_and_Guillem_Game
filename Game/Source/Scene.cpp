@@ -6,6 +6,9 @@
 #include "Window.h"
 #include "Scene.h"
 #include "EntityManager.h"
+
+//Diferent Scenes
+#include "Intro.h"
 #include "Map.h"
 
 #include "Defs.h"
@@ -37,6 +40,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	//L02: DONE 3: Instantiate the player using the entity manager
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
+	actualScene = Scenes::INTRO;
 
 	return ret;
 }
@@ -109,8 +113,30 @@ bool Scene::Update(float dt)
 
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
-	// Draw map
-	app->map->Draw();
+	//Draw actual scene
+	switch (actualScene)
+	{
+	case Scene::INTRO:
+		//Draw intro
+		app->intro->Draw();
+
+		//Cambiar al mapa de juego
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			actualScene = Scenes::GAMEMAP;
+		break;
+	case Scene::GAMEMAP:
+		// Draw map
+		app->map->Draw();
+		break;
+	case Scene::WIN:
+		break;
+	case Scene::LOSE:
+		break;
+	default:
+		break;
+	}
+
+	
 
 	return true;
 }

@@ -46,6 +46,15 @@ public:
 	int maxCameraPosLeft;
 	int maxCameraPosRigth;
 
+	enum Scenes
+	{
+		INTRO,
+		GAMEMAP,
+		WIN,
+		LOSE
+	};
+	int actualScene;
+
 private:
 	SDL_Texture* img;
 

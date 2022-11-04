@@ -44,7 +44,7 @@ bool Item::Start() {
 bool Item::Update()
 {
 	//If not GameMap no print ni fisica
-	if (app->map->actualScene != app->map->GAMEMAP)
+	if (app->scene->actualScene != app->scene->GAMEMAP)
 	{
 		return true;
 	}
