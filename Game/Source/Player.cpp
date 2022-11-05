@@ -98,7 +98,7 @@ bool Player::Update()
 	{
 		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
 	}
-	if (app->scene->maxCameraPosRigth <= app->render->camera.x && position.x + app->scene->cameraMargin * app->map->mapData.tileWidth >= -app->render->camera.x+app->render->camera.w /*&& movement> 0*/)
+	if (app->scene->maxCameraPosRigth <= app->render->camera.x && position.x + app->scene->cameraMargin * app->map->mapData.tileWidth >= -app->render->camera.x+app->render->camera.w && movement> 0)
 	{
 		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
 	}
@@ -106,10 +106,10 @@ bool Player::Update()
 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump==true)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump>0)
 	{
-		jump=-30;
-		CanJump = false;
+		jump=-24;
+		CanJump -=1;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
@@ -117,14 +117,14 @@ bool Player::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
-		movement = -10;
+		movement = -5;
 		Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
 		currentAnimation = &Anim;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
-		movement=10;
+		movement=5;
 		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
 		currentAnimation = &Anim;
 	}
@@ -168,7 +168,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		if (CanJump == false) { CanJump = true; app->audio->PlayFx(pickCoinFxId);
+		if (CanJump == 0) { CanJump = 2; app->audio->PlayFx(pickCoinFxId);
 		}
 		break;
 	case ColliderType::WALL:

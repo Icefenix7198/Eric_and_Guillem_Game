@@ -40,7 +40,7 @@ public:
 	Player* player;
 
 	//A que distancia del borde se empieza a mover la camara con el player
-	int cameraMargin = 4;
+	int cameraMargin = 10;
 
 	//Limites donde la camara dejara de moverse por salirse del mapa
 	int maxCameraPosLeft;

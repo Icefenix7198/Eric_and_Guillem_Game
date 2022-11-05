@@ -46,7 +46,7 @@ private:
 	
 	//Movimiento vertical del player (solo positivo de momento)
 	int jump=0;
-	bool CanJump=true;
+	int CanJump=2;
 	//Movimiento horizontal del player
 	int movement=0;
 

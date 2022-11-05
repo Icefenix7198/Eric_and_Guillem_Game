@@ -65,7 +65,7 @@ bool Scene::Start()
 	app->win->SetTitle(title.GetString());
 
 	//SET CAMERA MAXIMS
-	maxCameraPosLeft = 1; //1 para evitar una linea de pixels negra
+	maxCameraPosLeft = -1; //-1 para evitar una linea de pixels negra
 	maxCameraPosRigth = -(app->map->mapData.width* app->map->mapData.tileWidth)+app->render->camera.w; //PosRigth es negativo ya que el mapa a moverse la camara se mueve a la izquierda
 
 	return true;
