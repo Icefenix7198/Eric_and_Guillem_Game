@@ -10,12 +10,16 @@
 #include "Physics.h"
 #include "Map.h"
 
+#include "Animation.h"
+
 #include "Item.h"
 #include "EntityManager.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
+	Right.PushBack({ -32, 0, 32, 32 });
+
 }
 
 Player::~Player() {
