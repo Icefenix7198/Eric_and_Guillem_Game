@@ -43,7 +43,7 @@ bool Player::Start() {
 
 	// L07 TODO 5: Add physics to the player - initialize physics body
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
-	playerBody = app->physics->CreateCircle(position.x + 32, position.y + 32, 32 / 2, bodyType::DYNAMIC);
+	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
 	playerBody->listener = this;
 	return true;
 	
