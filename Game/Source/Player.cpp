@@ -18,8 +18,12 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
-	Right.PushBack({ -32, 0, 32, 32 });
-
+	Right.PushBack({ -32, 0, 27, 36 });
+	Right.PushBack({ 320, 64, 32, 32 });
+	Right.PushBack({ 352, 64, 32, 32 });
+	
+	Right.speed = 0.1f;
+	Right.loop = false;
 }
 
 Player::~Player() {
@@ -102,7 +106,7 @@ bool Player::Update()
 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && CanJump==true)
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump==true)
 	{
 		jump=-30;
 		CanJump = false;
@@ -115,7 +119,7 @@ bool Player::Update()
 	{
 		movement = -10;
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && CanJump == true)
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump == true)
 		{
 			jump = -30;
 			CanJump = false;
@@ -125,15 +129,16 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		movement=10;
+		currentAnimation = &Right;
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && CanJump == true)
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump == true)
 		{
 			jump = -30;
 			CanJump = false;
 		}
 	}
 		
-	
+	currentAnimation->Update();	
 	
 
 

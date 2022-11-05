@@ -7,7 +7,7 @@
 class Animation
 {
 public:
-	float speed = 1.0f;
+	float speed = 0.0f;
 	SDL_Rect frames[MAX_FRAMES];
 	bool loop = true;
 	// Allows the animation to keep going back and forth
