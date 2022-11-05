@@ -341,18 +341,32 @@ bool Map::Load()
     }
     // Collider 20 (plataforma compuesta P2 izquierda+2)
     {
-        int x, y, w, h; x = 464; y = 144; w = 64; h = 88; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        int x, y, w, h; x = 752; y = 144; w = 64; h = 88; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
         PhysBody* c20 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
         // L07 DONE 7: Assign collider type
         c20->ctype = ColliderType::PLATFORM;
     }
-    // Collider 17 (plataforma compuesta P2 izquierda)
+    // Collider 21 (plataforma compuesta P2 izquierda+2)
     {
-        int x, y, w, h; x = 304; y = 176; w = 160; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
-        PhysBody* c17 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        int x, y, w, h; x = 816; y = 176; w = 160; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c21 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
         // L07 DONE 7: Assign collider type
-        c17->ctype = ColliderType::PLATFORM;
-
+        c21->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 22 (plataforma compuesta P2 izquierda+2)
+    {
+        int x, y, w, h; x = 944; y = 208; w = 352; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c22 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c22->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 24 (Techo)
+    {
+        int x, y, w, h; x = 0; y = 0; w = 1440; h = 72; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c23 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c23->ctype = ColliderType::UNKNOWN;
+    }
     
 
     if(ret == true)
