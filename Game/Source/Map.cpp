@@ -346,6 +346,12 @@ bool Map::Load()
         // L07 DONE 7: Assign collider type
         c20->ctype = ColliderType::PLATFORM;
     }
+    // Collider 17 (plataforma compuesta P2 izquierda)
+    {
+        int x, y, w, h; x = 304; y = 176; w = 160; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c17 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c17->ctype = ColliderType::PLATFORM;
 
     
 
