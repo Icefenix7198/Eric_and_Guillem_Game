@@ -206,19 +206,36 @@ bool Map::Load()
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
 
-    
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
+    //PARED LATERAL 
+    //Izquierda
+    PhysBody* c1 = app->physics->CreateRectangle(-30, 532, 64, 576, STATIC);
     // L07 DONE 7: Assign collider type
     c1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
+    //Derecha
+    PhysBody* c2 = app->physics->CreateRectangle(1400, 532, 64, 576, STATIC);
     // L07 DONE 7: Assign collider type
     c2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+    //SUELO ZONA 1
+    PhysBody* c3 = app->physics->CreateRectangle(150, 692, 300, 64, STATIC);
     // L07 DONE 7: Assign collider type
     c3->ctype = ColliderType::PLATFORM;
-    
+
+    PhysBody* c4 = app->physics->CreateRectangle(350, 695, 160, 264, STATIC);
+    // L07 DONE 7: Assign collider type
+    c4->ctype = ColliderType::PLATFORM;
+
+    PhysBody* c5 = app->physics->CreateRectangle(610, 695, 160, 264, STATIC);
+    // L07 DONE 7: Assign collider type
+    c5->ctype = ColliderType::PLATFORM;
+
+    PhysBody* c6 = app->physics->CreateRectangle(-30, 500 , 64, 576, STATIC);
+    // L07 DONE 7: Assign collider type
+    c6->ctype = ColliderType::PLATFORM;
+    //SUELO ZONA 2
+
+    //SUELO ZONA 3
 
     
 
