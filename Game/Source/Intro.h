@@ -18,20 +18,12 @@ public:
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
-
+	bool Start();
 	// Called each loop iteration
 	void Draw();
 
 	// Called before quitting
 	bool CleanUp();
-
-	// Load new map
-	bool Load();
-
-
-private:
-
-	bool LoadImage(pugi::xml_node mapFile);
 
 public:
 	bool colidersCreated = false;

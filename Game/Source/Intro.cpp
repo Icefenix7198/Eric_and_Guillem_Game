@@ -33,27 +33,27 @@ bool Intro::Awake(pugi::xml_node& config)
     return ret;
 }
 
+bool Intro::Start()
+{
+    texture = app->tex->Load(texturePath);
+    return true;
+}
+
 void Intro::Draw()
 {
     if (texturePath == false)
         return;
-    texture = app->tex->Load(texturePath);
    if (app->scene->actualScene==app->scene->INTRO)
    { 
-     
       app->render->DrawTexture(texture,0,0);
    }             
-
-     
-
-
-
 }
 
 // Called before quitting
 bool Intro::CleanUp()
 {
-    RELEASE(texture);
+    app->tex->UnLoad(texture);
+    //RELEASE(texture);
 
     return true;
 }
