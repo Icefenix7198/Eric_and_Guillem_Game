@@ -360,6 +360,13 @@ bool Map::Load()
         // L07 DONE 7: Assign collider type
         c22->ctype = ColliderType::PLATFORM;
     }
+    // Collider 23 (plataforma compuesta P2 izquierda+2)
+    {
+        int x, y, w, h; x = 1264; y = 240; w = 352; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c23 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c23->ctype = ColliderType::PLATFORM;
+    }
     // Collider 24 (Techo)
     {
         int x, y, w, h; x = 0; y = 0; w = 1440; h = 72; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
