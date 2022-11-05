@@ -18,12 +18,12 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
-	Right.PushBack({ -32, 0, 27, 36 });
-	Right.PushBack({ 320, 64, 32, 32 });
-	Right.PushBack({ 352, 64, 32, 32 });
-	
-	Right.speed = 0.1f;
-	Right.loop = false;
+
+	Anim.PushBack({ 224, 64, 27, 36 });
+	Anim.PushBack({ 256, 64, 27, 36 });
+	Anim.PushBack({ 288, 64, 27, 36 });
+	Anim.loop = true;
+	Anim.speed = 0.1f;
 }
 
 Player::~Player() {
@@ -118,28 +118,20 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		movement = -10;
-
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump == true)
-		{
-			jump = -30;
-			CanJump = false;
-		}
+		Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+		currentAnimation = &Anim;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		movement=10;
-		currentAnimation = &Right;
-
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump == true)
-		{
-			jump = -30;
-			CanJump = false;
-		}
+		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
+		currentAnimation = &Anim;
 	}
 		
-	currentAnimation->Update();	
-	
+	/*currentAnimation->Update();	
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	*/
 
 
 	playerBody->body->SetLinearVelocity(velocity);
@@ -150,7 +142,7 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(vec.x)-32/2;
 	position.y = METERS_TO_PIXELS(vec.y)-32/2;
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y/*, &rect, 1.0f, NULL, NULL, NULL, Invert*/);
 
 	return true;
 }

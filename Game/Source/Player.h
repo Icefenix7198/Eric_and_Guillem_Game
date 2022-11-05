@@ -33,7 +33,8 @@ private:
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	Animation* currentAnimation = nullptr;
-	Animation Left, Right;
+	Animation Anim;
+	SDL_RendererFlip Invert;
 	const char* texturePath;
 
 	// L07 TODO 5: Add physics to the player - declare a Physics body
