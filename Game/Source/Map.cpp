@@ -272,16 +272,51 @@ bool Map::Load()
     // Collider 10 (plataforma compuesta P1 Derecha-1)
     {
         int x, y, w, h; x = 976; y = 464; w = 64; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
-        PhysBody* c9 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        PhysBody* c10 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
         // L07 DONE 7: Assign collider type
-        c9->ctype = ColliderType::PLATFORM;
+        c10->ctype = ColliderType::PLATFORM;
     }
     // Collider 11 (plataforma compuesta P1 Derecha-1)
     {
-        int x, y, w, h; x = 880; y = 416; w = 96; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
-        PhysBody* c9 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        int x, y, w, h; x = 912; y = 432; w = 96; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c11 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
         // L07 DONE 7: Assign collider type
-        c9->ctype = ColliderType::PLATFORM;
+        c11->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 12 (plataforma compuesta P1 Derecha-2)
+    {
+        int x, y, w, h; x = 752; y = 432; w = 96; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c12 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c12->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 13 (plataforma compuesta P1 Derecha-2)
+    {
+        int x, y, w, h; x = 624; y = 400; w = 160; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c13 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c13->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 14 (plataforma compuesta P1 Derecha-2)
+    {
+        int x, y, w, h; x = 432; y = 368; w = 224; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c14 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c14->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 15 (plataforma compuesta P1 Derecha-2)
+    {
+        int x, y, w, h; x = 240; y = 336; w = 224; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c15 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c15->ctype = ColliderType::PLATFORM;
+    }
+    // Collider 16 (plataforma compuesta P1 Derecha-2)
+    {
+        int x, y, w, h; x = 144; y = 304; w = 128; h = 56; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
+        PhysBody* c16 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        // L07 DONE 7: Assign collider type
+        c16->ctype = ColliderType::PLATFORM;
     }
     
 
