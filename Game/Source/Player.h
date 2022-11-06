@@ -49,6 +49,9 @@ private:
 	int CanJump=2;
 	//Movimiento horizontal del player
 	int movement=0;
+	//Debugging
+	bool ShowVectors=false;
+	bool GodMode = false;
 
 };
 

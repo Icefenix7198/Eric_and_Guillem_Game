@@ -63,19 +63,27 @@ bool Player::Update()
 	{
 		return true;
 	}
-	
+
 	// L07 TODO 5: Add physics to the player - updated player position using physics
 	b2Vec2 velocity=b2Vec2(0,0);
 	
 	//En cada iteracion jump y movimiento se hacen un poco mas pequeñas, dando la impersion de que desacelera el player
-	if (jump<0)
+	if (jump!=0)
 	{
 		velocity.y = jump;
+		//For god mode proporses, if jump is positive (goes downwards) the jump variable gets added to become 0
+		if(jump<0)
+		{
 		jump += 2;
+		}
+		else 
+		{
+			jump -= 2;
+		}   
 	}
 	else
 	{
-		velocity.y = -GRAVITY_Y;
+		velocity.y = -GRAVITY_Y*(GodMode==false); //Si God Mode == true es falso por lo tanto gravedad = 0
 	}
 
 	if (movement>0)
@@ -103,7 +111,24 @@ bool Player::Update()
 		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
 	}
 	
+	//DEBUGGING
 
+	//Show Vectors
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		ShowVectors = !ShowVectors;
+
+	//God Mode
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) 
+	{
+	if (GodMode==true)
+	{
+		GodMode = false;
+	}
+	else
+	{
+		GodMode = true;
+	}
+	}
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump>0)
@@ -112,8 +137,16 @@ bool Player::Update()
 		CanJump -=1;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-		position.y += 1;
+	//Fly Up and Down during God Mode
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && GodMode==true)
+	{
+		jump=4;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && GodMode == true)
+	{
+		jump = -4;
+	}
+		
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
@@ -142,8 +175,16 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(vec.x)-32/2;
 	position.y = METERS_TO_PIXELS(vec.y)-32/2;
 
+	
+	
 	app->render->DrawTexture(texture, position.x, position.y/*, &rect, 1.0f, NULL, NULL, NULL, Invert*/);
-
+	 
+	//Print player movement vector
+	if (ShowVectors==true)
+	{
+		//+16 para que este centrado, es el tamaño del collider del player
+		app->render->DrawLine(position.x+16, position.y+16, position.x + METERS_TO_PIXELS(velocity.x/8)+16,position.y + METERS_TO_PIXELS(velocity.y/8)+16, 0, 255, 0);
+	}
 	return true;
 }
 
