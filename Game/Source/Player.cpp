@@ -204,13 +204,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
-<<<<<<< Updated upstream
+
 		//physB->listener->Disable();
-		app->entityManager->DestroyEntity(physB->listener);
-=======
+		app->entityManager->DestroyEntity(physB->listener); //TODO ERIC:Arreglar esto
+
 		physB->body->DestroyFixture(physB->body->GetFixtureList());
 		//app->entityManager->DestroyEntity();
->>>>>>> Stashed changes
+
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
