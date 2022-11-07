@@ -35,7 +35,8 @@
 
   <map>
     <mapfolder path="Assets/Maps/"/>
-	<intro texturepath="Assets/Maps/PantallaInicio.png"/>
+	<intro texturepath="Assets/Maps/Pantalla Inicio 1.png"/>
+	<intro texturepath2="Assets/Maps/Pantalla Start.png"/>
     <!--<mapfile path="Assets/Maps/MapTemplate.tmx"/>-->
     <mapfile path="Assets/Maps/MapaFinal.tmx"/>
 	 

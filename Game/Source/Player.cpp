@@ -19,11 +19,18 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
-	Anim.PushBack({ 0, 0, 27, 36 });
-	Anim.PushBack({ 27, 0, 27, 36 });
-	Anim.PushBack({ 54, 0, 27, 36 });
-	Anim.loop = true;
-	Anim.speed = 0.1f;
+	Run.PushBack({ 0, 0, 27, 36 });
+	Run.PushBack({ 27, 0, 27, 36 });
+	Run.PushBack({ 54, 0, 27, 36 });
+	Run.loop = true;
+	Run.speed = 0.1f;
+
+	Jump.PushBack({ 0, 36, 27, 36 });
+	Jump.loop = true;
+	Jump.speed = 0.1f;	
+	JumpIdle.PushBack({ 27, 36, 27, 36 });
+	JumpIdle.loop = true;
+	JumpIdle.speed = 0.1f;
 }
 
 Player::~Player() {
@@ -48,7 +55,7 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	currentAnimation = &Anim;
+	currentAnimation = &Run;
 	// L07 TODO 5: Add physics to the player - initialize physics body
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
 	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
@@ -135,6 +142,21 @@ bool Player::Update()
 	{
 		jump=-16;
 		CanJump -=1;
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
+			currentAnimation = &Jump;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			Invert = SDL_RendererFlip::SDL_FLIP_NONE;
+			currentAnimation = &Jump;
+		}
+		else
+		{
+			currentAnimation = &JumpIdle;
+
+		}
 	}
 
 	//Fly Up and Down during God Mode
@@ -152,16 +174,38 @@ bool Player::Update()
 	{
 		movement = -5;
 		Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
-		currentAnimation = &Anim;
+
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			currentAnimation = &Jump;
+		}
+		else
+		{
+			currentAnimation = &Run;
+		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 	{
 		movement=5;
 		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
-		currentAnimation = &Anim;
+
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			currentAnimation = &Jump;
+		}
+		else
+		{
+			currentAnimation = &Run;
+		}
 	}
-		
+	/*if (app->input->GetKey(SDL_SCANCODE_SPACE) != KEY_DOWN &&
+		app->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT &&
+		app->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
+	{
+		currentAnimation = &Run;
+	}*/
+
 	currentAnimation->Update();	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	

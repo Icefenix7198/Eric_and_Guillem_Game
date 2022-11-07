@@ -34,7 +34,7 @@ private:
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	Animation* currentAnimation = nullptr;
-	Animation Anim;
+	Animation Run, Jump, JumpIdle;
 	SDL_RendererFlip Invert;
 	const char* texturePath;
 
