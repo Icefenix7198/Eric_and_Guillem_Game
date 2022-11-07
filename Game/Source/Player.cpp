@@ -19,9 +19,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
-	Anim.PushBack({ 0, 36, 27, 36 });
-	Anim.PushBack({ 256, 64, 27, 36 });
-	Anim.PushBack({ 288, 64, 27, 36 });
+	Anim.PushBack({ 0, 0, 27, 36 });
+	Anim.PushBack({ 27, 0, 27, 36 });
+	Anim.PushBack({ 54, 0, 27, 36 });
 	Anim.loop = true;
 	Anim.speed = 0.1f;
 }
@@ -40,8 +40,6 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	
-	currentAnimation = &Anim;
 
 	return true;
 }
@@ -50,7 +48,7 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-
+	currentAnimation = &Anim;
 	// L07 TODO 5: Add physics to the player - initialize physics body
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
 	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
@@ -179,7 +177,7 @@ bool Player::Update()
 
 	
 	
-	app->render->DrawTexture(texture, position.x, position.y/*, &rect, 1.0f, NULL, NULL, NULL, Invert*/);
+	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 	 
 	//Print player movement vector
 	if (ShowVectors==true)
