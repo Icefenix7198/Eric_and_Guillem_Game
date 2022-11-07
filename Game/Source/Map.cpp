@@ -87,6 +87,25 @@ void Map::Draw()
                     }
                 }
             }
+            //Crear colliders (?)
+            else if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value) {
+                for (int x = 0; x < mapLayerItem->data->width; x++)
+                {
+                    for (int y = 0; y < mapLayerItem->data->height; y++)
+                    {
+                        // L05: DONE 9: Complete the draw function
+                        int gid = mapLayerItem->data->Get(x, y);
+
+                        //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                        TileSet* tileset = GetTilesetFromTileId(gid);
+
+                        SDL_Rect r = tileset->GetTileRect(gid);
+                        iPoint pos = MapToWorld(x, y);
+
+                        
+                    }
+                }
+            }
             mapLayerItem = mapLayerItem->next;
 
         }

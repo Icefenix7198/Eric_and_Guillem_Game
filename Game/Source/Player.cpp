@@ -74,11 +74,11 @@ bool Player::Update()
 		//For god mode proporses, if jump is positive (goes downwards) the jump variable gets added to become 0
 		if(jump<0)
 		{
-		jump += 2;
+		jump += 1;
 		}
 		else 
 		{
-			jump -= 2;
+			jump -= 1;
 		}   
 	}
 	else
@@ -133,7 +133,7 @@ bool Player::Update()
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump>0)
 	{
-		jump=-24;
+		jump=-16;
 		CanJump -=1;
 	}
 
@@ -204,8 +204,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
-		physB->~PhysBody();
-		//app->entityManager->DestroyEntity();
+		//physB->listener->Disable();
+		app->entityManager->DestroyEntity(physB->listener);
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");

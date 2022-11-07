@@ -27,7 +27,8 @@ public:
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
-
+	//Movido para guardar
+	PhysBody* playerBody;
 private:
 
 	//L02: DONE 1: Declare player parameters
@@ -39,7 +40,7 @@ private:
 
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
-	PhysBody* playerBody;
+	
 
 	int pickCoinFxId;
 
