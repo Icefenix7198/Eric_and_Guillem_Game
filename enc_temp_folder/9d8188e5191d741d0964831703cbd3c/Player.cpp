@@ -19,9 +19,9 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
-	Anim.PushBack({ 0, 0, 27, 36 });
-	Anim.PushBack({ 27, 0, 27, 36 });
-	Anim.PushBack({ 54, 0, 27, 36 });
+	Anim.PushBack({ 224, 64, 27, 36 });
+	Anim.PushBack({ 256, 64, 27, 36 });
+	Anim.PushBack({ 288, 64, 27, 36 });
 	Anim.loop = true;
 	Anim.speed = 0.1f;
 }
@@ -40,7 +40,7 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-
+	
 	return true;
 }
 
@@ -48,7 +48,7 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	currentAnimation = &Anim;
+
 	// L07 TODO 5: Add physics to the player - initialize physics body
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
 	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
@@ -74,11 +74,11 @@ bool Player::Update()
 		//For god mode proporses, if jump is positive (goes downwards) the jump variable gets added to become 0
 		if(jump<0)
 		{
-		jump += 1;
+		jump += 2;
 		}
 		else 
 		{
-			jump -= 1;
+			jump -= 2;
 		}   
 	}
 	else
@@ -133,7 +133,7 @@ bool Player::Update()
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && CanJump>0)
 	{
-		jump=-16;
+		jump=-24;
 		CanJump -=1;
 	}
 
@@ -162,9 +162,9 @@ bool Player::Update()
 		currentAnimation = &Anim;
 	}
 		
-	currentAnimation->Update();	
+	/*currentAnimation->Update();	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	
+	*/
 
 
 	playerBody->body->SetLinearVelocity(velocity);
@@ -177,7 +177,7 @@ bool Player::Update()
 
 	
 	
-	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+	app->render->DrawTexture(texture, position.x, position.y/*, &rect, 1.0f, NULL, NULL, NULL, Invert*/);
 	 
 	//Print player movement vector
 	if (ShowVectors==true)
@@ -204,13 +204,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
-<<<<<<< Updated upstream
-		//physB->listener->Disable();
-		app->entityManager->DestroyEntity(physB->listener);
-=======
 		physB->body->DestroyFixture(physB->body->GetFixtureList());
 		//app->entityManager->DestroyEntity();
->>>>>>> Stashed changes
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
