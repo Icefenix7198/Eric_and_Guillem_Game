@@ -121,6 +121,9 @@ bool Player::Update()
 	//DEBUGGING
 
 	//Show Vectors
+	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+		playerBody->body->SetTransform({ PIXEL_TO_METERS(parameters.attribute("x").as_int()),PIXEL_TO_METERS(parameters.attribute("y").as_int()) }, 0);
+
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		ShowVectors = !ShowVectors;
 

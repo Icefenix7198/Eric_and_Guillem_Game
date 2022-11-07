@@ -389,9 +389,15 @@ bool Map::Load()
     // Collider 24 (Techo)
     {
         int x, y, w, h; x = 0; y = 0; w = 1440; h = 72; //h no divisor de 16 porque tiene unos pocos pixeles mas el reborde de abajo
-        PhysBody* c23 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
+        PhysBody* c24 = app->physics->CreateRectangle(x + w / 2, y + h / 2, w, h, STATIC);
         // L07 DONE 7: Assign collider type
-        c23->ctype = ColliderType::UNKNOWN;
+        c24->ctype = ColliderType::UNKNOWN;
+    }
+    //Collider 25 (pozos de muerte)
+    {
+       int x, y, w, h; x = 0; y = 736; w = 1440; h = 8;
+       PhysBody* c25 = app->physics->CreateRectangleSensor(x + w / 2, y + h / 2, w, h, STATIC);
+       c25->ctype = ColliderType::DEAD;
     }
     
 
