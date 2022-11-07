@@ -2,7 +2,7 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
-#define MAX_FRAMES 25
+#define MAX_FRAMES 60
 
 class Animation
 {
@@ -12,10 +12,9 @@ public:
 	bool loop = true;
 	// Allows the animation to keep going back and forth
 	bool pingpong = false;
-
-private:
-	float currentFrame = 0.0f;
 	int totalFrames = 0;
+
+	float currentFrame = 0.0f;
 	int loopCount = 0;
 	int pingpongDirection = 1;
 

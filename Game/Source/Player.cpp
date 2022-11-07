@@ -19,7 +19,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
-	Anim.PushBack({ 224, 64, 27, 36 });
+	Anim.PushBack({ 0, 36, 27, 36 });
 	Anim.PushBack({ 256, 64, 27, 36 });
 	Anim.PushBack({ 288, 64, 27, 36 });
 	Anim.loop = true;
@@ -41,6 +41,8 @@ bool Player::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	
+	currentAnimation = &Anim;
+
 	return true;
 }
 
@@ -162,9 +164,9 @@ bool Player::Update()
 		currentAnimation = &Anim;
 	}
 		
-	/*currentAnimation->Update();	
+	currentAnimation->Update();	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	*/
+	
 
 
 	playerBody->body->SetLinearVelocity(velocity);
