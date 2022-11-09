@@ -37,9 +37,7 @@ public:
 	SDL_Texture* texture2;
 	const char* texturePath;
 	const char* texturePath2;
-	SDL_Rect* rect;
-	Animation* currentAnimation2 = nullptr;
-	Animation Main;
+	int change;
 
 private:
 
