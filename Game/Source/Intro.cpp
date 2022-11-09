@@ -17,11 +17,8 @@
 
 Intro::Intro() : Module(), mapLoaded(false)
 {
-    name.Create("map");
-    Main.PushBack({ 1024, 0, 1024, 768 });
-    Main.PushBack({ 1024, 0, 1024, 768 });
-    Main.loop = true;
-    Main.speed = 0.1f;
+    name.Create("intro");
+    
 }
 
 // Destructor
@@ -45,16 +42,13 @@ bool Intro::Start()
 {
     texture2 = app->tex->Load(texturePath2);
     texture = app->tex->Load(texturePath);
-    currentAnimation2 = &Main;
+    change = 30;
     return true;
 }
 
 bool Intro::Update()
 {
-    currentAnimation2 = &Main;
-    currentAnimation2->Update();
-    SDL_Rect rect2 = currentAnimation2->GetCurrentFrame();
-    app->render->DrawTexture(texture2, 0, 0, &rect2);
+    
     return true;
 }
 
@@ -64,7 +58,22 @@ void Intro::Draw()
         return;
    if (app->scene->actualScene==app->scene->INTRO)
    {
-       app->render->DrawTexture(texture,0,0);
+       
+       if (change>=0)
+       {
+        app->render->DrawTexture(texture,0,0);
+        --change;
+        if (change == 0)
+            change = -30;
+       }
+       if (change <= 0)
+       {
+           app->render->DrawTexture(texture2, 0, 0);
+           ++change;
+           if (change == 0)
+               change = 30;
+       }
+       
    }             
 }
 
