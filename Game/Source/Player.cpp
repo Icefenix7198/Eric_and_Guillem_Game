@@ -25,9 +25,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	Run.loop = true;
 	Run.speed = 0.1f;
 
-	Jump.PushBack({ 0, 36, 27, 36 });
+	Jump.PushBack({ 0, 72, 27, 36 });
+	Jump.PushBack({ 27, 72, 27, 36 });
+	Jump.PushBack({ 54, 72, 27, 36 });
 	Jump.loop = true;
 	Jump.speed = 0.1f;	
+
+	JumpIdle.PushBack({ 0, 36, 27, 36 });
 	JumpIdle.PushBack({ 27, 36, 27, 36 });
 	JumpIdle.loop = true;
 	JumpIdle.speed = 0.1f;
