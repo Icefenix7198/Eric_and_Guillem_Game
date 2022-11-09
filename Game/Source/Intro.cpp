@@ -31,8 +31,8 @@ bool Intro::Awake(pugi::xml_node& config)
     LOG("Loading Map Parser");
     bool ret = true;
 
-    texturePath = config.child("intro").attribute("texturepath").as_string();
-    texturePath2 = config.child("intro").attribute("texturepath2").as_string();
+    texturePath = config.child("start1").attribute("texturepath").as_string();
+    texturePath2 = config.child("start2").attribute("texturepath2").as_string();
     
     
     return ret;

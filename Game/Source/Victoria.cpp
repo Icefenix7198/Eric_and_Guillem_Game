@@ -17,7 +17,7 @@
 
 Victory::Victory() : Module(), mapLoaded(false)
 {
-    name.Create("map");
+    name.Create("victory");
     Main.PushBack({ 1024, 0, 1024, 768 });
     Main.PushBack({ 1024, 0, 1024, 768 });
     Main.loop = true;
