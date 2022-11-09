@@ -273,9 +273,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DEAD:
 		app->scene->actualScene = app->scene->LOSE;
+		//app->audio->PlayFx(DeadSound);
 		break;
 	case ColliderType::WIN:
 		app->scene->actualScene = app->scene->WIN;
+		//app->audio->PlayFx(WinSound);
 		break;
 	case ColliderType::ENEMY:
 		break;
