@@ -395,9 +395,15 @@ bool Map::Load()
     }
     //Collider 25 (pozos de muerte)
     {
-       int x, y, w, h; x = 0; y = 736; w = 1440; h = 8;
+       int x, y, w, h; x = 0; y = 800; w = 1440; h = 8;
        PhysBody* c25 = app->physics->CreateRectangleSensor(x + w / 2, y + h / 2, w, h, STATIC);
        c25->ctype = ColliderType::DEAD;
+    }
+    //Collider 26 (Puerta salida)
+    {
+        int x, y, w, h; x = 1408; y = 192; w = 32; h = 48;
+        PhysBody* c25 = app->physics->CreateRectangleSensor(x + w / 2, y + h / 2, w, h, STATIC);
+        c25->ctype = ColliderType::WIN;
     }
     
 

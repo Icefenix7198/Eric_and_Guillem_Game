@@ -1,5 +1,5 @@
-#ifndef __INTRO_H__
-#define __INTRO_H__
+#ifndef __MUERTE_H__
+#define __MUERTE_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -50,4 +50,4 @@ private:
 
 
 
-#endif // __INTRO_H__
+#endif // __MUERTE_H__

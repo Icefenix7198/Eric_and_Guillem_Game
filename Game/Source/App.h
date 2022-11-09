@@ -96,7 +96,7 @@ public:
 	FadeToBlack* fade;
 	Intro* intro;
 	Victory* victory;
-	//Lose* lose;
+	Lose* lose;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 

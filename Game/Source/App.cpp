@@ -35,7 +35,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager();
 	intro = new Intro();
 	victory = new Victory();
-	//lose = new Lose();
+	lose = new Lose();
 	map = new Map();
 
 	// Ordered for awake / Start / Update
@@ -52,7 +52,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(intro);
 	AddModule(map);
 	AddModule(victory);
-	//AddModule(lose);
+	AddModule(lose);
 
 	// Render last to swap buffer
 	AddModule(render);

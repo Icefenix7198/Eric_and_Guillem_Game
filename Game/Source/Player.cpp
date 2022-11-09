@@ -270,6 +270,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DEAD:
 		app->scene->actualScene = app->scene->LOSE;
 		break;
+	case ColliderType::WIN:
+		app->scene->actualScene = app->scene->WIN;
+		break;
 	case ColliderType::ENEMY:
 		break;
 	case ColliderType::UNKNOWN:

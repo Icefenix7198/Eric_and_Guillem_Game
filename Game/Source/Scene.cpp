@@ -134,7 +134,7 @@ bool Scene::Update(float dt)
 		app->victory->Draw();
 		break;
 	case Scene::LOSE:
-		
+		app->victory->Draw();
 		break;
 	default:
 		break;
