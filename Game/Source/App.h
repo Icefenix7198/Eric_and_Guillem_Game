@@ -20,6 +20,7 @@ class EntityManager;
 class Map;
 class FadeToBlack;
 class Intro;
+class Victory;
 //L07 DONE 2: Add Physics module
 class Physics;
 
@@ -93,6 +94,7 @@ public:
 	Map* map;
 	FadeToBlack* fade;
 	Intro* intro;
+	Victory* victory;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 
