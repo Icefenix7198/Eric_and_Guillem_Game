@@ -9,14 +9,14 @@
 
 #include "PugiXml\src\pugixml.hpp"
 
-class Intro : public Module
+class Lose : public Module
 {
 public:
 
-	Intro();
+	Lose();
 
 	// Destructor
-	virtual ~Intro();
+	virtual ~Lose();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);

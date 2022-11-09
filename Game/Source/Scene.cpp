@@ -10,6 +10,8 @@
 //Diferent Scenes
 #include "Intro.h"
 #include "Map.h"
+#include "Victoria.h"
+#include "Muerte.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -129,8 +131,10 @@ bool Scene::Update(float dt)
 		app->map->Draw();
 		break;
 	case Scene::WIN:
+		app->victory->Draw();
 		break;
 	case Scene::LOSE:
+		
 		break;
 	default:
 		break;

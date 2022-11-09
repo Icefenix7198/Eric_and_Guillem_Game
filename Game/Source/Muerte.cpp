@@ -1,7 +1,7 @@
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
-#include "Intro.h"
+#include "Muerte.h"
 #include "Scene.h"
 
 #include "Defs.h"
@@ -15,7 +15,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
-Intro::Intro() : Module(), mapLoaded(false)
+Lose::Lose() : Module(), mapLoaded(false)
 {
     name.Create("map");
     Main.PushBack({ 1024, 0, 1024, 768 });
@@ -25,11 +25,11 @@ Intro::Intro() : Module(), mapLoaded(false)
 }
 
 // Destructor
-Intro::~Intro()
+Lose::~Lose()
 {}
 
 // Called before render is available
-bool Intro::Awake(pugi::xml_node& config)
+bool Lose::Awake(pugi::xml_node& config)
 {
     LOG("Loading Map Parser");
     bool ret = true;
@@ -41,7 +41,7 @@ bool Intro::Awake(pugi::xml_node& config)
     return ret;
 }
 
-bool Intro::Start()
+bool Lose::Start()
 {
     texture2 = app->tex->Load(texturePath2);
     texture = app->tex->Load(texturePath);
@@ -49,7 +49,7 @@ bool Intro::Start()
     return true;
 }
 
-bool Intro::Update()
+bool Lose::Update()
 {
     currentAnimation2 = &Main;
     currentAnimation2->Update();
@@ -58,7 +58,7 @@ bool Intro::Update()
     return true;
 }
 
-void Intro::Draw()
+void Lose::Draw()
 {
     if (texturePath == false)
         return;
@@ -69,7 +69,7 @@ void Intro::Draw()
 }
 
 // Called before quitting
-bool Intro::CleanUp()
+bool Lose::CleanUp()
 {
     app->tex->UnLoad(texture);
     app->tex->UnLoad(texture);

@@ -21,6 +21,7 @@ class Map;
 class FadeToBlack;
 class Intro;
 class Victory;
+class Lose; 
 //L07 DONE 2: Add Physics module
 class Physics;
 
@@ -95,6 +96,7 @@ public:
 	FadeToBlack* fade;
 	Intro* intro;
 	Victory* victory;
+	//Lose* lose;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 
