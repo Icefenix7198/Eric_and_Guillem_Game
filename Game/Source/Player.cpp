@@ -265,7 +265,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		if (CanJump == 0) { CanJump = 2; app->audio->PlayFx(pickCoinFxId);
+		if (CanJump == 0 && jump ==0) { CanJump = 2; app->audio->PlayFx(pickCoinFxId);
 		}
 		break;
 	case ColliderType::WALL:
