@@ -120,21 +120,43 @@ bool Scene::Update(float dt)
 	{
 	case Scene::INTRO:
 		//Draw intro
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
 		app->intro->Draw();
 
 		//Cambiar al mapa de juego
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
 			actualScene = Scenes::GAMEMAP;
+		}
 		break;
 	case Scene::GAMEMAP:
 		// Draw map
 		app->map->Draw();
 		break;
 	case Scene::WIN:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
 		app->victory->Draw();
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			actualScene = Scenes::INTRO;
+			player->CleanUp();
+			player->Awake();
+			player->Start();
+		}
 		break;
 	case Scene::LOSE:
+		app->render->camera.x = 0;
+		app->render->camera.y = 0;
 		app->lose->Draw();
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			actualScene = Scenes::INTRO;
+			player->CleanUp();
+			player->Awake();
+			player->Start();
+		}
 		break;
 	default:
 		break;

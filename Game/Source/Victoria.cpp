@@ -62,7 +62,7 @@ void Victory::Draw()
 {
     if (texturePath == false)
         return;
-   if (app->scene->actualScene==app->scene->INTRO)
+   if (app->scene->actualScene==app->scene->WIN)
    {
        app->render->DrawTexture(texture,0,0);
    }             
