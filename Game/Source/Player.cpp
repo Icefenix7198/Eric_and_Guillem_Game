@@ -149,6 +149,8 @@ bool Player::Update()
 	{
 		jump=-16;
 		CanJump -=1;
+		app->audio->PlayFx(JumpSound);
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
@@ -254,7 +256,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
+		if (physB->ctype == ColliderType::ITEM)
+		{
+			app->audio->PlayFx(pickCoinFxId);
+		}
 
 		//physB->listener->Disable();
 		app->entityManager->DestroyEntity(physB->listener); //TODO ERIC:Arreglar esto
@@ -265,19 +270,24 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		if (CanJump == 0 && jump ==0) { CanJump = 2; app->audio->PlayFx(pickCoinFxId);
-		}
+		if (CanJump == 0 && jump ==0) { CanJump = 2;}
 		break;
 	case ColliderType::WALL:
 		LOG("Collison WALL");
 		break;
 	case ColliderType::DEAD:
 		app->scene->actualScene = app->scene->LOSE;
-		//app->audio->PlayFx(DeadSound);
+		if (physB->ctype == ColliderType::DEAD)
+		{
+			app->audio->PlayFx(DeadSound);
+		}
 		break;
 	case ColliderType::WIN:
 		app->scene->actualScene = app->scene->WIN;
-		//app->audio->PlayFx(WinSound);
+		if (physB->ctype == ColliderType::WIN)
+		{
+			app->audio->PlayFx(WinSound);
+		}
 		break;
 	case ColliderType::ENEMY:
 		break;

@@ -7,10 +7,12 @@
 	<:anonymous />
 	<scene />
 	<entitymanager>
-		<player x="41" y="478" />
+		<player x="343" y="529" />
 	</entitymanager>
+	<intro />
 	<map />
-	<map />
+	<victory />
+	<lose />
 	<renderer>
 		<camera x="0" y="0" />
 	</renderer>

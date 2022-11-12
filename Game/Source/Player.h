@@ -43,6 +43,9 @@ private:
 	
 
 	int pickCoinFxId;
+	int DeadSound;
+	int WinSound;
+	int JumpSound;
 
 	
 	//Movimiento vertical del player (solo positivo de momento)
