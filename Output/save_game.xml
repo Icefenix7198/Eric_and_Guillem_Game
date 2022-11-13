@@ -5,15 +5,17 @@
 	<textures />
 	<audio />
 	<:anonymous />
-	<scene />
+	<scene>
+		<scene actualScene="1" />
+	</scene>
 	<entitymanager>
-		<player x="343" y="529" />
+		<player x="1105" y="623" />
 	</entitymanager>
 	<intro />
 	<map />
 	<victory />
 	<lose />
 	<renderer>
-		<camera x="0" y="0" />
+		<camera x="-420" y="0" />
 	</renderer>
 </save_state>

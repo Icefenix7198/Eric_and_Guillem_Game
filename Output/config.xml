@@ -53,7 +53,7 @@
 	</lose>
 
 	<victory>
-		<win texturepath="patata.png"/>
+		<win texturepath="Assets/Maps/PantallaWin.png"/>
 	</victory>
 	
   

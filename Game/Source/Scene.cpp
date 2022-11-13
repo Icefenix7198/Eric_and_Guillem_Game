@@ -185,3 +185,21 @@ bool Scene::CleanUp()
 
 	return true;
 }
+
+bool Scene::LoadState(pugi::xml_node& data)
+{
+	
+	actualScene = data.child("scene").attribute("actualScene").as_int();
+
+	return true;
+	
+}
+
+bool Scene::SaveState(pugi::xml_node& data)
+{
+	pugi::xml_node scene = data.append_child("scene");
+
+	scene.append_attribute("actualScene") = actualScene;
+	
+	return true;
+}

@@ -34,13 +34,8 @@ public:
 
 	pugi::xml_node parameters;
 	SDL_Texture* texture;
-	SDL_Texture* texture2;
 	const char* texturePath;
-	const char* texturePath2;
-	SDL_Rect* rect;
-	Animation* currentAnimation2 = nullptr;
-	Animation Main;
-
+	
 private:
 
 	SString mapFileName;
