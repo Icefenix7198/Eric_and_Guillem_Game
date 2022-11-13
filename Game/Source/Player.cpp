@@ -62,9 +62,12 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+
+	//initializate sound
 	JumpSound = app->audio->LoadFx(FxJump);
 	WinSound = app->audio->LoadFx(FxWin);
 	DeadSound = app->audio->LoadFx(FxLose);
+
 	currentAnimation = &Run;
 	// L07 TODO 5: Add physics to the player - initialize physics body
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
