@@ -401,7 +401,7 @@ bool Map::Load()
     }
     //Collider 26 (Puerta salida)
     {
-        int x, y, w, h; x = 1408; y = 192; w = 32; h = 48;
+        int x, y, w, h; x = 1396; y = 192; w = 32; h = 48;
         PhysBody* c25 = app->physics->CreateRectangleSensor(x + w / 2, y + h / 2, w, h, STATIC);
         c25->ctype = ColliderType::WIN;
     }
