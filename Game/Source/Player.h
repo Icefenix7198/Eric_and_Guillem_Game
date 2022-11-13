@@ -37,7 +37,9 @@ private:
 	Animation Run, Jump, JumpIdle;
 	SDL_RendererFlip Invert;
 	const char* texturePath;
-
+	const char* FxJump;
+	const char* FxWin;
+	const char* FxLose;
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
 	
