@@ -19,6 +19,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
+	/*ListItem<rects>*/
 	Run.PushBack({ 0, 0, 27, 36 });
 	Run.PushBack({ 27, 0, 27, 36 });
 	Run.PushBack({ 54, 0, 27, 36 });
@@ -54,6 +55,15 @@ bool Player::Awake() {
 	FxJump = parameters.attribute("FxJump").as_string();
 	FxWin = parameters.attribute("FxWin").as_string();
 	FxLose = parameters.attribute("FxLose").as_string();
+	
+	/*for(nodoDePugi = parameters.child("AnimationRun"); nodoDePugi !=NULL; nodoDePugi= parameters.child("AnimationRun").next_sibling();)
+	{
+		rect.x = nodoDePugi.attribute("x");
+		rect.y = nodoDePugi.attribute("7");
+		rect.h = nodoDePugi.attribute("h");
+		rect.w = nodoDePugi.attribute("w");
+	}*/
+	
 
 	return true;
 }

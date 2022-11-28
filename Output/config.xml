@@ -23,7 +23,15 @@
 
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="150" y="672" texturepath="Assets/Textures/MainCharacter.png" FxJump="Assets/Audio/Fx/SonidoSalto.ogg" FxWin="Assets/Audio/Fx/SonidoWin.ogg" FxLose="Assets/Audio/Fx/SonidoLose.ogg"/>
+    <player x="150" y="672" texturepath="Assets/Textures/MainCharacter.png" FxJump="Assets/Audio/Fx/SonidoSalto.ogg" FxWin="Assets/Audio/Fx/SonidoWin.ogg" FxLose="Assets/Audio/Fx/SonidoLose.ogg">
+	  <AnimationRun x="150" y="672" w="22" h="66"/>
+	  <AnimationRun x="140" y="672" w="22" h="66"/>
+	  <AnimationRun x="130" y="672" w="22" h="66"/>
+
+		<AnimationIdle1 x="150" y="672" w="22" h="66"/>
+		<AnimationRun2 x="140" y="672" w="22" h="66"/>
+		<AnimationRun3 x="130" y="672" w="22" h="66"/>
+	</player >
     <!--<item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
