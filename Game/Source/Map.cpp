@@ -52,26 +52,7 @@ void Map::Draw()
         while (mapLayerItem != NULL) 
         {
 
-            //Crear colliders (?)
-            if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value == true)
-            {
-                for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) //Preguntar a Pedro porque explota
-                {
-                    for (int y1 = 0; y1 < mapLayerItem->data->height; y1++)
-                    {
-                        // L05: DONE 9: Complete the draw function
-                        int gid = mapLayerItem->data->Get(x1, y1);
-
-                        //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
-                        TileSet* tileset = GetTilesetFromTileId(gid);
-
-                        SDL_Rect r = tileset->GetTileRect(gid);
-                        iPoint pos = MapToWorld(x1, y1);
-
-                        /*LOG("%d",tileset);*/
-                    }
-                }
-            }
+           
 
             //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
             if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) 
@@ -217,6 +198,39 @@ bool Map::Load()
     
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
+    
+
+    ListItem<MapLayer*>* layerCollision; //AYUDA PEDRO!!!
+    layerCollision = mapData.maplayers.end;
+
+    //Crear colliders (?)
+    while (layerCollision != NULL)
+    {
+        if (layerCollision->data->properties.GetProperty("Colliders") != NULL && layerCollision->data->properties.GetProperty("Colliders")->value == true)
+        {
+            for (int x1 = 0; x1 < layerCollision->data->width; x1++) //Preguntar a Pedro porque explota
+            {
+                for (int y1 = 0; y1 < layerCollision->data->height; y1++)
+                {
+                    // L05: DONE 9: Complete the draw function
+                    int gid = layerCollision->data->Get(x1, y1);
+
+                    //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x1, y1);
+
+                    int w, h;
+
+                }
+            }
+        }
+
+        layerCollision = layerCollision->next;
+
+    }
+
  // Collider 1
     {
         int x, y, w, h; x = 0; y = 656; w = 272; h = 208;

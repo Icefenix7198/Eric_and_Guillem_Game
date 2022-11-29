@@ -50,6 +50,8 @@ public:
 	//Limites donde la camara dejara de moverse por salirse del mapa
 	int maxCameraPosLeft;
 	int maxCameraPosRigth;
+	int maxCameraPosUp;
+	int maxCameraPosDown;
 
 	enum Scenes
 	{

@@ -71,6 +71,8 @@ bool Scene::Start()
 	//SET CAMERA MAXIMS
 	maxCameraPosLeft = -1; //-1 para evitar una linea de pixels negra
 	maxCameraPosRigth = -(app->map->mapData.width* app->map->mapData.tileWidth)+app->render->camera.w; //PosRigth es negativo ya que el mapa a moverse la camara se mueve a la izquierda
+	maxCameraPosUp = 1;
+	maxCameraPosDown = -(app->map->mapData.height * app->map->mapData.tileHeight) + app->render->camera.h;
 
 	return true;
 }
@@ -91,11 +93,23 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 
-	//if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y += 1;
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	{
+		if (maxCameraPosUp >= app->render->camera.y)
+		{
+			app->render->camera.y += 1;
+		}
+	}
+		
 
-	//if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y -= 1;
+	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		if (maxCameraPosDown <= app->render->camera.y)
+		{
+			app->render->camera.y -= 1;
+		}
+	}
+		
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT )
 	{

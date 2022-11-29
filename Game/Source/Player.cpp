@@ -140,6 +140,14 @@ bool Player::Update()
 	{
 		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
 	}
+	if (app->scene->maxCameraPosUp >= app->render->camera.y && -position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= app->render->camera.y)
+	{
+		app->render->camera.y += 1; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+	}
+	if (app->scene->maxCameraPosDown <= app->render->camera.y && position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= -app->render->camera.y + app->render->camera.h && movement > 0)
+	{
+		app->render->camera.y += -1; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+	}
 	
 	//DEBUGGING
 
