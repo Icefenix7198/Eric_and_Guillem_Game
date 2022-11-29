@@ -38,20 +38,7 @@ void Map::Draw()
     if(mapLoaded == false)
         return;
 
-    /*
-    // L04: DONE 6: Iterate all tilesets and draw all their 
-    // images in 0,0 (you should have only one tileset for now)
-
-    ListItem<TileSet*>* tileset;
-    tileset = mapData.tilesets.start;
-
-    while (tileset != NULL) {
-        app->render->DrawTexture(tileset->data->texture,0,0);
-        tileset = tileset->next;
-    }
-    */
-
-    // L05: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
+    
 
 
     //SWITCH DE QUE PANTALLA SE PRINTA
@@ -62,10 +49,33 @@ void Map::Draw()
         ListItem<MapLayer*>* mapLayerItem;
         mapLayerItem = mapData.maplayers.start;
 
-        while (mapLayerItem != NULL) {
+        while (mapLayerItem != NULL) 
+        {
+
+            //Crear colliders (?)
+            if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value == true)
+            {
+                for (int x1 = 0; x1 < mapLayerItem->data->width; x1++) //Preguntar a Pedro porque explota
+                {
+                    for (int y1 = 0; y1 < mapLayerItem->data->height; y1++)
+                    {
+                        // L05: DONE 9: Complete the draw function
+                        int gid = mapLayerItem->data->Get(x1, y1);
+
+                        //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                        TileSet* tileset = GetTilesetFromTileId(gid);
+
+                        SDL_Rect r = tileset->GetTileRect(gid);
+                        iPoint pos = MapToWorld(x1, y1);
+
+                        /*LOG("%d",tileset);*/
+                    }
+                }
+            }
 
             //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
-            if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+            if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) 
+            {
 
                 for (int x = 0; x < mapLayerItem->data->width; x++)
                 {
@@ -87,25 +97,9 @@ void Map::Draw()
                     }
                 }
             }
-            //Crear colliders (?)
-            else if (mapLayerItem->data->properties.GetProperty("Colliders") != NULL && mapLayerItem->data->properties.GetProperty("Colliders")->value) {
-                for (int x = 0; x < mapLayerItem->data->width; x++)
-                {
-                    for (int y = 0; y < mapLayerItem->data->height; y++)
-                    {
-                        // L05: DONE 9: Complete the draw function
-                        int gid = mapLayerItem->data->Get(x, y);
 
-                        //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
-                        TileSet* tileset = GetTilesetFromTileId(gid);
+            
 
-                        SDL_Rect r = tileset->GetTileRect(gid);
-                        iPoint pos = MapToWorld(x, y);
-
-                        
-                    }
-                }
-            }
             mapLayerItem = mapLayerItem->next;
 
         }
@@ -148,7 +142,6 @@ TileSet* Map::GetTilesetFromTileId(int gid) const
 {
     ListItem<TileSet*>* item = mapData.tilesets.start;
     TileSet* set = NULL;
-
     while (item)
     {
         set = item->data;

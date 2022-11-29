@@ -8,6 +8,7 @@
  </tileset>
  <layer id="2" name="Fondo" width="45" height="24">
   <properties>
+   <property name="Colliders" type="bool" value="false"/>
    <property name="Draw" type="bool" value="true"/>
   </properties>
   <data>
@@ -1095,6 +1096,7 @@
  </layer>
  <layer id="3" name="Decoracion" width="45" height="24">
   <properties>
+   <property name="Colliders" type="bool" value="false"/>
    <property name="Draw" type="bool" value="true"/>
   </properties>
   <data>
@@ -2182,6 +2184,7 @@
  </layer>
  <layer id="1" name="Suelo" width="45" height="24">
   <properties>
+   <property name="Colliders" type="bool" value="false"/>
    <property name="Draw" type="bool" value="true"/>
   </properties>
   <data>
