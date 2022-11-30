@@ -1,5 +1,5 @@
-#ifndef __ITEM_H__
-#define __ITEM_H__
+#ifndef __ENEMY_H__
+#define __ENEMY_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -24,7 +24,7 @@ public:
 
 public:
 
-	bool isPicked = false;
+	bool fly = false;
 
 private:
 
@@ -35,4 +35,4 @@ private:
 	PhysBody* pbody;
 };
 
-#endif // __ITEM_H__
+#endif // __ENEMY_H__

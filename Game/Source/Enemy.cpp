@@ -23,6 +23,7 @@ bool Enemy::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	fly = parameters.attribute("fly").as_bool();
 
 	return true;
 }
@@ -37,7 +38,7 @@ bool Enemy::Start() {
 
 	// L07 DONE 7: Assign collider type
 	pbody->ctype = ColliderType::ENEMY;
-
+	 
 	return true;
 }
 

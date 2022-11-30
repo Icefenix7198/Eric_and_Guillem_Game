@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Item.h"
+#include "Enemy.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
@@ -95,7 +96,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 
 	case EntityType::ENEMY:
-		entity = new Item();
+		entity = new Enemy();
 		break;
 
 	default: break;
@@ -109,13 +110,24 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 void EntityManager::DestroyEntity(Entity* entity)
 {
-	ListItem<Entity*>* item;
+	
+	/*entity->Disable();*/
 
+	ListItem<Entity*>* item;
+	
 	for (item = entities.start; item != NULL; item = item->next)
 	{
-		if (item->data == entity) 
+	
+		if (item->data == entity)
+		{
 			entities.Del(item);
+		}
+		
+
 	}
+			
+
+	
 }
 
 void EntityManager::AddEntity(Entity* entity)

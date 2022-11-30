@@ -61,5 +61,7 @@ bool Item::Update()
 bool Item::CleanUp()
 {
 	//TODO ERIC O GUILLEM: AQUI METER QUE SE DESTRUYA EL ITEM
+	pbody->~PhysBody();
+
 	return true;
 }

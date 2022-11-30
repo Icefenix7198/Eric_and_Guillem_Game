@@ -289,10 +289,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 
 		//physB->listener->Disable();
-		app->entityManager->DestroyEntity(physB->listener); //TODO ERIC:Arreglar esto
+		//TODO ERIC:Arreglar esto
 
-		physB->body->DestroyFixture(physB->body->GetFixtureList());
-		//app->entityManager->DestroyEntity();
+		
+		app->entityManager->DestroyEntity(physB->listener);
 
 		break;
 	case ColliderType::PLATFORM:
