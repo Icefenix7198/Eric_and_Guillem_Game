@@ -6,10 +6,10 @@
 	<audio />
 	<:anonymous />
 	<scene>
-		<scene actualScene="3" />
+		<scene actualScene="1" />
 	</scene>
 	<entitymanager>
-		<player x="1035" y="770" />
+		<player x="134" y="613" />
 	</entitymanager>
 	<intro />
 	<map />

@@ -225,93 +225,246 @@ bool Map::Load()
                     switch (gid)
                     {
                         case 111:
+                            
+                        {
                             int w, h;
                             w = 32;
                             h = 32;
 
-                            PhysBody* c = new PhysBody;
-                            c = app->physics->CreateRectangle(pos.x+w/2, pos.y+ h/2, w, h, STATIC);
-                            collisionadores.Add(c);
+                            PhysBody* co = new PhysBody;
+                            co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co);
+                        }
                             break;
 
-                        /*case 112:
+                        case 112:
+                        {
+                            int w, h;
+                            w = 48;
+                            h = 48;
 
+                            PhysBody* co1 = new PhysBody;
+                            co1 = app->physics->CreateRectangle(pos.x + w / 6, pos.y + h / 6, w, h, STATIC);
+                            collisionadores.Add(co1);
+                        }
                             break;
 
                         case 113:
+                        {
+                            int w, h;
+                            w = 48;
+                            h = 48;
+
+                            PhysBody* co2 = new PhysBody;
+                            co2 = app->physics->CreateRectangle(pos.x + w / 2 , pos.y + h / 6, w, h, STATIC);
+                            collisionadores.Add(co2);
+                        }
 
                             break;
 
                         case 114:
+                        {
+                            int w, h;
+                            w = 48;
+                            h = 48;
 
+                            PhysBody* co3 = new PhysBody;
+                            co3 = app->physics->CreateRectangle(pos.x + w / 6, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co3);
+                        }
                             break;
 
                         case 115:
+                        {
+                            int w, h;
+                            w = 48;
+                            h = 48;
 
+                            PhysBody* co4 = new PhysBody;
+                            co4 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co4);
+                        }
                             break;
 
                         case 116:
+                        {
+                            int w, h;
+                            w = 64;
+                            h = 48;
 
+                            PhysBody* co5 = new PhysBody;
+                            co5 = app->physics->CreateRectangle(pos.x + w / 4, pos.y + h / 6, w, h, STATIC);
+                            collisionadores.Add(co5);
+                        }
                             break;
 
                         case 117:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co6 = new PhysBody;
+                            co6 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co6);
+                        }
                             break;
 
                         case 118:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co7 = new PhysBody;
+                            co7 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co7);
+                    }
                             break;
 
                         case 119:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co8 = new PhysBody;
+                            co8 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co8);
+                        }
                             break;
 
                         case 120:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co9 = new PhysBody;
+                            co9 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co9);
+                        }
                             break;
 
                         case 121:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co10 = new PhysBody;
+                            co10 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co10);
+                        }
                             break;
 
                         case 122:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 48;
 
+                            PhysBody* co11 = new PhysBody;
+                            co11 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 6, w, h, STATIC);
+                            collisionadores.Add(co11);
+                        }
                             break;
 
                         case 123:
+                        {
+                            int w, h;
+                            w = 48;
+                            h = 32;
 
+                            PhysBody* co12 = new PhysBody;
+                            co12 = app->physics->CreateRectangle(pos.x + w / 6, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co12);
+                        }
                             break;
 
                         case 124:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 48;
 
+                            PhysBody* co13 = new PhysBody;
+                            co13 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co13);
+                        }
                             break;
 
                         case 125:
+                        {
+                            int w, h;
+                            w = 48;
+                            h = 32;
 
+                            PhysBody* co14 = new PhysBody;
+                            co14 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co14);
+                        }
                             break;
 
                         case 126:
+                        {
+                            int w, h;
+                            w = 64;
+                            h = 48;
 
+                            PhysBody* co15 = new PhysBody;
+                            co15 = app->physics->CreateRectangle(pos.x + w / 4, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co15);
+                        }
                             break;
 
                         case 127:
-                            
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
+
+                            PhysBody* co16 = new PhysBody;
+                            co16 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co16);
+                        }
                             break;
 
                         case 128:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co17 = new PhysBody;
+                            co17 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co17);
+                        }
                             break;
 
                         case 129:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
+                            PhysBody* co18 = new PhysBody;
+                            co18 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co18);
+                        }
                             break;
 
                         case 130:
+                        {
+                            int w, h;
+                            w = 32;
+                            h = 32;
 
-                            break; */                   
-
-                        /*default:
-                            break;*/
+                            PhysBody* co19 = new PhysBody;
+                            co19 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            collisionadores.Add(co19);
+                        }
+                            break;             
                     }
                         
 
