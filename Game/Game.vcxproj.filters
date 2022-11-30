@@ -27,6 +27,7 @@
     </ClCompile>
     <ClCompile Include="Source\Muerte.cpp" />
     <ClCompile Include="Source\Victoria.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -80,6 +81,7 @@
     </ClInclude>
     <ClInclude Include="Source\Muerte.h" />
     <ClInclude Include="Source\Victoria.h" />
+    <ClInclude Include="Source\Enemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

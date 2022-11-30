@@ -1,4 +1,4 @@
-#include "Item.h"
+#include "Enemy.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -11,14 +11,14 @@
 
 #include "Map.h"
 
-Item::Item() : Entity(EntityType::ITEM)
+Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
-	name.Create("item");
+	name.Create("enemy");
 }
 
-Item::~Item() {}
+Enemy::~Enemy() {}
 
-bool Item::Awake() {
+bool Enemy::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -27,7 +27,7 @@ bool Item::Awake() {
 	return true;
 }
 
-bool Item::Start() {
+bool Enemy::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -36,12 +36,12 @@ bool Item::Start() {
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::KINEMATIC);
 
 	// L07 DONE 7: Assign collider type
-	pbody->ctype = ColliderType::ITEM;
+	pbody->ctype = ColliderType::ENEMY;
 
 	return true;
 }
 
-bool Item::Update()
+bool Enemy::Update()
 {
 	//If not GameMap no print ni fisica
 	if (app->scene->actualScene != app->scene->GAMEMAP)
@@ -58,8 +58,7 @@ bool Item::Update()
 	return true;
 }
 
-bool Item::CleanUp()
+bool Enemy::CleanUp()
 {
-	//TODO ERIC O GUILLEM: AQUI METER QUE SE DESTRUYA EL ITEM
 	return true;
 }

@@ -52,11 +52,11 @@ void Map::Draw()
         while (mapLayerItem != NULL) 
         {
 
-           
-
             //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
             if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) 
             {
+
+                
 
                 for (int x = 0; x < mapLayerItem->data->width; x++)
                 {
@@ -214,6 +214,7 @@ bool Map::Load()
                 {
                     // L05: DONE 9: Complete the draw function
                     int gid = layerCollision->data->Get(x1, y1);
+                    
 
                     //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
                     TileSet* tileset = GetTilesetFromTileId(gid);
@@ -221,7 +222,99 @@ bool Map::Load()
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x1, y1);
 
-                    int w, h;
+                    switch (gid)
+                    {
+                        case 111:
+                            int w, h;
+                            w = 32;
+                            h = 32;
+
+                            PhysBody* c = new PhysBody;
+                            c = app->physics->CreateRectangle(pos.x+w/2, pos.y+ h/2, w, h, STATIC);
+                            collisionadores.Add(c);
+                            break;
+
+                        /*case 112:
+
+                            break;
+
+                        case 113:
+
+                            break;
+
+                        case 114:
+
+                            break;
+
+                        case 115:
+
+                            break;
+
+                        case 116:
+
+                            break;
+
+                        case 117:
+
+                            break;
+
+                        case 118:
+
+                            break;
+
+                        case 119:
+
+                            break;
+
+                        case 120:
+
+                            break;
+
+                        case 121:
+
+                            break;
+
+                        case 122:
+
+                            break;
+
+                        case 123:
+
+                            break;
+
+                        case 124:
+
+                            break;
+
+                        case 125:
+
+                            break;
+
+                        case 126:
+
+                            break;
+
+                        case 127:
+                            
+                            break;
+
+                        case 128:
+
+                            break;
+
+                        case 129:
+
+                            break;
+
+                        case 130:
+
+                            break; */                   
+
+                        /*default:
+                            break;*/
+                    }
+                        
+
 
                 }
             }

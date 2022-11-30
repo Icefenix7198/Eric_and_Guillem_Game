@@ -94,6 +94,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Item();
 		break;
 
+	case EntityType::ENEMY:
+		entity = new Item();
+		break;
+
 	default: break;
 	}
 
