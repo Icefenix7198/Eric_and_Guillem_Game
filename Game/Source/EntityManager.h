@@ -21,6 +21,9 @@ public:
 	// Called after Awake
 	bool Start();
 
+	//ERIC: Brings all entities to its position (depending on the map), if they were destroyed it creates them
+	bool Reset();
+
 	// Called every frame
 	bool Update(float dt);
 

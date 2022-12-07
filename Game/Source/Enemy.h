@@ -18,9 +18,13 @@ public:
 
 	bool Start();
 
+	bool Reset();
+
 	bool Update();
 
 	bool CleanUp();
+
+	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
 

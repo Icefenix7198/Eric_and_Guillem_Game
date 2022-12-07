@@ -39,6 +39,12 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
+	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
+	{
+		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->parameters = itemNode;
+	}
+
 	//L02: DONE 3: Instantiate the player using the entity manager
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
@@ -157,9 +163,12 @@ bool Scene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			actualScene = Scenes::INTRO;
-			player->CleanUp();
+			app->entityManager->CleanUp();
+			app->entityManager->Start();
+
+			/*player->CleanUp();
 			player->Awake();
-			player->Start();
+			player->Start();*/
 		}
 		break;
 	case Scene::LOSE:
@@ -169,9 +178,8 @@ bool Scene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			actualScene = Scenes::INTRO;
-			player->CleanUp();
-			player->Awake();
-			player->Start();
+			app->entityManager->CleanUp();
+			app->entityManager->Start();
 		}
 		break;
 	default:

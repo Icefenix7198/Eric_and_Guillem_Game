@@ -32,6 +32,11 @@ public:
 		return true;
 	}
 
+	virtual bool Reset()
+	{
+		return true;
+	}
+
 	virtual bool Update()
 	{
 		return true;

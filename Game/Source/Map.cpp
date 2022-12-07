@@ -233,6 +233,7 @@ bool Map::Load()
 
                             PhysBody* co = new PhysBody;
                             co = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co->ctype = ColliderType::PLATFORM;
                             collisionadores.Add(co);
                         }
                             break;
@@ -245,6 +246,7 @@ bool Map::Load()
 
                             PhysBody* co1 = new PhysBody;
                             co1 = app->physics->CreateRectangle(pos.x + w / 6, pos.y + h / 6, w, h, STATIC);
+                            co1->ctype = ColliderType::PLATFORM;
                             collisionadores.Add(co1);
                         }
                             break;
@@ -257,6 +259,7 @@ bool Map::Load()
 
                             PhysBody* co2 = new PhysBody;
                             co2 = app->physics->CreateRectangle(pos.x + w / 2 , pos.y + h / 6, w, h, STATIC);
+                            co2->ctype = ColliderType::PLATFORM;
                             collisionadores.Add(co2);
                         }
 
@@ -294,6 +297,7 @@ bool Map::Load()
 
                             PhysBody* co5 = new PhysBody;
                             co5 = app->physics->CreateRectangle(pos.x + w / 4, pos.y + h / 6, w, h, STATIC);
+                            co5->ctype = ColliderType::PLATFORM;
                             collisionadores.Add(co5);
                         }
                             break;
@@ -305,7 +309,8 @@ bool Map::Load()
                             h = 32;
 
                             PhysBody* co6 = new PhysBody;
-                            co6 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co6 = app->physics->CreateRectangleSensor(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co6->ctype = ColliderType::DEAD;
                             collisionadores.Add(co6);
                         }
                             break;
@@ -317,7 +322,8 @@ bool Map::Load()
                             h = 32;
 
                             PhysBody* co7 = new PhysBody;
-                            co7 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co7 = app->physics->CreateRectangleSensor(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co7->ctype = ColliderType::DEAD;
                             collisionadores.Add(co7);
                     }
                             break;
@@ -366,6 +372,7 @@ bool Map::Load()
 
                             PhysBody* co11 = new PhysBody;
                             co11 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 6, w, h, STATIC);
+                            co11->ctype = ColliderType::PLATFORM;
                             collisionadores.Add(co11);
                         }
                             break;
@@ -437,7 +444,8 @@ bool Map::Load()
                             h = 32;
 
                             PhysBody* co17 = new PhysBody;
-                            co17 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co17 = app->physics->CreateRectangleSensor(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
+                            co17->ctype = ColliderType::DEAD;
                             collisionadores.Add(co17);
                         }
                             break;

@@ -283,11 +283,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		if (physB->ctype == ColliderType::ITEM)
-		{
-			app->audio->PlayFx(pickCoinFxId);
-		}
+		
+		app->audio->PlayFx(pickCoinFxId);
 
+		physB->body->DestroyFixture(physB->body->GetFixtureList());
+		physB->body->GetWorld()->DestroyBody(physB->body);
+ 		app->entityManager->DestroyEntity(physB->listener);
 		//physB->listener->Disable();
 		//TODO ERIC:Arreglar esto
 
@@ -317,6 +318,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		break;
 	case ColliderType::ENEMY:
+		app->scene->actualScene = app->scene->LOSE;
+		if (physB->ctype == ColliderType::DEAD)
+		{
+			app->audio->PlayFx(DeadSound); //TODO: QUIZA HACER MODO DE VIDAS
+		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
