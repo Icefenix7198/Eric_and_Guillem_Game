@@ -107,6 +107,7 @@
     <ClCompile Include="Source\ModuleFadeToBlack.cpp" />
     <ClCompile Include="Source\Muerte.cpp" />
     <ClCompile Include="Source\Path.cpp" />
+    <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Source\ModuleFadeToBlack.h" />
     <ClInclude Include="Source\Muerte.h" />
     <ClInclude Include="Source\Path.h" />
+    <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Queue.h" />

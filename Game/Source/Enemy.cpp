@@ -48,30 +48,19 @@ bool Enemy::Reset()
 {
 	//TODO:SWITCH DE NIVELES
 	
-	switch (app->scene->actualScene)
+	bool ret = true;
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	if (pbody == nullptr)
 	{
-	case app->scene->INTRO: //Si no es una pantalla donde haya enemigos por si acaso la funcion no se llama (?)
-		break;
-	
-	case app->scene->GAMEMAP:
-	{}
-	
-	case app->scene->WIN:
-		break;
-	
-	case app->scene->LOSE:
-		break;
-	
-	/*case app->scene->INTRO:
-	{}*/
-
-
-
-	default:
-		break;
+		pbody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
 	}
+	else
+	{
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 
-	return true;
+	}
+	return ret;
 }
 
 bool Enemy::Update()

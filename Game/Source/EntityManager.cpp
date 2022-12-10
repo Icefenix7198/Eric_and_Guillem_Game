@@ -72,7 +72,10 @@ bool EntityManager::Reset() {
 	{
 		pEntity = item->data;
 
-		if (pEntity->active == false) continue;
+		if (pEntity->active == false)
+		{
+			pEntity->Enable();
+		}
 		ret = item->data->Reset();
 	}
 

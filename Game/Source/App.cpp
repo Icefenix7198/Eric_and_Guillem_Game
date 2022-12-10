@@ -11,6 +11,7 @@
 #include "Intro.h"
 #include "Victoria.h"
 #include "Muerte.h"
+#include "Pathfinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -31,12 +32,14 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//fade = new FadeToBlack(); //ERIC: Por que conchas da error? Provar a hacerlo de 0 
 	//L07 DONE 2: Add Physics module
 	physics = new Physics();
+	pathfinding = new PathFinding();
 	scene = new Scene();
 	entityManager = new EntityManager();
 	intro = new Intro();
 	victory = new Victory();
 	lose = new Lose();
 	map = new Map();
+	
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -47,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//AddModule(fade);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
+	AddModule(pathfinding);
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(intro);

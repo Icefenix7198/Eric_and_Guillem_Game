@@ -23,7 +23,7 @@
 
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="150" y="672" texturepath="Assets/Textures/MainCharacter.png" FxJump="Assets/Audio/Fx/SonidoSalto.ogg" FxWin="Assets/Audio/Fx/SonidoWin.ogg" FxLose="Assets/Audio/Fx/SonidoLose.ogg">
+    <player x="288" y="1408" texturepath="Assets/Textures/MainCharacter.png" FxJump="Assets/Audio/Fx/SonidoSalto.ogg" FxWin="Assets/Audio/Fx/SonidoWin.ogg" FxLose="Assets/Audio/Fx/SonidoLose.ogg">
 
       <AnimRun1 x="0" y="0" w="27" h="36"/>
       <AnimRun2 x="27" y="0" w="27" h="36"/>
@@ -56,7 +56,7 @@
 	
 	 
     <!--<mapfile path="Assets/Maps/MapTemplate.tmx"/>-->
-    <mapfile path="Assets/Maps/MapaFinal.tmx"/>
+    <mapfile path="Assets/Maps/MapaLvl2.tmx"/>
 	 
   </map>
 	<intro>

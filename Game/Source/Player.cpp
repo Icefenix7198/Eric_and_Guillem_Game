@@ -64,6 +64,13 @@ bool Player::Awake() {
 		rect.w = nodoDePugi.attribute("w");
 	}*/
 	
+	////initilize textures
+	//texture = app->tex->Load(texturePath);
+
+	//initializate sound
+	JumpSound = app->audio->LoadFx(FxJump);
+	WinSound = app->audio->LoadFx(FxWin);
+	DeadSound = app->audio->LoadFx(FxLose);
 
 	return true;
 }
@@ -73,10 +80,10 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	//initializate sound
-	JumpSound = app->audio->LoadFx(FxJump);
-	WinSound = app->audio->LoadFx(FxWin);
-	DeadSound = app->audio->LoadFx(FxLose);
+	////initializate sound
+	//JumpSound = app->audio->LoadFx(FxJump);
+	//WinSound = app->audio->LoadFx(FxWin);
+	//DeadSound = app->audio->LoadFx(FxLose);
 
 	currentAnimation = &Run;
 	// L07 TODO 5: Add physics to the player - initialize physics body
@@ -85,6 +92,23 @@ bool Player::Start() {
 	playerBody->listener = this;
 	return true;
 	
+}
+
+bool Player::Reset() 
+{
+	bool ret = true;
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	if (playerBody==nullptr)
+	{
+		playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
+	}
+	else 
+	{
+		playerBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+			
+	}
+	return ret;
 }
 
 bool Player::Update()
@@ -142,11 +166,11 @@ bool Player::Update()
 	}
 	if (app->scene->maxCameraPosUp >= app->render->camera.y && -position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= app->render->camera.y)
 	{
-		app->render->camera.y += 1; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		app->render->camera.y += 3; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
 	}
-	if (app->scene->maxCameraPosDown <= app->render->camera.y && position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= -app->render->camera.y + app->render->camera.h && movement > 0)
+	if (app->scene->maxCameraPosDown <= app->render->camera.y && position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= -app->render->camera.y + app->render->camera.h)
 	{
-		app->render->camera.y += -1; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		app->render->camera.y += -3; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
 	}
 	
 	//DEBUGGING

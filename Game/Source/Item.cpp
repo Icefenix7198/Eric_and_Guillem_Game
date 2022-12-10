@@ -41,6 +41,23 @@ bool Item::Start() {
 	return true;
 }
 
+bool Item::Reset()
+{
+	bool ret = true;
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	if (pbody == nullptr)
+	{
+		pbody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
+	}
+	else
+	{
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
+
+	}
+	return ret;
+}
+
 bool Item::Update()
 {
 	//If not GameMap no print ni fisica

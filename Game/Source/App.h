@@ -18,6 +18,7 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class PathFinding;
 class FadeToBlack;
 class Intro;
 class Victory;
@@ -93,6 +94,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	PathFinding* pathfinding;
 	FadeToBlack* fade;
 	Intro* intro;
 	Victory* victory;

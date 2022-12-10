@@ -20,6 +20,8 @@ public:
 
 	bool Start();
 
+	bool Reset();
+
 	bool Update();
 
 	bool CleanUp();

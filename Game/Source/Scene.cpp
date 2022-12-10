@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "EntityManager.h"
+#include "Pathfinding.h"
 
 //Diferent Scenes
 #include "Intro.h"
@@ -51,7 +52,6 @@ bool Scene::Awake(pugi::xml_node& config)
 	actualScene = Scenes::INTRO;
 	
 
-
 	return ret;
 }
 
@@ -62,7 +62,19 @@ bool Scene::Start()
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
 	
 	// L03: DONE: Load map
-	app->map->Load();
+	bool retLoad=app->map->Load();
+
+	// L12 Create walkability map
+	if (retLoad) {
+		int w, h;
+		uchar* data = NULL;
+
+		bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
+		if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+
+		RELEASE_ARRAY(data);
+
+	}
 
 	// L04: DONE 7: Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
@@ -133,9 +145,6 @@ bool Scene::Update(float dt)
 		app->render->camera.x -= 1; 
 		}
 	}
-		
-
-	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
 	//Draw actual scene
 	switch (actualScene)
@@ -163,12 +172,8 @@ bool Scene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			actualScene = Scenes::INTRO;
-			app->entityManager->CleanUp();
-			app->entityManager->Start();
-
-			/*player->CleanUp();
-			player->Awake();
-			player->Start();*/
+			//app->entityManager->CleanUp();
+			app->entityManager->Reset();
 		}
 		break;
 	case Scene::LOSE:
@@ -178,8 +183,8 @@ bool Scene::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			actualScene = Scenes::INTRO;
-			app->entityManager->CleanUp();
-			app->entityManager->Start();
+			//app->entityManager->CleanUp();
+			app->entityManager->Reset();
 		}
 		break;
 	default:
