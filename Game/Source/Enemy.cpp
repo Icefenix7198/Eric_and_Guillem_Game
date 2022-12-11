@@ -12,6 +12,8 @@
 #include "Map.h"
 #include "EntityManager.h"
 
+#include "Point.h"
+
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
 	name.Create("enemy");
@@ -36,7 +38,7 @@ bool Enemy::Start() {
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
-
+	
 	// L07 DONE 7: Assign collider type
 	pbody->ctype = ColliderType::ENEMY;
 	 
@@ -75,7 +77,53 @@ bool Enemy::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	pbody->body->ApplyForceToCenter(b2Vec2(1, 0), 10);
+	switch (actualState)
+	{
+	case Enemy::IDLE:
+
+		//Moverse de lado a lado
+		pbody->body->SetLinearVelocity(b2Vec2(0.5, 0));
+		
+		//Detectar si el player esta cerca 
+		if (position.DistanceTo(app->scene->player->position)<200) //Pugi Mejor o asi esta bien?
+		{
+			LOG("DETECTED");
+			actualState = Enemy::CHASE;
+		}
+
+
+
+		//Show Alert Mode
+		if (ShowVectors)
+		app->render->DrawCircle(position.x, position.y, 200, 255, 255, 0);
+
+		break;
+	case Enemy::CHASE:
+
+		if (position.DistanceTo(app->scene->player->position) > 450) //Pugi Mejor o asi esta bien?
+		{
+			LOG("DETECTED");
+			actualState = Enemy::IDLE;
+		}
+
+
+
+		//Show Alert Mode
+		if (ShowVectors)
+			app->render->DrawCircle(position.x, position.y, 450, 255, 0, 255);
+
+		break;
+	case Enemy::DEAD:
+		break;
+	default:
+		break;
+	}
+
+
+	//Debug
+
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		ShowVectors = !ShowVectors;
 
 	app->render->DrawTexture(texture, position.x, position.y);
 

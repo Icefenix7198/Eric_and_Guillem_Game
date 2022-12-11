@@ -35,8 +35,19 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	enum state
+	{
+		IDLE,
+		CHASE,
+		DEAD
+	};
+
+	int actualState = IDLE;
+
 	//DONE 4: Add a physics to an item
 	PhysBody* pbody;
+
+	bool ShowVectors=false;
 };
 
 #endif // __ENEMY_H__
