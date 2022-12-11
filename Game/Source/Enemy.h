@@ -29,6 +29,8 @@ public:
 public:
 
 	bool fly = false;
+	iPoint tilePos;
+	iPoint tileObjective;
 
 private:
 

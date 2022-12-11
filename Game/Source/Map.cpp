@@ -245,7 +245,7 @@ bool Map::Load()
     
 
     ListItem<MapLayer*>* layerCollision; 
-    layerCollision = mapData.maplayers.end;
+    layerCollision = mapData.maplayers.end->prev; //PEDRO AYUDA, COMO HALLAR LAYER COLLIDER
 
     //Crear colliders
     while (layerCollision != NULL)

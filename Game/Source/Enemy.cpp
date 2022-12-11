@@ -11,6 +11,7 @@
 
 #include "Map.h"
 #include "EntityManager.h"
+#include "Pathfinding.h"
 
 #include "Point.h"
 
@@ -106,6 +107,11 @@ bool Enemy::Update()
 			actualState = Enemy::IDLE;
 		}
 
+		//Create path towards player
+
+		
+
+ 		app->pathfinding->CreatePath(position, app->scene->player->position);
 
 
 		//Show Alert Mode
