@@ -59,25 +59,25 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 int tileId = layer->Get(x, y);
                 TileSet* tileset = (tileId > 0) ? GetTilesetFromTileId(tileId) : NULL; //PEDRO AYUDA, ESTA LINEA DE CODIGO QUE HACE
 
-                if (tileset != NULL)
+                /*if (tileset != NULL)*/ //NULL = 0 y nuestra tile de vacio es 0
                 {
                     //map[i] = (tileId - tileset->firstgid) > 0 ? 0 : 1; CODE PROFE MEDIO GUIA
 
                     //map[i]= 0 no
-                    if (tileId==137) //Tile pared
+                    if (tileId  == 131) //Tile pared
                     {
                         map[i] = 0;
                     }
                     //map[i]=1 todos
-                    else if (tileId >0) //DE MOMENTO cualquier otra tile
+                    else if (tileId ==132) //Tile camino
                     {
                         map[i] = 1;
                     }
                     //map[1]=2 voladores only
-                    //else if((tileId - tileset->firstgid) == 0) //Vacio
-                    //{
-                    //    map[i] = 2;
-                    //}
+                    else if (tileId == 0)//Vacio
+                    {
+                        map[i] = 2;
+                    }
                      
                     
                     
