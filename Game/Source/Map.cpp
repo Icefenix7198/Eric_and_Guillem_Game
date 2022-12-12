@@ -61,7 +61,26 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
 
                 if (tileset != NULL)
                 {
-                    map[i] = (tileId - tileset->firstgid) > 0 ? 0 : 1;
+                    //map[i] = (tileId - tileset->firstgid) > 0 ? 0 : 1; CODE PROFE MEDIO GUIA
+
+                    //map[i]= 0 no
+                    if (tileId==137) //Tile pared
+                    {
+                        map[i] = 0;
+                    }
+                    //map[i]=1 todos
+                    else if (tileId >0) //DE MOMENTO cualquier otra tile
+                    {
+                        map[i] = 1;
+                    }
+                    //map[1]=2 voladores only
+                    //else if((tileId - tileset->firstgid) == 0) //Vacio
+                    //{
+                    //    map[i] = 2;
+                    //}
+                     
+                    
+                    
                 }
             }
         }

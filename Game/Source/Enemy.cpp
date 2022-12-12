@@ -89,7 +89,7 @@ bool Enemy::Update()
 
 		//Moverse de lado a lado
 		pbody->body->SetLinearVelocity(b2Vec2(direction*speed, -GRAVITY_Y));
-		if (app->pathfinding->IsWalkable(iPoint(tilePos.x+direction,tilePos.y)))
+		if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+direction,tilePos.y)))
 			(direction*=-1);		
 		
 		//Detectar si el player esta cerca 
@@ -148,6 +148,8 @@ bool Enemy::Update()
 			tileObj.y = tileObjective.y * tileSM;
 			tileObj.w = tileObj.h = tileSM;
 			app->render->DrawRectangle(tileObj, 122, 0, 255);
+
+			app->pathfinding->GetLastPath();
 		
 		}
 
