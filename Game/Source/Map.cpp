@@ -57,7 +57,7 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 int i = (y * layer->width) + x;
 
                 int tileId = layer->Get(x, y);
-                TileSet* tileset = (tileId > 0) ? GetTilesetFromTileId(tileId) : NULL;
+                TileSet* tileset = (tileId > 0) ? GetTilesetFromTileId(tileId) : NULL; //PEDRO AYUDA, ESTA LINEA DE CODIGO QUE HACE
 
                 if (tileset != NULL)
                 {
@@ -142,6 +142,18 @@ iPoint Map::MapToWorld(int x, int y) const
 
     ret.x = x * mapData.tileWidth;
     ret.y = y * mapData.tileHeight;
+
+    return ret;
+}
+
+iPoint Map::WorldToMap(int x, int y)
+{
+    iPoint ret(0, 0);    
+    
+        ret.x = x / mapData.tileWidth;
+        ret.y = y / mapData.tileHeight;
+    
+    
 
     return ret;
 }

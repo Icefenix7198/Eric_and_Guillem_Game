@@ -55,7 +55,7 @@ bool PathFinding::IsWalkable(const iPoint& pos) const
 uchar PathFinding::GetTileAt(const iPoint& pos) const
 {
 	if(CheckBoundaries(pos))
-		return map[(pos.y*width) + pos.x];
+		return map[(pos.y*width) + pos.x]; //PEDRO DUDA, ESTO ES ISOMETRICO SOLO O QUE
 
 	return INVALID_WALK_CODE;
 }

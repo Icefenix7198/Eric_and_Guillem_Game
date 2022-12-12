@@ -78,12 +78,19 @@ bool Enemy::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+	tilePos = app->map->WorldToMap(position.x,position.y);
+	tileObjective = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
+
+	
+
 	switch (actualState)
 	{
 	case Enemy::IDLE:
 
 		//Moverse de lado a lado
-		pbody->body->SetLinearVelocity(b2Vec2(0.5, 0));
+		pbody->body->SetLinearVelocity(b2Vec2(direction*speed, -GRAVITY_Y));
+		if (app->pathfinding->IsWalkable(iPoint(tilePos.x+direction,tilePos.y)))
+			(direction*=-1);		
 		
 		//Detectar si el player esta cerca 
 		if (position.DistanceTo(app->scene->player->position)<200) //Pugi Mejor o asi esta bien?
@@ -96,7 +103,17 @@ bool Enemy::Update()
 
 		//Show Alert Mode
 		if (ShowVectors)
-		app->render->DrawCircle(position.x, position.y, 200, 255, 255, 0);
+		{
+			app->render->DrawCircle(position.x, position.y, 200, 255, 255, 0);
+			SDL_Rect tileEnemigo;
+			int tileSM = app->map->mapData.tileWidth;
+			tileEnemigo.x = tilePos.x * tileSM;
+			tileEnemigo.y = tilePos.y * tileSM;
+			tileEnemigo.h = tileEnemigo.w = tileSM;
+			app->render->DrawRectangle(tileEnemigo, 0, 0, 255,122);
+			
+				
+		}
 
 		break;
 	case Enemy::CHASE:
@@ -111,12 +128,29 @@ bool Enemy::Update()
 
 		
 
- 		app->pathfinding->CreatePath(position, app->scene->player->position);
+ 		app->pathfinding->CreatePath(tilePos, tileObjective);
 
 
 		//Show Alert Mode
 		if (ShowVectors)
+		{
 			app->render->DrawCircle(position.x, position.y, 450, 255, 0, 255);
+			
+			SDL_Rect tileEnemigo;
+			int tileSM = app->map->mapData.tileWidth;
+			tileEnemigo.x = tilePos.x * tileSM;
+			tileEnemigo.y = tilePos.y * tileSM;
+			tileEnemigo.h = tileEnemigo.w = tileSM;
+			app->render->DrawRectangle(tileEnemigo, 0, 0, 255, 122);
+			
+			SDL_Rect tileObj;
+			tileObj.x = tileObjective.x * tileSM;
+			tileObj.y = tileObjective.y * tileSM;
+			tileObj.w = tileObj.h = tileSM;
+			app->render->DrawRectangle(tileObj, 122, 0, 255);
+		
+		}
+
 
 		break;
 	case Enemy::DEAD:
