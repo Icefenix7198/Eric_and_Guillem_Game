@@ -28,7 +28,7 @@ bool Enemy::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	fly = parameters.attribute("fly").as_bool();
-
+	
 	return true;
 }
 
@@ -89,7 +89,7 @@ bool Enemy::Update()
 
 		//Moverse de lado a lado
 		pbody->body->SetLinearVelocity(b2Vec2(direction*speed, -GRAVITY_Y));
-		if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+direction,tilePos.y)))
+		if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+direction,tilePos.y),fly))
 			(direction*=-1);		
 		
 		//Detectar si el player esta cerca 
@@ -128,7 +128,16 @@ bool Enemy::Update()
 
 		
 
- 		app->pathfinding->CreatePath(tilePos, tileObjective);
+		if (app->pathfinding->CreatePath(tilePos, tileObjective, fly) > 0)
+		{
+			for (int i=0;i< app->pathfinding->GetLastPath()->Count();i++)
+			{
+			const iPoint* tileToMove =app->pathfinding->GetLastPath()->At(i);
+			
+			pbody->body->SetLinearVelocity(b2Vec2(0, -GRAVITY_Y));
+			}
+			
+		}
 
 
 		//Show Alert Mode
@@ -149,7 +158,7 @@ bool Enemy::Update()
 			tileObj.w = tileObj.h = tileSM;
 			app->render->DrawRectangle(tileObj, 122, 0, 255);
 
-			app->pathfinding->GetLastPath();
+			
 		
 		}
 

@@ -76,7 +76,7 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                     //map[1]=2 voladores only
                     else if (tileId == 0)//Vacio
                     {
-                        map[i] = 2;
+                        map[i] = -1;
                     }
                      
                     
