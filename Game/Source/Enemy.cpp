@@ -28,7 +28,7 @@ bool Enemy::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	fly = parameters.attribute("fly").as_bool();
-	
+	fly = true;
 	return true;
 }
 
@@ -158,7 +158,17 @@ bool Enemy::Update()
 			tileObj.w = tileObj.h = tileSM;
 			app->render->DrawRectangle(tileObj, 122, 0, 255);
 
-			
+			const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+
+			for (uint i = 0; i < path->Count(); ++i)
+			{
+				iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+				SDL_Rect rectangulo;
+				rectangulo.x = pos.x;
+				rectangulo.y = pos.y;
+				rectangulo.h = rectangulo.w = 32;
+				app->render->DrawRectangle(rectangulo,255,0,0);
+			}
 		
 		}
 
