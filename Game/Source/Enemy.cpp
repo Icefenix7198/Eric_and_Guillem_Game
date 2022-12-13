@@ -28,7 +28,7 @@ bool Enemy::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	fly = parameters.attribute("fly").as_bool();
-	fly = true;
+	
 	return true;
 }
 
@@ -126,18 +126,58 @@ bool Enemy::Update()
 
 		//Create path towards player
 
-		
+		//PSEUDOCODIGO
 
-		if (app->pathfinding->CreatePath(tilePos, tileObjective, fly) > 0)
+		//
+		// Crear path
+		// if path NO CREABLE aka -1-->Seguir antiguo last path
+		//		ir direccion i hasta que tile pos=pos then path
+		// deteccion de tiles en diagonal para las caidas
+
+
+		app->pathfinding->CreatePath(tilePos, tileObjective, fly);
+		
+		if (app->pathfinding->CreatePath(tilePos, tileObjective, fly) > 0 )
 		{
-			for (int i=0;i< app->pathfinding->GetLastPath()->Count();i++)
+			const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+
+			pathStep = 1;
+
+			posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
+			/*if (posNextStep.x > tilePos.x)
 			{
-			const iPoint* tileToMove =app->pathfinding->GetLastPath()->At(i);
-			
-			pbody->body->SetLinearVelocity(b2Vec2(0, -GRAVITY_Y));
+				pbody->body->SetLinearVelocity(b2Vec2(-4 * speed, -GRAVITY_Y));
 			}
-			
+			if (posNextStep.x < tilePos.x)
+			{
+				pbody->body->SetLinearVelocity(b2Vec2(4 * speed, -GRAVITY_Y));
+			}
+
+			if (posNextStep == tilePos)
+			{
+				pathStep++;
+			}*/
+
 		}
+
+		//posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
+
+
+		if (posNextStep.x > tilePos.x)
+		{
+			pbody->body->SetLinearVelocity(b2Vec2(-2 * speed, -GRAVITY_Y));
+		}
+		if (posNextStep.x < tilePos.x)
+		{
+			pbody->body->SetLinearVelocity(b2Vec2(2 * speed, -GRAVITY_Y));
+		}
+
+		if (posNextStep == tilePos)
+		{
+			pathStep++;
+		}
+			
+		
 
 
 		//Show Alert Mode
@@ -167,7 +207,7 @@ bool Enemy::Update()
 				rectangulo.x = pos.x;
 				rectangulo.y = pos.y;
 				rectangulo.h = rectangulo.w = 32;
-				app->render->DrawRectangle(rectangulo,255,0,0);
+				app->render->DrawRectangle(rectangulo,255,0,0,255-i*5);
 			}
 		
 		}

@@ -45,8 +45,13 @@ private:
 	};
 
 	int actualState = IDLE;
+	//IDLE MOVEMENT
 	int direction = 1;
 	float speed = 0.8;
+	
+	//Following player
+	uint pathStep = 1;
+	iPoint posNextStep;
 
 	//DONE 4: Add a physics to an item
 	PhysBody* pbody;
