@@ -348,7 +348,7 @@ bool Map::Load()
 
                             PhysBody* co3 = new PhysBody;
                             co3 = app->physics->CreateRectangle(pos.x + w / 6, pos.y + h / 2, w, h, STATIC);
-                            co3->ctype = ColliderType::PLATFORM;
+                            co3->ctype = ColliderType::WALL;
                             collisionadores.Add(co3);
                         }
                             break;
@@ -361,7 +361,7 @@ bool Map::Load()
 
                             PhysBody* co4 = new PhysBody;
                             co4 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
-                            co4->ctype = ColliderType::PLATFORM;
+                            co4->ctype = ColliderType::WALL;
                             collisionadores.Add(co4);
                         }
                             break;
@@ -483,7 +483,7 @@ bool Map::Load()
 
                             PhysBody* co12 = new PhysBody;
                             co12 = app->physics->CreateRectangle(pos.x + w / 6, pos.y + h / 2, w, h, STATIC);
-                            co12->ctype = ColliderType::PLATFORM;
+                            co12->ctype = ColliderType::WALL;
                             collisionadores.Add(co12);
                         }
                             break;
@@ -496,7 +496,7 @@ bool Map::Load()
 
                             PhysBody* co13 = new PhysBody;
                             co13 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
-                            co13->ctype = ColliderType::PLATFORM;
+                            co13->ctype = ColliderType::WALL;
                             collisionadores.Add(co13);
                         }
                             break;
@@ -509,7 +509,7 @@ bool Map::Load()
 
                             PhysBody* co14 = new PhysBody;
                             co14 = app->physics->CreateRectangle(pos.x + w / 2, pos.y + h / 2, w, h, STATIC);
-                            co14->ctype = ColliderType::PLATFORM;
+                            co14->ctype = ColliderType::WALL;
                             collisionadores.Add(co14);
                         }
                             break;
@@ -522,7 +522,7 @@ bool Map::Load()
 
                             PhysBody* co15 = new PhysBody;
                             co15 = app->physics->CreateRectangle(pos.x + w / 4, pos.y + h / 2, w, h, STATIC);
-                            co15->ctype = ColliderType::PLATFORM;
+                            co15->ctype = ColliderType::WALL;
                             collisionadores.Add(co15);
                         }
                             break;
