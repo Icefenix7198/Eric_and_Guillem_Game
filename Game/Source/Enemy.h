@@ -46,7 +46,8 @@ private:
 
 	int actualState = IDLE;
 	//IDLE MOVEMENT
-	int direction = 1;
+	int directionX = 1;
+	int directionY = 1;
 	float speed = 0.8;
 	
 	//Following player

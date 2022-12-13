@@ -42,7 +42,16 @@ bool Enemy::Start() {
 	
 	// L07 DONE 7: Assign collider type
 	pbody->ctype = ColliderType::ENEMY;
-	 
+	if (fly==true)
+	{
+		pbody->body->SetGravityScale(0);
+	}
+	else 
+	{
+		pbody->body->SetGravityScale(-GRAVITY_Y);
+	}
+
+
 	return true;
 }
 
@@ -88,9 +97,16 @@ bool Enemy::Update()
 	case Enemy::IDLE:
 
 		//Moverse de lado a lado
-		pbody->body->SetLinearVelocity(b2Vec2(direction*speed, -GRAVITY_Y));
-		if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+direction,tilePos.y),fly))
-			(direction*=-1);		
+		pbody->body->SetLinearVelocity(b2Vec2(directionX*speed,0));
+		if (fly==false)
+		{
+			directionY = 0;
+			if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+directionX,tilePos.y),fly))
+				(directionX*=-1); 
+		}
+
+		pbody->body->SetLinearVelocity(b2Vec2(directionX * speed, directionY * speed));
+				
 		
 		//Detectar si el player esta cerca 
 		if (position.DistanceTo(app->scene->player->position)<200) //Pugi Mejor o asi esta bien?
@@ -99,7 +115,7 @@ bool Enemy::Update()
 			actualState = Enemy::CHASE;
 		}
 
-
+		
 
 		//Show Alert Mode
 		if (ShowVectors)
@@ -126,56 +142,64 @@ bool Enemy::Update()
 
 		//Create path towards player
 
-		//PSEUDOCODIGO
-
-		//
-		// Crear path
-		// if path NO CREABLE aka -1-->Seguir antiguo last path
-		//		ir direccion i hasta que tile pos=pos then path
-		// deteccion de tiles en diagonal para las caidas
-
-
 		app->pathfinding->CreatePath(tilePos, tileObjective, fly);
 		
-		if (app->pathfinding->CreatePath(tilePos, tileObjective, fly) > 0 )
+		if (fly==true)
 		{
-			const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
-
-			pathStep = 1;
-
-			posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
-			/*if (posNextStep.x > tilePos.x)
+			if (app->pathfinding->GetLastPath()->Count() > 0)
 			{
-				pbody->body->SetLinearVelocity(b2Vec2(-4 * speed, -GRAVITY_Y));
+				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+
+				pathStep = 1;
+
+				posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
+				
+				if (posNextStep.x > position.x)
+				{
+					directionX = 1;
+				}
+				if (posNextStep.x < position.x)
+				{
+					directionX = -1;
+				}
+
+				if (posNextStep.y > position.y)
+				{
+					directionY = 1;
+				}
+				if (posNextStep.y < position.y)
+				{
+					directionY = -1;
+				}
 			}
-			if (posNextStep.x < tilePos.x)
+		}
+
+		if (fly==false)
+		{
+			if (app->pathfinding->GetLastPath()->Count() > 0 )
 			{
-				pbody->body->SetLinearVelocity(b2Vec2(4 * speed, -GRAVITY_Y));
+				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+
+				pathStep = 1;
+
+				posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
+				if (posNextStep.x > position.x)
+				{
+					directionX = 1;
+				}
+				if (posNextStep.x < position.x)
+				{
+					directionX = -1;
+				}
 			}
-
-			if (posNextStep == tilePos)
-			{
-				pathStep++;
-			}*/
-
 		}
 
-		//posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
+		
 
 
-		if (posNextStep.x > tilePos.x)
-		{
-			pbody->body->SetLinearVelocity(b2Vec2(-2 * speed, -GRAVITY_Y));
-		}
-		if (posNextStep.x < tilePos.x)
-		{
-			pbody->body->SetLinearVelocity(b2Vec2(2 * speed, -GRAVITY_Y));
-		}
+		
 
-		if (posNextStep == tilePos)
-		{
-			pathStep++;
-		}
+		pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, directionY * 2*  speed));
 			
 		
 
@@ -198,6 +222,8 @@ bool Enemy::Update()
 			tileObj.w = tileObj.h = tileSM;
 			app->render->DrawRectangle(tileObj, 122, 0, 255);
 
+			app->render->DrawLine(position.x, position.y, position.x + directionX * 2 , directionY * 2 , 0, 0, 255);
+
 			const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
 			for (uint i = 0; i < path->Count(); ++i)
@@ -207,7 +233,7 @@ bool Enemy::Update()
 				rectangulo.x = pos.x;
 				rectangulo.y = pos.y;
 				rectangulo.h = rectangulo.w = 32;
-				app->render->DrawRectangle(rectangulo,255,0,0,255-i*5);
+				app->render->DrawRectangle(rectangulo,255-i*10,0,i*10,100);
 			}
 		
 		}
@@ -219,6 +245,7 @@ bool Enemy::Update()
 	default:
 		break;
 	}
+
 
 
 	//Debug
