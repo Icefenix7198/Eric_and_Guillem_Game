@@ -14,11 +14,13 @@
 ## Controls
 
  - {ControlsScheme}
- SPACE - Jump and switck scene
- W - Move upwards (God Mode Only)
- A - Move Left
- S -  Move downwards (God Mode Only)
- D - Move Rigth
+ - SPACE - Jump and switck scene
+ - W - Move upwards (God Mode Only)
+ - A - Move Left
+ - S -  Move downwards (God Mode Only)
+ - D - Move Rigth 
+ 
+ 
 
 ## Developers
 
