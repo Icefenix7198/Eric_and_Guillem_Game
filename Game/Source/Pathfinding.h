@@ -74,10 +74,11 @@ struct PathNode
 	int h;
 	iPoint pos;
 	const PathNode* parent; // needed to reconstruct the path in the end
+	bool diagonal;
 
 	// Convenient constructors
 	PathNode();
-	PathNode(int g, int h, const iPoint& pos, const PathNode* parent);
+	PathNode(int g, int h, const iPoint& pos, const PathNode* parent,bool diagonal=false);
 	PathNode(const PathNode& node);
 
 	// Fills a list (PathList) of all valid adjacent pathnodes
@@ -85,7 +86,7 @@ struct PathNode
 	// Calculates this tile score
 	int Score() const;
 	// Calculate the F for a specific destination tile
-	int CalculateF(const iPoint& destination);
+	int CalculateF(const iPoint& destination, bool diagonal);
 };
 
 // ---------------------------------------------------------------------

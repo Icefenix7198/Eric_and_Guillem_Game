@@ -122,7 +122,7 @@ ListItem<PathNode>* PathList::GetNodeLowestScore() const
 PathNode::PathNode() : g(-1), h(-1), pos(-1, -1), parent(NULL)
 {}
 
-PathNode::PathNode(int g, int h, const iPoint& pos, const PathNode* parent) : g(g), h(h), pos(pos), parent(parent)
+PathNode::PathNode(int g, int h, const iPoint& pos, const PathNode* parent, bool diagonal) : g(g), h(h), pos(pos), parent(parent),  diagonal(diagonal)
 {}
 
 PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), parent(node.parent)
@@ -138,23 +138,60 @@ uint PathNode::FindWalkableAdjacents(PathList& listToFill,bool fly) const
 
 	// north
 	cell.Create(pos.x, pos.y + 1);
-	if(app->pathfinding->IsWalkable(cell,fly))
-		listToFill.list.Add(PathNode(-1, -1, cell, this));
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, false));
+	}
 
 	// south
 	cell.Create(pos.x, pos.y - 1);
-	if(app->pathfinding->IsWalkable(cell,fly))
-		listToFill.list.Add(PathNode(-1, -1, cell, this));
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, false));
+	}
 
 	// east
 	cell.Create(pos.x + 1, pos.y);
-	if(app->pathfinding->IsWalkable(cell,fly))
-		listToFill.list.Add(PathNode(-1, -1, cell, this));
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, false));
+	}
 
 	// west
 	cell.Create(pos.x - 1, pos.y);
-	if(app->pathfinding->IsWalkable(cell,fly))
-		listToFill.list.Add(PathNode(-1, -1, cell, this));
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, false));
+	}
+
+	
+	//north-east
+	cell.Create(pos.x+1, pos.y + 1);
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, true));
+	}
+
+	// south east
+	cell.Create(pos.x+1, pos.y - 1);
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, true));
+	}
+
+	// north west
+	cell.Create(pos.x - 1, pos.y+1);
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, true));
+	}
+
+	// south west
+	cell.Create(pos.x - 1, pos.y-1);
+	if (app->pathfinding->IsWalkable(cell, fly))
+	{
+		listToFill.list.Add(PathNode(-1, -1, cell, this, true));
+	}
 
 	return listToFill.list.Count();
 }
@@ -170,9 +207,15 @@ int PathNode::Score() const
 // PathNode -------------------------------------------------------------------------
 // Calculate the F for a specific destination tile
 // ----------------------------------------------------------------------------------
-int PathNode::CalculateF(const iPoint& destination)
+int PathNode::CalculateF(const iPoint& destination, bool diagonal )
 {
-	g = parent->g + 1;
+
+
+	if (diagonal==false)
+		g = parent->g + 2; //Modificar en caso de diagonales valer 3 en normales 2
+	if (diagonal == false)
+		g = parent->g + 3;
+
 	h = pos.DistanceTo(destination);
 
 	return g + h;
@@ -243,7 +286,7 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination, boo
 	// If it is NOT found, calculate its F and add it to the open list
 			if (open.Find(adjacent->data.pos) == nullptr)
 			{
-				adjacent->data.CalculateF(destination);
+				adjacent->data.CalculateF(destination,adjacent->data.diagonal);
 				open.list.Add(adjacent->data);
 			}
 			

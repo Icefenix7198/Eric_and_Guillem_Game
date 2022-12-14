@@ -10,13 +10,13 @@
 		<scene actualScene="1" />
 	</scene>
 	<entitymanager>
-		<player x="268" y="1455" />
+		<player x="406" y="1455" />
 	</entitymanager>
 	<intro />
 	<map />
 	<victory />
 	<lose />
 	<renderer>
-		<camera x="0" y="-711" />
+		<camera x="0" y="-771" />
 	</renderer>
 </save_state>

@@ -28,6 +28,9 @@ bool Enemy::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	fly = parameters.attribute("fly").as_bool();
+	speed= parameters.attribute("speed").as_float();
+	alarmRange= parameters.attribute("alarmRange").as_int();
+	loseRange= parameters.attribute("loseRange").as_int();
 	
 	return true;
 }
@@ -72,6 +75,7 @@ bool Enemy::Reset()
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 
 	}
+	app->pathfinding->ClearLastPath();
 	return ret;
 }
 
@@ -90,26 +94,33 @@ bool Enemy::Update()
 	tilePos = app->map->WorldToMap(position.x,position.y);
 	tileObjective = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	
+	app->render->DrawTexture(texture, position.x, position.y);
 
 	switch (actualState)
 	{
 	case Enemy::IDLE:
 
 		//Moverse de lado a lado
-		pbody->body->SetLinearVelocity(b2Vec2(directionX*speed,0));
+		if (fly == true)
+		{
+			pbody->body->SetLinearVelocity(b2Vec2(0,0));
+
+		}
+
 		if (fly==false)
 		{
+			pbody->body->SetLinearVelocity(b2Vec2(directionX*speed,0));
+
 			directionY = 0;
 			if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+directionX,tilePos.y),fly))
 				(directionX*=-1); 
 		}
 
-		pbody->body->SetLinearVelocity(b2Vec2(directionX * speed, directionY * speed));
+		//pbody->body->SetLinearVelocity(b2Vec2(directionX * speed, directionY * speed));
 				
 		
 		//Detectar si el player esta cerca 
-		if (position.DistanceTo(app->scene->player->position)<200) //Pugi Mejor o asi esta bien?
+		if (position.DistanceTo(app->scene->player->position)< alarmRange) //Pugi Mejor o asi esta bien?
 		{
 			LOG("DETECTED");
 			actualState = Enemy::CHASE;
@@ -120,7 +131,7 @@ bool Enemy::Update()
 		//Show Alert Mode
 		if (ShowVectors)
 		{
-			app->render->DrawCircle(position.x, position.y, 200, 255, 255, 0);
+			app->render->DrawCircle(position.x, position.y, alarmRange, 255, 255, 0);
 			SDL_Rect tileEnemigo;
 			int tileSM = app->map->mapData.tileWidth;
 			tileEnemigo.x = tilePos.x * tileSM;
@@ -132,11 +143,12 @@ bool Enemy::Update()
 		}
 
 		break;
+
 	case Enemy::CHASE:
 
-		if (position.DistanceTo(app->scene->player->position) > 450) //Pugi Mejor o asi esta bien?
+		if (position.DistanceTo(app->scene->player->position) > loseRange) 
 		{
-			LOG("DETECTED");
+			LOG("LOST TRACK");
 			actualState = Enemy::IDLE;
 		}
 
@@ -194,11 +206,6 @@ bool Enemy::Update()
 			}
 		}
 
-		
-
-
-		
-
 		pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, directionY * 2*  speed));
 			
 		
@@ -207,7 +214,7 @@ bool Enemy::Update()
 		//Show Alert Mode
 		if (ShowVectors)
 		{
-			app->render->DrawCircle(position.x, position.y, 450, 255, 0, 255);
+			app->render->DrawCircle(position.x, position.y, loseRange, 255, 0, 255);
 			
 			SDL_Rect tileEnemigo;
 			int tileSM = app->map->mapData.tileWidth;
@@ -222,7 +229,7 @@ bool Enemy::Update()
 			tileObj.w = tileObj.h = tileSM;
 			app->render->DrawRectangle(tileObj, 122, 0, 255);
 
-			app->render->DrawLine(position.x, position.y, position.x + directionX * 2 , directionY * 2 , 0, 0, 255);
+			app->render->DrawLine(position.x+16, position.y+16, position.x + directionX * 12 +16, position.y + directionY * 12+16 , 0, 255, 255);
 
 			const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
@@ -253,7 +260,7 @@ bool Enemy::Update()
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		ShowVectors = !ShowVectors;
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	//app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;
 }

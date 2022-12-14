@@ -44,8 +44,12 @@ private:
 		DEAD
 	};
 
+	//Detection
+	int alarmRange;
+	int loseRange;
+
 	int actualState = IDLE;
-	//IDLE MOVEMENT
+	//Movement
 	int directionX = 1;
 	int directionY = 1;
 	float speed = 0.8;
