@@ -108,6 +108,7 @@ bool Player::Reset()
 		playerBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 			
 	}
+	GodMode = false;
 	return ret;
 }
 

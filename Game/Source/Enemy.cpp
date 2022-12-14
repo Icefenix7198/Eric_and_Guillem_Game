@@ -54,6 +54,7 @@ bool Enemy::Start() {
 		pbody->body->SetGravityScale(-GRAVITY_Y);
 	}
 
+	pbody->listener = this;
 
 	return true;
 }
@@ -75,6 +76,7 @@ bool Enemy::Reset()
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 
 	}
+	actualState = IDLE;
 	app->pathfinding->ClearLastPath();
 	return ret;
 }
@@ -111,12 +113,12 @@ bool Enemy::Update()
 		{
 			pbody->body->SetLinearVelocity(b2Vec2(directionX*speed,0));
 
-			directionY = 0;
+			//directionY = 0;
 			if (!app->pathfinding->IsWalkable(iPoint(tilePos.x+directionX,tilePos.y),fly))
 				(directionX*=-1); 
 		}
 
-		//pbody->body->SetLinearVelocity(b2Vec2(directionX * speed, directionY * speed));
+		
 				
 		
 		//Detectar si el player esta cerca 
@@ -193,7 +195,7 @@ bool Enemy::Update()
 				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
 				pathStep = 1;
-
+				
 				posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
 				if (posNextStep.x > position.x)
 				{
@@ -206,7 +208,8 @@ bool Enemy::Update()
 			}
 		}
 
-		pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, directionY * 2*  speed));
+		pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, -GRAVITY_Y));
+		
 			
 		
 
@@ -254,7 +257,7 @@ bool Enemy::Update()
 	}
 
 
-
+	app->pathfinding->ClearLastPath();
 	//Debug
 
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
@@ -297,6 +300,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::DEAD:
 	
 		physA->body->DestroyFixture(physA->body->GetFixtureList());
+		physA->body->GetWorld()->DestroyBody(physA->body);
 
 		break;
 	case ColliderType::WIN:
@@ -310,6 +314,6 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 
-
+	
 
 }
