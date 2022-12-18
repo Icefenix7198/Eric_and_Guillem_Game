@@ -274,17 +274,12 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 	
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && swordExist == false)
 	{
-		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 20, 32, 16, STATIC);
+		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 40, 32, 16, STATIC);
 		weapon->ctype = ColliderType::WEAPON;
 		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
-	}
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
-	{
-		//weapon->body->DestroyFixture(weapon->body->GetFixtureList());
-		weapon->body->GetWorld()->DestroyBody(weapon->body);
-		//app->entityManager->DestroyEntity(weapon->listener);
+		swordExist = true;
 	}
 	if (weapon!=nullptr)
 	{
@@ -292,6 +287,12 @@ bool Player::Update()
 
 	}
 	
+	if (app->input->GetKey(SDL_SCANCODE_F) != KEY_DOWN || app->input->GetKey(SDL_SCANCODE_F) != KEY_REPEAT && swordExist == true)
+	{
+		//weapon->body->DestroyFixture(weapon->body->GetFixtureList());
+		weapon->body->GetWorld()->DestroyBody(weapon->body);
+		//app->entityManager->DestroyEntity(weapon->listener);
+	}
 
 	//Print player movement vector
 	if (ShowVectors==true)

@@ -64,7 +64,7 @@ private:
 	//Debugging
 	bool ShowVectors=false;
 	bool GodMode = false;
-
+	bool swordExist = false;
 };
 
 #endif // __PLAYER_H__

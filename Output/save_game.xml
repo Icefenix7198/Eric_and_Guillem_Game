@@ -11,11 +11,11 @@
 		<camara x="0" y="-771" />
 	</scene>
 	<entitymanager>
-		<player x="284" y="1455" />
+		<player x="292" y="1455" />
 		<enemies>
-			<enemy x="734" y="143" />
-			<enemy x="2282" y="1455" />
-			<enemy x="1174" y="847" />
+			<enemy x="750" y="160" />
+			<enemy x="2351" y="1455" />
+			<enemy x="1231" y="847" />
 		</enemies>
 	</entitymanager>
 	<intro />
