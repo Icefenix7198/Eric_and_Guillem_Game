@@ -260,12 +260,28 @@ bool Player::Update()
 			currentAnimation = &Run;
 		}
 	}
-	/*if (app->input->GetKey(SDL_SCANCODE_SPACE) != KEY_DOWN &&
-		app->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT &&
-		app->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
+	
+	bool weaponOn;
+
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
-		currentAnimation = &Run;
-	}*/
+		weaponOn = true;
+
+		if (weaponOn == true)
+		{
+			int w, h;
+			w = 32;
+			h = 16;
+
+			PhysBody* weapon = new PhysBody;
+			weapon = app->physics->CreateRectangleSensor(position.x, position.y + 20, w, h, STATIC);
+			weapon->ctype = ColliderType::PLAYER;
+		}
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE)
+	{
+		weaponOn = false;
+	}
 
 	currentAnimation->Update();	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
