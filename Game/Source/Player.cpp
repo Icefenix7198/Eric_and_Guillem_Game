@@ -287,7 +287,7 @@ bool Player::Update()
 
 	}
 	
-	if (app->input->GetKey(SDL_SCANCODE_F) != KEY_DOWN || app->input->GetKey(SDL_SCANCODE_F) != KEY_REPEAT && swordExist == true)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist == true)
 	{
 		//weapon->body->DestroyFixture(weapon->body->GetFixtureList());
 		weapon->body->GetWorld()->DestroyBody(weapon->body);
