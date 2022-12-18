@@ -36,5 +36,5 @@ This project is licensed under an unmodified MIT license, which is an OSI-certif
 
 {AdditionalLicenses}
 
-Github Lproject Link:
+Github Project Link:
 https://github.com/Icefenix7198/Eric_and_Guillem_Game
