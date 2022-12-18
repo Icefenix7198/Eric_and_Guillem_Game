@@ -28,6 +28,8 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	
+
 public:
 	//Movido para guardar
 	PhysBody* playerBody;

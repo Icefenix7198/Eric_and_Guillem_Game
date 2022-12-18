@@ -26,23 +26,31 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	/*bool LoadState(pugi::xml_node& data);
+
+	bool SaveState(pugi::xml_node& data);*/
+
+
+
 public:
 
 	bool fly = false;
 	iPoint tilePos;
 	iPoint tileObjective;
-
-private:
-
-	SDL_Texture* texture;
-	const char* texturePath;
-
+	
 	enum state
 	{
 		IDLE,
 		CHASE,
 		DEAD
 	};
+
+private:
+
+	SDL_Texture* texture;
+	const char* texturePath;
+
+	
 
 	//Detection
 	int alarmRange;

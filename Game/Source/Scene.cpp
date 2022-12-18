@@ -158,6 +158,7 @@ bool Scene::Update(float dt)
 		//Cambiar al mapa de juego
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 		{
+			app->render->camera.y = -768;
 			actualScene = Scenes::GAMEMAP;
 		}
 		break;
@@ -219,6 +220,9 @@ bool Scene::LoadState(pugi::xml_node& data)
 {
 	
 	actualScene = data.child("scene").attribute("actualScene").as_int();
+	app->render->camera.x = data.child("camera").attribute("x").as_int();
+	app->render->camera.x = data.child("camera").attribute("y").as_int();
+
 
 	return true;
 	
@@ -227,6 +231,10 @@ bool Scene::LoadState(pugi::xml_node& data)
 bool Scene::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node scene = data.append_child("scene");
+	pugi::xml_node camara = data.append_child("camara");
+	
+	camara.append_attribute("x")=app->render->camera.x;
+	camara.append_attribute("y")= app->render->camera.y;
 
 	scene.append_attribute("actualScene") = actualScene;
 	
