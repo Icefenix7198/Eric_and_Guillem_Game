@@ -53,6 +53,7 @@ bool Enemy::Start() {
 	{
 		pbody->body->SetGravityScale(-GRAVITY_Y);
 	}
+	isDead = false;
 
 	pbody->listener = this;
 
@@ -69,8 +70,8 @@ bool Enemy::Reset()
 	position.y = parameters.attribute("y").as_int();
 	if (actualState==state::DEAD)
 	{
-		pbody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
-		pbody->listener = this;
+		pbody = app->physics->CreateCircle(position.x+16, position.y+16 - 45, 32 / 2, bodyType::DYNAMIC);
+		//pbody->listener = this;
 	}
 	else
 	{
@@ -78,6 +79,7 @@ bool Enemy::Reset()
 
 	}
 	actualState = IDLE;
+	isDead = false;
 	app->pathfinding->ClearLastPath();
 	return ret;
 }
@@ -256,11 +258,12 @@ bool Enemy::Update()
 		break;
 	case Enemy::DEAD:
 
-		if (pbody!=nullptr)
+		if (isDead==false)
 		{
 		pbody->body->DestroyFixture(pbody->body->GetFixtureList());
 		pbody->body->GetWorld()->DestroyBody(pbody->body);
-		app->entityManager->DestroyEntity(pbody->listener);
+		//app->entityManager->DestroyEntity(pbody->listener);
+		isDead = true;
 		}
 		
 
@@ -344,7 +347,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 bool Enemy::LoadState(pugi::xml_node& data)
 {
-
+	Reset();
 	//Damos como data uno de los enemy directamente (habiendo uno por cada enemigo)
 	float x = data.attribute("x").as_int();
 	float y = data.attribute("y").as_int();

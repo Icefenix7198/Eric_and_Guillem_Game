@@ -66,6 +66,7 @@ private:
 	uint pathStep = 1;
 	iPoint posNextStep;
 
+	bool isDead = false;
 	//DONE 4: Add a physics to an item
 	PhysBody* pbody;
 
