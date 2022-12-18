@@ -274,8 +274,6 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 	
-	PhysBody* weapon = new PhysBody;
-
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
 		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 20, 32, 16, STATIC);
@@ -283,8 +281,9 @@ bool Player::Update()
 	}
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		//destruccion arma
+		//weapon->body->DestroyFixture(weapon->body->GetFixtureList());
 		weapon->body->GetWorld()->DestroyBody(weapon->body);
+		//app->entityManager->DestroyEntity(weapon->listener);
 	}
 
 	//Print player movement vector

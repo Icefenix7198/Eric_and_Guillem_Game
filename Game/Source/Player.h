@@ -33,6 +33,8 @@ public:
 public:
 	//Movido para guardar
 	PhysBody* playerBody;
+	PhysBody* weapon;
+
 private:
 
 	//L02: DONE 1: Declare player parameters
