@@ -51,7 +51,7 @@ bool Enemy::Start() {
 	}
 	else 
 	{
-		pbody->body->SetGravityScale(-GRAVITY_Y);
+		pbody->body->SetGravityScale(1);
 	}
 	isDead = false;
 
@@ -164,7 +164,7 @@ bool Enemy::Update()
 		
 		if (fly==true)
 		{
-			if (app->pathfinding->GetLastPath()->Count() > 0)
+			if (app->pathfinding->GetLastPath()->Count() !=0 )
 			{
 				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
@@ -189,32 +189,44 @@ bool Enemy::Update()
 				{
 					directionY = -1;
 				}
+
+				pbody->body->SetLinearVelocity(b2Vec2(directionX * 2 * speed, directionY*2*speed));
 			}
 		}
 
 		if (fly==false)
 		{
-			if (app->pathfinding->GetLastPath()->Count() > 0 )
+			if (app->pathfinding->GetLastPath()->Count() != 0 )
 			{
 				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
 				pathStep = 1;
-				if (path->Count()>-1)
-				{
+				
 					posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
 					if (posNextStep.x > position.x)
 					{
 						directionX = 1;
 					}
-					if (posNextStep.x < position.x)
+					else if (posNextStep.x < position.x)
 					{
 						directionX = -1;
 					}
-				}
+				
+				
+				pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, -GRAVITY_Y));
+			}
+			else
+			{
+				pbody->body->SetLinearVelocity(b2Vec2(directionX* speed, 0));
+
+				//directionY = 0;
+				if (!app->pathfinding->IsWalkable(iPoint(tilePos.x + directionX, tilePos.y), fly))
+					(directionX *= -1);
 			}
 		}
+		
 
-		pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, -GRAVITY_Y));
+		
 		
 			
 		

@@ -96,6 +96,7 @@ bool Player::Start() {
 	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
 	playerBody->listener = this;
 	swordExist = false;
+	
 
 	return true;
 	
@@ -115,6 +116,7 @@ bool Player::Reset()
 		playerBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 			
 	}
+	app->render->camera.x = 0;
 	GodMode = false;
 	return ret;
 }
