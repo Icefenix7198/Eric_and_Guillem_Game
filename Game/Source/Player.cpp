@@ -309,9 +309,10 @@ bool Player::Update()
 		float posX = position.x+16+swordFrames*direction*2;
 		float posY = position.y+16;
 		weapon->body->SetTransform({ PIXEL_TO_METERS(posX),PIXEL_TO_METERS(posY) }, 1.57079632679);
-		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
+		if(direction>0){Invert = SDL_RendererFlip::SDL_FLIP_NONE;}
+		if (direction < 0) { Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL; }
 		currentAnimation2 = &Weapon;
-		app->render->DrawTexture(texture, posX, posY, &rect2, 1.0f, 90.00, NULL, NULL, Invert);
+		app->render->DrawTexture(texture, posX, posY-16, &rect2, 1.0f, 0, NULL, NULL, Invert);
 		++swordFrames;
 
 	}
