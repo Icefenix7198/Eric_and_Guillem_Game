@@ -52,6 +52,7 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
+	texturePath2 = parameters.attribute("texturepath2").as_string();
 	FxJump = parameters.attribute("FxJump").as_string();
 	FxWin = parameters.attribute("FxWin").as_string();
 	FxLose = parameters.attribute("FxLose").as_string();
@@ -79,6 +80,7 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+	Wtexture = app->tex->Load(texturePath2);
 
 	////initializate sound
 	//JumpSound = app->audio->LoadFx(FxJump);
@@ -273,6 +275,8 @@ bool Player::Update()
 	position.y = METERS_TO_PIXELS(vec.y)-32/2;
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+
+	app->render->DrawTexture(Wtexture, position.x - 10, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && swordExist == false)
 	{
@@ -281,7 +285,7 @@ bool Player::Update()
 		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
 		swordExist = true;
 	}
-	if (weapon!=nullptr)
+	if (weapon!=nullptr && swordExist == true)
 	{
 		weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
 
@@ -289,9 +293,9 @@ bool Player::Update()
 	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist == true)
 	{
-		//weapon->body->DestroyFixture(weapon->body->GetFixtureList());
+		weapon->body->DestroyFixture(weapon->body->GetFixtureList());
 		weapon->body->GetWorld()->DestroyBody(weapon->body);
-		//app->entityManager->DestroyEntity(weapon->listener);
+		app->entityManager->DestroyEntity(weapon->listener);
 	}
 
 	//Print player movement vector
@@ -364,7 +368,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::WEAPON:
 		LOG("Collision WEAPON");
-		if (CanJump == 0 && jump == 0) { CanJump = 2; }
+		if (physB->ctype == ColliderType::ENEMY)
+		{
+			physB->body->GetWorld()->DestroyBody(physB->body);
+		}
 		break;
 	}
 

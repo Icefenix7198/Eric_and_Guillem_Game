@@ -39,10 +39,13 @@ private:
 
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
+	SDL_Texture* Wtexture;
 	Animation* currentAnimation = nullptr;
-	Animation Run, Jump, JumpIdle;
+	Animation* currentAnimation2 = nullptr;
+	Animation Run, Jump, JumpIdle, Weapon;
 	SDL_RendererFlip Invert;
 	const char* texturePath;
+	const char* texturePath2;
 	const char* FxJump;
 	const char* FxWin;
 	const char* FxLose;
