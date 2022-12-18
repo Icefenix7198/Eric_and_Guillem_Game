@@ -67,9 +67,10 @@ bool Enemy::Reset()
 	bool ret = true;
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	if (pbody == nullptr)
+	if (actualState==state::DEAD)
 	{
 		pbody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
+		pbody->listener = this;
 	}
 	else
 	{
@@ -96,7 +97,8 @@ bool Enemy::Update()
 	tilePos = app->map->WorldToMap(position.x,position.y);
 	tileObjective = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	if (actualState!=state::DEAD)
+		app->render->DrawTexture(texture, position.x, position.y);
 
 	switch (actualState)
 	{
@@ -195,15 +197,17 @@ bool Enemy::Update()
 				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
 				pathStep = 1;
-				
-				posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
-				if (posNextStep.x > position.x)
+				if (path->Count()>-1)
 				{
-					directionX = 1;
-				}
-				if (posNextStep.x < position.x)
-				{
-					directionX = -1;
+					posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
+					if (posNextStep.x > position.x)
+					{
+						directionX = 1;
+					}
+					if (posNextStep.x < position.x)
+					{
+						directionX = -1;
+					}
 				}
 			}
 		}
@@ -251,6 +255,15 @@ bool Enemy::Update()
 
 		break;
 	case Enemy::DEAD:
+
+		if (pbody!=nullptr)
+		{
+		pbody->body->DestroyFixture(pbody->body->GetFixtureList());
+		pbody->body->GetWorld()->DestroyBody(pbody->body);
+		app->entityManager->DestroyEntity(pbody->listener);
+		}
+		
+
 		break;
 	default:
 		break;
@@ -303,10 +316,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::WALL:
 		LOG("Collison WALL");
 		break;
+
 	case ColliderType::DEAD:
 
-		physA->body->DestroyFixture(physA->body->GetFixtureList());
-		physA->body->GetWorld()->DestroyBody(physA->body);
+		actualState = state::DEAD;
 
 		break;
 	case ColliderType::WIN:
@@ -315,6 +328,13 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 
 		break;
+
+	case ColliderType::WEAPON:
+
+		actualState = state::DEAD;
+		
+		break;
+
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

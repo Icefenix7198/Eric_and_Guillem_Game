@@ -50,8 +50,6 @@ private:
 	const char* FxLose;
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
-	
-
 	int pickCoinFxId;
 	int DeadSound;
 	int WinSound;

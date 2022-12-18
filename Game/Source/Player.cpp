@@ -88,10 +88,6 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	////initializate sound
-	//JumpSound = app->audio->LoadFx(FxJump);
-	//WinSound = app->audio->LoadFx(FxWin);
-	//DeadSound = app->audio->LoadFx(FxLose);
 
 	currentAnimation = &Run;
 	currentAnimation2 = &Nulle;
@@ -99,6 +95,8 @@ bool Player::Start() {
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
 	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
 	playerBody->listener = this;
+	swordExist = false;
+
 	return true;
 	
 }
@@ -166,43 +164,46 @@ bool Player::Update()
 	}
 
 	//Mover la camara
-	if (app->scene->maxCameraPosLeft >= app->render->camera.x && -position.x+app->scene->cameraMargin*app->map->mapData.tileWidth >= app->render->camera.x && movement<0)
 	{
-		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
-	}
-	if (app->scene->maxCameraPosRigth <= app->render->camera.x && position.x + app->scene->cameraMargin * app->map->mapData.tileWidth >= -app->render->camera.x+app->render->camera.w && movement> 0)
-	{
-		app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
-	}
-	if (app->scene->maxCameraPosUp >= app->render->camera.y && -position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= app->render->camera.y)
-	{
-		app->render->camera.y += 3; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
-	}
-	if (app->scene->maxCameraPosDown <= app->render->camera.y && position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= -app->render->camera.y + app->render->camera.h)
-	{
-		app->render->camera.y += -3; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		if (app->scene->maxCameraPosLeft >= app->render->camera.x && -position.x+app->scene->cameraMargin*app->map->mapData.tileWidth >= app->render->camera.x && movement<0)
+		{
+			app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		}
+		if (app->scene->maxCameraPosRigth <= app->render->camera.x && position.x + app->scene->cameraMargin * app->map->mapData.tileWidth >= -app->render->camera.x+app->render->camera.w && movement> 0)
+		{
+			app->render->camera.x += -movement; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		}
+		if (app->scene->maxCameraPosUp >= app->render->camera.y && -position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= app->render->camera.y)
+		{
+			app->render->camera.y += 3; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		}
+		if (app->scene->maxCameraPosDown <= app->render->camera.y && position.y + app->scene->cameraMargin * app->map->mapData.tileHeight >= -app->render->camera.y + app->render->camera.h)
+		{
+			app->render->camera.y += -3; //TODO ERIC: MOVER LA CAMARA TANTO COMO EL PLAYER
+		}
 	}
 	
 	//DEBUGGING
-
-	//Show Vectors
-	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
-		playerBody->body->SetTransform({ PIXEL_TO_METERS(parameters.attribute("x").as_int()),PIXEL_TO_METERS(parameters.attribute("y").as_int()) }, 0);
-
-	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
-		ShowVectors = !ShowVectors;
-
-	//God Mode
-	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) 
 	{
-	if (GodMode==true)
-	{
-		GodMode = false;
-	}
-	else
-	{
-		GodMode = true;
-	}
+		if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+			app->entityManager->Reset();
+	
+		//Show Vectors
+		if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+			ShowVectors = !ShowVectors;
+	
+		//God Mode
+		if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) 
+		{
+			if (GodMode==true)
+			{
+				GodMode = false;
+			}
+			else
+			{
+				GodMode = true;
+			}
+		}
 	}
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
@@ -234,12 +235,12 @@ bool Player::Update()
 	{
 		jump=4;
 	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && GodMode == true)
 	{
 		jump = -4;
 	}
 		
-
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{
 		movement = -5;
@@ -285,7 +286,7 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 
-	app->render->DrawTexture(texture, position.x, position.y, &rect2, 1.0f, NULL, NULL, NULL, Invert);
+	
 	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && swordExist == false)
 	{
@@ -293,22 +294,25 @@ bool Player::Update()
 		weapon->ctype = ColliderType::WEAPON;
 		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
 		
-		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
-		currentAnimation2 = &Weapon;
+		
 
 		swordExist = true;
 	}
 	if (weapon!=nullptr && swordExist == true)
 	{
 		weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
+		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
+		currentAnimation2 = &Weapon;
+		app->render->DrawTexture(texture, position.x, position.y, &rect2, 1.0f, NULL, NULL, NULL, Invert);
 
 	}
 	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist == true)
 	{
 		weapon->body->DestroyFixture(weapon->body->GetFixtureList());
-	  		weapon->body->GetWorld()->DestroyBody(weapon->body);
+	  	weapon->body->GetWorld()->DestroyBody(weapon->body);
 		app->entityManager->DestroyEntity(weapon->listener);
+		swordExist = false;
 	}
 
 	//Print player movement vector
@@ -357,10 +361,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DEAD:
 		app->scene->actualScene = app->scene->LOSE;
-		if (physB->ctype == ColliderType::DEAD)
-		{
-			app->audio->PlayFx(DeadSound);
-		}
+		app->audio->PlayFx(DeadSound);
+		
 		break;
 	case ColliderType::WIN:
 		app->scene->actualScene = app->scene->WIN;
@@ -370,11 +372,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		break;
 	case ColliderType::ENEMY:
-		app->scene->actualScene = app->scene->LOSE;
-		if (physB->ctype == ColliderType::DEAD)
+		if (GodMode==false)
 		{
+			app->scene->actualScene = app->scene->LOSE;
 			app->audio->PlayFx(DeadSound); //TODO: QUIZA HACER MODO DE VIDAS
+		
 		}
+		
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -383,7 +387,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision WEAPON");
 		if (physB->ctype == ColliderType::ENEMY)
 		{
-			physB->body->GetWorld()->DestroyBody(physB->body);
+			
 		}
 		break;
 	}
