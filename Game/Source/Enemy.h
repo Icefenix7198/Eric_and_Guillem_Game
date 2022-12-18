@@ -26,9 +26,9 @@ public:
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	/*bool LoadState(pugi::xml_node& data);
+	bool LoadState(pugi::xml_node& data);
 
-	bool SaveState(pugi::xml_node& data);*/
+	bool SaveState(pugi::xml_node& data);
 
 
 

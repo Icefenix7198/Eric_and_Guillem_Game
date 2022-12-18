@@ -184,14 +184,19 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
 
+	pugi::xml_node enemigo = data.child("enemies").first_child();
+
 	for (item = entities.start; item != NULL; item = item->next)
 	{
 		pEntity = item->data;
+
+		
 		if (pEntity->type == EntityType::ENEMY)
 		{
-			pEntity->position.x = data.child("enemy").attribute("x").as_int();
-			pEntity->position.y = data.child("enemy").attribute("y").as_int();
+			pEntity->LoadState(enemigo);
+			enemigo = enemigo.next_sibling();
 		}
+
 
 		if (pEntity->active == false) continue;
 
@@ -217,11 +222,7 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		pEntity = item->data;
 		if(pEntity->type==EntityType::ENEMY)
 		{
-			pugi::xml_node enemy = enemies.append_child("enemy");
-			enemy.append_attribute("x") = pEntity->position.x;
-			enemy.append_attribute("y") = pEntity->position.y;
-			//enemy.append_attribute("state") = pEntity-
-			//TODO : Guardar si esta morido o no;
+			pEntity->SaveState(enemies);
 		}
 
 		if (pEntity->active == false) continue;

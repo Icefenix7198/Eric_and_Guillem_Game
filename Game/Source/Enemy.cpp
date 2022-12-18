@@ -263,6 +263,12 @@ bool Enemy::Update()
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		ShowVectors = !ShowVectors;
 
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		ShowVectors = !ShowVectors;
+
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
+		ShowVectors = !ShowVectors;
+
 	//app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;
@@ -314,4 +320,33 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 
+}
+
+bool Enemy::LoadState(pugi::xml_node& data)
+{
+
+	//Damos como data uno de los enemy directamente (habiendo uno por cada enemigo)
+	float x = data.attribute("x").as_int();
+	float y = data.attribute("y").as_int();
+
+	pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+
+	actualState= data.attribute("state").as_int();
+	directionX = data.attribute("directionX").as_int();
+	directionY = data.attribute("directionY").as_int();
+
+	return true;
+}
+
+bool Enemy::SaveState(pugi::xml_node& data)
+{
+	pugi::xml_node enemy = data.append_child("enemy");
+
+	enemy.append_attribute("x") = position.x;
+	enemy.append_attribute("y") = position.y;
+	enemy.append_attribute("state") = actualState;
+	enemy.append_attribute("directionX") = directionX;
+	enemy.append_attribute("directionY") = directionY;
+
+	return true;
 }
