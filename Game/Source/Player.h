@@ -42,10 +42,9 @@ private:
 	SDL_Texture* Wtexture;
 	Animation* currentAnimation = nullptr;
 	Animation* currentAnimation2 = nullptr;
-	Animation Run, Jump, JumpIdle, Weapon;
+	Animation Nulle, Run, Jump, JumpIdle, Weapon;
 	SDL_RendererFlip Invert;
 	const char* texturePath;
-	const char* texturePath2;
 	const char* FxJump;
 	const char* FxWin;
 	const char* FxLose;

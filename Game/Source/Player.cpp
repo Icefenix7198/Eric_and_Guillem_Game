@@ -36,6 +36,14 @@ Player::Player() : Entity(EntityType::PLAYER)
 	JumpIdle.PushBack({ 27, 36, 27, 36 });
 	JumpIdle.loop = true;
 	JumpIdle.speed = 0.1f;
+
+	Weapon.PushBack({ 54, 36, 27, 36 });
+	Weapon.PushBack({ 54, 36, 27, 36 });
+	Weapon.loop = true;
+	Weapon.speed = 0.1f;
+
+	Nulle.PushBack({ 0, 0, 2, 2 });
+
 }
 
 Player::~Player() {
@@ -52,7 +60,6 @@ bool Player::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	texturePath2 = parameters.attribute("texturepath2").as_string();
 	FxJump = parameters.attribute("FxJump").as_string();
 	FxWin = parameters.attribute("FxWin").as_string();
 	FxLose = parameters.attribute("FxLose").as_string();
@@ -80,7 +87,6 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	Wtexture = app->tex->Load(texturePath2);
 
 	////initializate sound
 	//JumpSound = app->audio->LoadFx(FxJump);
@@ -88,6 +94,7 @@ bool Player::Start() {
 	//DeadSound = app->audio->LoadFx(FxLose);
 
 	currentAnimation = &Run;
+	currentAnimation2 = &Nulle;
 	// L07 TODO 5: Add physics to the player - initialize physics body
 	//playerBody = app->physics->CreateRectangle(position.x + 32 / 2, position.y + 32 / 2, 16, 32, bodyType::DYNAMIC); //MEJOR ESFERA YA QUE EL RECTANGULO ROTA Y DA PROBLEMAS
 	playerBody = app->physics->CreateCircle(position.x, position.y - 45, 32 / 2, bodyType::DYNAMIC);
@@ -264,7 +271,9 @@ bool Player::Update()
 	}
 
 	currentAnimation->Update();	
+	currentAnimation2->Update();	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	SDL_Rect rect2 = currentAnimation2->GetCurrentFrame();
 
 	playerBody->body->SetLinearVelocity(velocity);
 	
@@ -276,13 +285,17 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 
-	app->render->DrawTexture(Wtexture, position.x - 10, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+	app->render->DrawTexture(texture, position.x, position.y, &rect2, 1.0f, NULL, NULL, NULL, Invert);
 	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && swordExist == false)
 	{
 		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 40, 32, 16, STATIC);
 		weapon->ctype = ColliderType::WEAPON;
 		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
+		
+		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
+		currentAnimation2 = &Weapon;
+
 		swordExist = true;
 	}
 	if (weapon!=nullptr && swordExist == true)
@@ -294,7 +307,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist == true)
 	{
 		weapon->body->DestroyFixture(weapon->body->GetFixtureList());
-		weapon->body->GetWorld()->DestroyBody(weapon->body);
+	  		weapon->body->GetWorld()->DestroyBody(weapon->body);
 		app->entityManager->DestroyEntity(weapon->listener);
 	}
 
