@@ -278,6 +278,7 @@ bool Player::Update()
 	{
 		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 20, 32, 16, STATIC);
 		weapon->ctype = ColliderType::WEAPON;
+		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
@@ -285,6 +286,12 @@ bool Player::Update()
 		weapon->body->GetWorld()->DestroyBody(weapon->body);
 		//app->entityManager->DestroyEntity(weapon->listener);
 	}
+	if (weapon!=nullptr)
+	{
+		weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
+
+	}
+	
 
 	//Print player movement vector
 	if (ShowVectors==true)

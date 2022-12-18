@@ -281,7 +281,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
-		
+
 
 		//physB->listener->Disable();
 		//TODO ERIC:Arreglar esto
@@ -292,34 +292,26 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		
+
 		break;
 	case ColliderType::WALL:
 		LOG("Collison WALL");
 		break;
 	case ColliderType::DEAD:
-	
+
 		physA->body->DestroyFixture(physA->body->GetFixtureList());
 		physA->body->GetWorld()->DestroyBody(physA->body);
 
 		break;
 	case ColliderType::WIN:
-		
+
 		break;
 	case ColliderType::ENEMY:
-		
+
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
 	}
-
-	/*bool LoadState(pugi::xml_node & data)
-	{
-
-	};
-
-	bool SaveState(pugi::xml_node & data);*/
-	
 
 }
