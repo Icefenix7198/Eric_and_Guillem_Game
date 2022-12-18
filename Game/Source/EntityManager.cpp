@@ -161,7 +161,7 @@ bool EntityManager::Update(float dt)
 {
 	bool ret = true;
 	ListItem<Entity*>* item;
-	Entity* pEntity = NULL;
+ 	Entity* pEntity = NULL;
 
 	for (item = entities.start; item != NULL && ret == true; item = item->next)
 	{
@@ -181,15 +181,56 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 
 	app->scene->player->playerBody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
 
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL; item = item->next)
+	{
+		pEntity = item->data;
+		if (pEntity->type == EntityType::ENEMY)
+		{
+			pEntity->position.x = data.child("enemy").attribute("x").as_int();
+			pEntity->position.y = data.child("enemy").attribute("y").as_int();
+		}
+
+		if (pEntity->active == false) continue;
+
+	}
+
+
 	return true;
 }
 
 bool EntityManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node player = data.append_child("player");
+	pugi::xml_node enemies = data.append_child("enemies");
 
 	player.append_attribute("x") = app->scene->player->position.x;
 	player.append_attribute("y") = app->scene->player->position.y;
+
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL; item = item->next)
+	{
+		pEntity = item->data;
+		if(pEntity->type==EntityType::ENEMY)
+		{
+			pugi::xml_node enemy = enemies.append_child("enemy");
+			enemy.append_attribute("x") = pEntity->position.x;
+			enemy.append_attribute("y") = pEntity->position.y;
+			//enemy.append_attribute("state") = pEntity-
+			//TODO : Guardar si esta morido o no;
+		}
+
+		if (pEntity->active == false) continue;
+		
+	}
+
+	
+
+
 
 	return true;
 }

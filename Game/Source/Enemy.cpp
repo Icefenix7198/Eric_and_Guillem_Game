@@ -314,6 +314,12 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 
+	/*bool LoadState(pugi::xml_node & data)
+	{
+
+	};
+
+	bool SaveState(pugi::xml_node & data);*/
 	
 
 }
