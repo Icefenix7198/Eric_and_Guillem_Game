@@ -100,7 +100,17 @@ bool Enemy::Update()
 	tileObjective = app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y);
 
 	if (actualState!=state::DEAD)
-		app->render->DrawTexture(texture, position.x, position.y);
+	{
+		SDL_Rect rect;
+		rect.y = rect.x = 0;
+		rect.w = rect.h = 32;
+		if(directionX<0)
+			app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, SDL_RendererFlip::SDL_FLIP_HORIZONTAL);
+		if (directionX > 0)
+			app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
+	}
+
+		
 
 	switch (actualState)
 	{

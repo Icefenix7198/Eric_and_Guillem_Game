@@ -15,6 +15,8 @@
 #include "Item.h"
 #include "EntityManager.h"
 
+#include <math.h>
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -247,7 +249,7 @@ bool Player::Update()
 	{
 		movement = -5;
 		Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL;
-
+		direction = -1;
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			currentAnimation = &Jump;
@@ -263,6 +265,7 @@ bool Player::Update()
 		movement=5;
 		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
 
+		direction = 1;
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			currentAnimation = &Jump;
@@ -290,26 +293,30 @@ bool Player::Update()
 
 	
 	
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && swordExist == false)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN /*&& swordFrames <= 0*/ && swordExist==false)
 	{
 		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 40, 32, 16, STATIC);
 		weapon->ctype = ColliderType::WEAPON;
 		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
 		
 		
-
 		swordExist = true;
+		swordFrames = 0;
 	}
-	if (weapon!=nullptr && swordExist == true)
+	if (weapon!=nullptr && swordFrames <50 && swordExist==true)
 	{
-		weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
+		
+		float posX = position.x+16+swordFrames*direction*2;
+		float posY = position.y+16;
+		weapon->body->SetTransform({ PIXEL_TO_METERS(posX),PIXEL_TO_METERS(posY) }, 1.57079632679);
 		Invert = SDL_RendererFlip::SDL_FLIP_NONE;
 		currentAnimation2 = &Weapon;
-		app->render->DrawTexture(texture, position.x, position.y, &rect2, 1.0f, NULL, NULL, NULL, Invert);
+		app->render->DrawTexture(texture, posX, posY, &rect2, 1.0f, 90.00, NULL, NULL, Invert);
+		++swordFrames;
 
 	}
 	
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist == true)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist==true)
 	{
 		weapon->body->DestroyFixture(weapon->body->GetFixtureList());
 	  	weapon->body->GetWorld()->DestroyBody(weapon->body);
@@ -387,10 +394,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::WEAPON:
 		LOG("Collision WEAPON");
-		if (physB->ctype == ColliderType::ENEMY)
-		{
-			
-		}
+		
 		break;
 	}
 

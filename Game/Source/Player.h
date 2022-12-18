@@ -61,10 +61,17 @@ private:
 	int CanJump=2;
 	//Movimiento horizontal del player
 	int movement=0;
+
+	//Llama
+	float direction = 1;;
+	int swordFrames = 0;
+	bool swordExist = false;
+	
+
 	//Debugging
 	bool ShowVectors=false;
 	bool GodMode = false;
-	bool swordExist = false;
+	
 };
 
 #endif // __PLAYER_H__
