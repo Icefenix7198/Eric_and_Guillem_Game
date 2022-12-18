@@ -260,33 +260,9 @@ bool Player::Update()
 			currentAnimation = &Run;
 		}
 	}
-	
-	bool weaponOn;
-
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
-	{
-		weaponOn = true;
-
-		if (weaponOn == true)
-		{
-			int w, h;
-			w = 32;
-			h = 16;
-
-			PhysBody* weapon = new PhysBody;
-			weapon = app->physics->CreateRectangleSensor(position.x, position.y + 20, w, h, STATIC);
-			weapon->ctype = ColliderType::PLAYER;
-		}
-	}
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE)
-	{
-		weaponOn = false;
-	}
 
 	currentAnimation->Update();	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	
-
 
 	playerBody->body->SetLinearVelocity(velocity);
 	
@@ -295,11 +271,22 @@ bool Player::Update()
 
 	position.x = METERS_TO_PIXELS(vec.x)-32/2;
 	position.y = METERS_TO_PIXELS(vec.y)-32/2;
-
-	
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
-	 
+	
+	PhysBody* weapon = new PhysBody;
+
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
+	{
+		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 20, 32, 16, STATIC);
+		weapon->ctype = ColliderType::WEAPON;
+	}
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
+	{
+		//destruccion arma
+		weapon->body->GetWorld()->DestroyBody(weapon->body);
+	}
+
 	//Print player movement vector
 	if (ShowVectors==true)
 	{
@@ -367,6 +354,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::WEAPON:
+		LOG("Collision WEAPON");
+		if (CanJump == 0 && jump == 0) { CanJump = 2; }
 		break;
 	}
 
