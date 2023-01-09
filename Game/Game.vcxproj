@@ -108,11 +108,13 @@
     <ClCompile Include="Source\Muerte.cpp" />
     <ClCompile Include="Source\Path.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
+    <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Victoria.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
@@ -126,6 +128,7 @@
     <ClInclude Include="Source\Muerte.h" />
     <ClInclude Include="Source\Path.h" />
     <ClInclude Include="Source\Pathfinding.h" />
+    <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Queue.h" />
@@ -136,6 +139,7 @@
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Textures.h" />
+    <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Victoria.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
