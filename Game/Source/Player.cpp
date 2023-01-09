@@ -291,7 +291,10 @@ bool Player::Update()
 	
 	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 
-	
+	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	{
+		app->map->Load();
+	}
 	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN /*&& swordFrames <= 0*/ && swordExist==false)
 	{
