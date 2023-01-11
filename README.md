@@ -19,7 +19,9 @@
  - A - Move Left
  - S -  Move downwards (God Mode Only)
  - D - Move Rigth 
- - F - Attack 
+ - F - Attack
+ - P - Pause
+ 
  
  
 

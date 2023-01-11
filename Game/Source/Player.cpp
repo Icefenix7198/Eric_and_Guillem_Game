@@ -125,8 +125,18 @@ bool Player::Reset()
 
 bool Player::Update()
 {
-	if (app->scene->actualScene!=app->scene->GAMEMAP)
+	if (app->scene->actualScene!=app->scene->GAMEMAP )
 	{
+		return true;
+	}
+
+
+	if (app->scene->pause)
+	{
+		playerBody->body->SetLinearVelocity(b2Vec2(0, 0.00f));
+		playerBody->body->SetGravityScale(0);
+		SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 		return true;
 	}
 

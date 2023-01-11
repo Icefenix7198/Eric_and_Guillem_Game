@@ -62,7 +62,7 @@ public:
 		LOSE
 	};
 	int actualScene;
-
+	bool pause = false;
 private:
 	SDL_Texture* img;
 

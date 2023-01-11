@@ -92,6 +92,20 @@ bool Enemy::Update()
 		return true;
 	}
 
+
+	//Pause
+	if (app->scene->pause)
+	{
+		pbody->body->SetLinearVelocity(b2Vec2(0, 0.00f));
+		//playerBody->body->SetGravityScale(0); ////Lo dejo para cuando se le meta animación
+		//SDL_Rect rect = currentAnimation->GetCurrentFrame();
+		SDL_Rect rect;
+		rect.y = rect.x = 0;
+		rect.w = rect.h = 32;
+		app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL/*, Invert*/);
+		return true;
+	}
+
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
