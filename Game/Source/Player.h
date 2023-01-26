@@ -34,6 +34,7 @@ public:
 	//Movido para guardar
 	PhysBody* playerBody;
 	PhysBody* weapon;
+	int lives = 4;
 
 private:
 

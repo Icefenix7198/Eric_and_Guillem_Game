@@ -397,8 +397,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (GodMode==false)
 		{
-			app->scene->actualScene = app->scene->LOSE;
-			app->audio->PlayFx(DeadSound); //TODO: QUIZA HACER MODO DE VIDAS
+			if (lives<=0)
+			{
+				--lives;
+			}
+			else
+			{
+				app->scene->actualScene = app->scene->LOSE;
+				app->audio->PlayFx(DeadSound); //TODO: QUIZA HACER MODO DE VIDAS
+			}
+			
 		
 		}
 		
