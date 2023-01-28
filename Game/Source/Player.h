@@ -68,9 +68,12 @@ private:
 	int movement=0;
 
 	//Llama
-	float direction = 1;;
-	int swordFrames = 0;
+	float direction = 1;
+	int dirToGo;
+	Timer swordDuration;
 	bool swordExist = false;
+	float posFlameX;
+	float posFlameY;
 	
 
 	//Debugging

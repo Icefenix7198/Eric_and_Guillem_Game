@@ -326,30 +326,33 @@ bool Player::Update()
 	}*/
 	
 	//Ataque magico
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN /*&& swordFrames <= 0*/ && swordExist==false)
+	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN  && swordExist==false)
 	{
 		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 40, 32, 16, STATIC);
 		weapon->ctype = ColliderType::WEAPON;
 		//weapon->body->SetTransform({ PIXEL_TO_METERS(position.x),PIXEL_TO_METERS(position.y) }, 0);
 		
-		
+		posFlameX = position.x;
+		posFlameY = position.y + 16;
 		swordExist = true;
-		swordFrames = 0;
+		swordDuration.Start();
+		dirToGo = direction;
+		
 	}
-	if (weapon!=nullptr && swordFrames <50 && swordExist==true)
+	if (weapon!=nullptr && swordDuration.ReadSec()<1 && swordExist==true)
 	{
 		
-		float posX = position.x+16+swordFrames*direction*2;
-		float posY = position.y+16;
-		weapon->body->SetTransform({ PIXEL_TO_METERS(posX),PIXEL_TO_METERS(posY) }, 1.57079632679);
-		if(direction>0){Invert = SDL_RendererFlip::SDL_FLIP_NONE;}
-		if (direction < 0) { Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL; }
+		posFlameX += 2 * dirToGo;
+		
+		weapon->body->SetTransform({ PIXEL_TO_METERS(posFlameX),PIXEL_TO_METERS(posFlameY) }, 1.57079632679);
+		if(dirToGo >0){Invert = SDL_RendererFlip::SDL_FLIP_NONE;}
+		if (dirToGo < 0) { Invert = SDL_RendererFlip::SDL_FLIP_HORIZONTAL; }
 		currentAnimation2 = &Weapon;
-		app->render->DrawTexture(texture, posX, posY-16, &rect2, 1.0f, 0, NULL, NULL, Invert);
-		++swordFrames;
+		app->render->DrawTexture(texture, posFlameX, posFlameY-16, &rect2, 1.0f, 0, NULL, NULL, Invert);
+		
 
 	}
-	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist==true)
+	if (swordDuration.ReadSec() > 1 && swordExist==true)
 	{
 		weapon->body->DestroyFixture(weapon->body->GetFixtureList());
 	  	weapon->body->GetWorld()->DestroyBody(weapon->body);
