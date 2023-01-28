@@ -67,6 +67,7 @@ public:
 	//Remaining time?
 	int maxTime = 100;
 	int timeLeft;
+	int lastTime=0;
 	Timer countDown;
 	SString timeInText;
 private:

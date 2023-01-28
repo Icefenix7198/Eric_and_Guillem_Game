@@ -172,8 +172,19 @@ bool Scene::Update(float dt)
 	case Scene::GAMEMAP:
 		// Draw map
 		app->map->Draw();
-
-		timeLeft = maxTime - countDown.ReadSec();
+		
+		//Cuenta atras
+		if (pause == false) 
+		{
+		timeLeft = maxTime - countDown.ReadSec()-lastTime; 
+		}
+		else
+		{
+			lastTime = maxTime - timeLeft;
+			countDown.Start();
+		}
+		
+		//Print time
 		timeInText.Create("TIME %d", timeLeft);
 		SDL_Color colorLetras;
 		colorLetras.r = 155+(100-timeLeft)/2;

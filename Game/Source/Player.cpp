@@ -339,7 +339,7 @@ bool Player::Update()
 		dirToGo = direction;
 		
 	}
-	if (weapon!=nullptr && swordDuration.ReadSec()<1 && swordExist==true)
+	if (weapon!=nullptr && swordDuration.ReadSec()<1 && swordExist==true && app->scene->pause==false)
 	{
 		
 		posFlameX += 2 * dirToGo;
