@@ -38,6 +38,7 @@ public:
 	int lives = 4;
 	bool inmune = false;
 	Timer inmunityFrames;
+	int blinkingFrames = 1;
 
 private:
 

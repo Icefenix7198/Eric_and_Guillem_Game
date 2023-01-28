@@ -188,32 +188,33 @@ bool Enemy::Update()
 		
 		if (fly==true)
 		{
-			if (app->pathfinding->GetLastPath()->Count() !=0 )
+			if (app->pathfinding->GetLastPath()->Count() >0 )
 			{
 				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
 				pathStep = 1;
-
+				if (path->Count() > 1) 
+				{				
 				posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
 				
-				if (posNextStep.x > position.x)
-				{
-					directionX = 1;
-				}
-				if (posNextStep.x < position.x)
-				{
-					directionX = -1;
-				}
+					if (posNextStep.x > position.x)
+					{
+						directionX = 1;
+					}
+					if (posNextStep.x < position.x)
+					{
+						directionX = -1;
+					}
 
-				if (posNextStep.y > position.y)
-				{
-					directionY = 1;
+					if (posNextStep.y > position.y)
+					{
+						directionY = 1;
+					}
+					if (posNextStep.y < position.y)
+					{
+						directionY = -1;
+					}
 				}
-				if (posNextStep.y < position.y)
-				{
-					directionY = -1;
-				}
-
 				pbody->body->SetLinearVelocity(b2Vec2(directionX * 2 * speed, directionY*2*speed));
 			}
 		}
@@ -258,9 +259,6 @@ bool Enemy::Update()
 					(directionX *= -1);
 			}
 		}
-		
-
-		
 		
 			
 		

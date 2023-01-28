@@ -120,6 +120,8 @@ bool Player::Reset()
 	}
 	app->render->camera.x = 0;
 	GodMode = false;
+	inmune = false;
+	lives = 4;
 	return ret;
 }
 
@@ -301,16 +303,29 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(vec.x)-32/2;
 	position.y = METERS_TO_PIXELS(vec.y)-32/2;
 	
-	if (inmune == false || inmunityFrames.ReadSec() % 2 == 0)
+	if (inmune == true )
+	{
+		if (blinkingFrames > 8) { blinkingFrames -= 20; }
+		++blinkingFrames;
+		if (blinkingFrames<0)
+		{
+		app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+		}
+	}
+	else
 	{
 		app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
+	//Tras 3 segundos quitar inmunidad
+	if (inmunityFrames.ReadSec() > 2) { inmune = false;}
+
+	/*if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 	{
 		app->map->Load();
-	}
+	}*/
 	
+	//Ataque magico
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN /*&& swordFrames <= 0*/ && swordExist==false)
 	{
 		weapon = app->physics->CreateRectangleSensor(position.x, position.y + 40, 32, 16, STATIC);
@@ -334,7 +349,6 @@ bool Player::Update()
 		++swordFrames;
 
 	}
-	
 	if (app->input->GetKey(SDL_SCANCODE_F) == KEY_IDLE && swordExist==true)
 	{
 		weapon->body->DestroyFixture(weapon->body->GetFixtureList());
