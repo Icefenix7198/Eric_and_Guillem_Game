@@ -63,6 +63,12 @@ public:
 	};
 	int actualScene;
 	bool pause = false;
+
+	//Remaining time?
+	int maxTime = 100;
+	int timeLeft;
+	Timer countDown;
+	SString timeInText;
 private:
 	SDL_Texture* img;
 

@@ -350,7 +350,7 @@ bool Player::Update()
 		currentAnimation2 = &Weapon;
 		app->render->DrawTexture(texture, posFlameX, posFlameY-16, &rect2, 1.0f, 0, NULL, NULL, Invert);
 		
-
+		weapon->ctype = ColliderType::WEAPON;
 	}
 	if (swordDuration.ReadSec() > 1 && swordExist==true)
 	{

@@ -165,11 +165,28 @@ bool Scene::Update(float dt)
 		{
 			app->render->camera.y = -768;
 			actualScene = Scenes::GAMEMAP;
+			countDown.Start();
+			timeLeft = maxTime;
 		}
 		break;
 	case Scene::GAMEMAP:
 		// Draw map
 		app->map->Draw();
+
+		timeLeft = maxTime - countDown.ReadSec();
+		timeInText.Create("TIME %d", timeLeft);
+		SDL_Color colorLetras;
+		colorLetras.r = 155+(100-timeLeft)/2;
+		colorLetras.g = 155- (100 - timeLeft)/3;
+		colorLetras.b = 155- (100 - timeLeft)/3;
+		colorLetras.a = 255;
+		if (timeLeft < 10) { app->render->DrawText(timeInText.GetString(), 900, 5, 60, 20, colorLetras); }
+		else { app->render->DrawText(timeInText.GetString(), 900, 5, 70, 20, colorLetras); }
+		if (timeLeft<0)
+		{
+			actualScene = Scenes::LOSE;
+		}
+		
 		break;
 	case Scene::WIN:
 		app->render->camera.x = 0;
