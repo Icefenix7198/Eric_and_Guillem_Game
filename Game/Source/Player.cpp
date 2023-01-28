@@ -291,6 +291,8 @@ bool Player::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	SDL_Rect rect2 = currentAnimation2->GetCurrentFrame();
 
+	
+
 	playerBody->body->SetLinearVelocity(velocity);
 	
 	b2Transform transform = playerBody->body->GetTransform();
@@ -299,7 +301,10 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(vec.x)-32/2;
 	position.y = METERS_TO_PIXELS(vec.y)-32/2;
 	
-	app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+	if (inmune == false || inmunityFrames.ReadSec() % 2 == 0)
+	{
+		app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_0) == KEY_DOWN)
 	{
@@ -395,11 +400,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		break;
 	case ColliderType::ENEMY:
-		if (GodMode==false)
+		if (GodMode==false && inmune==false)
 		{
-			if (lives<=0)
+			if (lives>=0)
 			{
 				--lives;
+				inmunityFrames.Start();
+				inmune = true;
 			}
 			else
 			{

@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -35,6 +36,8 @@ public:
 	PhysBody* playerBody;
 	PhysBody* weapon;
 	int lives = 4;
+	bool inmune = false;
+	Timer inmunityFrames;
 
 private:
 

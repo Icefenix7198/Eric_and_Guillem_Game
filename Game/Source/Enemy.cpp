@@ -220,12 +220,14 @@ bool Enemy::Update()
 
 		if (fly==false)
 		{
-			if (app->pathfinding->GetLastPath()->Count() != 0 )
+			if (app->pathfinding->GetLastPath()->Count() > 0 )
 			{
 				const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 
 				pathStep = 1;
 				
+				if (path->Count()>1)
+				{
 					posNextStep = app->map->MapToWorld(path->At(pathStep)->x, path->At(pathStep)->y);
 					if (posNextStep.x > position.x)
 					{
@@ -235,6 +237,14 @@ bool Enemy::Update()
 					{
 						directionX = -1;
 					}
+				}
+				else
+				{
+					LOG("mUY CERCA");
+					pathStep = 0;
+				}
+
+					
 				
 				
 				pbody->body->SetLinearVelocity(b2Vec2(directionX * 2* speed, -GRAVITY_Y));

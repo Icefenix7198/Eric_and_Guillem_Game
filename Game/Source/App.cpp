@@ -277,7 +277,9 @@ bool App::DoUpdate()
 		if (pModule->active == false) {
 			continue;
 		}
-
+		//float numero = 20;
+		//dt = numero;
+		//LOG("");
 		ret = item->data->Update(dt);
 	}
 
