@@ -467,6 +467,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::WEAPON:
 		LOG("Collision WEAPON");
+	case ColliderType::LIVE:
+		
+		if (lives<4)
+		{
+		++lives;
+		physB->ctype = ColliderType::UNKNOWN;
+		}
+		LOG("Collision WEAPON");
 		
 		break;
 	}

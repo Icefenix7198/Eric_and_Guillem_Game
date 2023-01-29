@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Item.h"
 #include "Enemy.h"
+#include "Life.h"
 
 struct SDL_Texture;
 

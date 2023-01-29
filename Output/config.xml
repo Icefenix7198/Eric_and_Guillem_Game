@@ -54,12 +54,16 @@
 	<item x="2592" y="384" texturepath="Assets/Textures/goldCoin.png"/>
 	<item x="2592" y="448" texturepath="Assets/Textures/goldCoin.png"/>
 	<item x="2592" y="512" texturepath="Assets/Textures/goldCoin.png"/>
+
+	<life x="960" y="320" texturepath="Assets/Textures/VidaFull.png"/>
+	<life x="240" y="1280" texturepath="Assets/Textures/VidaFull.png"/>
+	<life x="64" y="640" texturepath="Assets/Textures/VidaFull.png"/>
 	  
 	  
 	  
 	<enemy x="750" y="160" texturepath="Assets/Textures/enemy.png" level="0" speed="0.8" fly="true" alarmRange="300" loseRange="650"/>
 	
-	<enemy x="2272" y="1440" texturepath="Assets/Textures/enemy.png" level="0" speed="1,2" fly="false" alarmRange="200" loseRange="450"/>
+	<enemy x="2372" y="1440" texturepath="Assets/Textures/enemy.png" level="0" speed="1,2" fly="false" alarmRange="200" loseRange="450"/>
 
 	<enemy x="1152" y="832" texturepath="Assets/Textures/enemy.png" level="0" speed="1,2" fly="false" alarmRange="250" loseRange="400"/>
 

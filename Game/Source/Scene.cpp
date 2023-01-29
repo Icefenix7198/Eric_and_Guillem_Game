@@ -41,6 +41,12 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
+	for (pugi::xml_node itemNode = config.child("life"); itemNode; itemNode = itemNode.next_sibling("life"))
+	{
+		Life* life = (Life*)app->entityManager->CreateEntity(EntityType::LIFE);
+		life->parameters = itemNode;
+	}
+
 	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
 	{
 		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
