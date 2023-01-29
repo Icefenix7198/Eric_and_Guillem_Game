@@ -32,6 +32,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Define multiple Gui Event methods
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 public:
 	bool colidersCreated = false;
 
