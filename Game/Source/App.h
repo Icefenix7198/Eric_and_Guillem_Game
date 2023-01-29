@@ -27,6 +27,7 @@ class Lose;
 class FadeToBlack; 
 //L07 DONE 2: Add Physics module
 class Physics;
+class GuiManager;
 
 class App
 {
@@ -103,6 +104,7 @@ public:
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	FadeToBlack* fade;
+	GuiManager* guiManager;
 
 private:
 

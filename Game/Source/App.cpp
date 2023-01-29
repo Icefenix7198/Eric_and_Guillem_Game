@@ -13,6 +13,7 @@
 #include "Muerte.h"
 #include "Pathfinding.h"
 #include "ModuleFadeToBlack.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	lose = new Lose();
 	map = new Map();
 	fade = new FadeToBlack(); //ERIC: Por que conchas da error? Provar a hacerlo de 0 
+	guiManager = new GuiManager();
 	
 
 	// Ordered for awake / Start / Update
@@ -58,6 +60,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(victory);
 	AddModule(lose);
 	AddModule(fade);
+	AddModule(guiManager);
 
 	// Render last to swap buffer
 	AddModule(render);
