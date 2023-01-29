@@ -35,6 +35,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//Pantallazo negro y luego lo quita
+	bool FadeToBlack(float ms);
+
 	bool LoadState(pugi::xml_node& data);
 
 	//Save actual scene
@@ -72,6 +75,7 @@ public:
 	SString timeInText;
 private:
 	SDL_Texture* img;
+	Timer fadingFrames;
 
 };
 

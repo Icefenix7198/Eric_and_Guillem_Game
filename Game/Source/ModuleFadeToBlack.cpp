@@ -4,13 +4,13 @@
 #include "Render.h"
 #include "Window.h"
 #include "Log.h"
+#include "Scene.h"
 
 #include "SDL/include/SDL_render.h"
 
 FadeToBlack::FadeToBlack() : Module()
 {
-	//Quiza haya que cambiar el screen suferce con pixels to algo
-	screenRect = {0, 0, app->win->screenSurface->w * (int)app->win->GetScale(), app->win->screenSurface->h * (int)app->win->GetScale() }; //ERIC: Mirar si funciona bien el get scale
+	
 }
 
 FadeToBlack::~FadeToBlack()
@@ -20,8 +20,8 @@ FadeToBlack::~FadeToBlack()
 
 bool FadeToBlack::Start()
 {
-	LOG("Preparing Fade Screen");
-
+	LOG("Preparing Fade Screen");//Quiza haya que cambiar el screen suferce con pixels to algo
+	screenRect = { app->render->camera.x,app->render->camera.y,app->render->camera.w,app->render->camera.h }; //ERIC: Mirar si funciona bien el get scale
 	// Enable blending mode for transparency
 	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	return true;
@@ -87,4 +87,21 @@ bool FadeToBlack::Change(Module* moduleToDisable, Module* moduleToEnable, float 
 	}
 
 	return ret;
+}
+
+bool FadeToBlack::JustFade(float ms)
+{
+
+	for (int i = 0; i < 255; ++i)
+	{
+		app->render->DrawRectangle(screenRect, 255, 255, 255, i);
+	}
+
+	for (int i = 255; i > 0; --i)
+	{
+		app->render->DrawRectangle(screenRect, 255, 255, 255, i);
+	}
+
+
+	return true;
 }

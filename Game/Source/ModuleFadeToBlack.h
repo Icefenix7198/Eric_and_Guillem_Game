@@ -31,6 +31,8 @@ public:
 	//Eric: El nuevo fade lo que hace es dar un bool que desactiva las fisicas y el player, sirve para hacer pause(?)
 	bool Change(Module* toDisable, Module* toEnable, float frames = 60);
 
+	bool JustFade(float frames = 60);
+
 private:
 
 	enum Fade_Step

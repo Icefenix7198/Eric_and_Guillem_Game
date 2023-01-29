@@ -12,6 +12,7 @@
 #include "Victoria.h"
 #include "Muerte.h"
 #include "Pathfinding.h"
+#include "ModuleFadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -29,7 +30,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	//fade = new FadeToBlack(); //ERIC: Por que conchas da error? Provar a hacerlo de 0 
 	//L07 DONE 2: Add Physics module
 	physics = new Physics();
 	pathfinding = new PathFinding();
@@ -39,6 +39,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	victory = new Victory();
 	lose = new Lose();
 	map = new Map();
+	fade = new FadeToBlack(); //ERIC: Por que conchas da error? Provar a hacerlo de 0 
 	
 
 	// Ordered for awake / Start / Update
@@ -47,7 +48,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(win);
 	AddModule(tex);
 	AddModule(audio);
-	//AddModule(fade);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
 	AddModule(pathfinding);
@@ -57,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(victory);
 	AddModule(lose);
+	AddModule(fade);
 
 	// Render last to swap buffer
 	AddModule(render);

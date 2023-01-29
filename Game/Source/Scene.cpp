@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "EntityManager.h"
 #include "Pathfinding.h"
+#include "ModuleFadeToBlack.h"
 
 //Diferent Scenes
 #include "Intro.h"
@@ -167,6 +168,7 @@ bool Scene::Update(float dt)
 			actualScene = Scenes::GAMEMAP;
 			countDown.Start();
 			timeLeft = maxTime;
+			app->fade->JustFade();
 		}
 		break;
 	case Scene::GAMEMAP:
@@ -273,3 +275,4 @@ bool Scene::SaveState(pugi::xml_node& data)
 	
 	return true;
 }
+

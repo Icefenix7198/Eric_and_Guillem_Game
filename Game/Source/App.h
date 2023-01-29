@@ -21,10 +21,10 @@ class Scene;
 class EntityManager;
 class Map;
 class PathFinding;
-class FadeToBlack;
 class Intro;
 class Victory;
-class Lose; 
+class Lose;
+class FadeToBlack; 
 //L07 DONE 2: Add Physics module
 class Physics;
 
@@ -97,12 +97,12 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	PathFinding* pathfinding;
-	FadeToBlack* fade;
 	Intro* intro;
 	Victory* victory;
 	Lose* lose;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
+	FadeToBlack* fade;
 
 private:
 
