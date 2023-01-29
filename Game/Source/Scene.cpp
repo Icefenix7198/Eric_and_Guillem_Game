@@ -112,7 +112,7 @@ bool Scene::Start()
 
 	if (button1->state == GuiControlState::PRESSED)
 	{
-
+		actualScene = Scenes::SETTINGS;
 	}
 
 	return true;
@@ -127,6 +127,12 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
+	//MENU SETTINGS
+	if (button3->state == GuiControlState::PRESSED)
+	{
+
+	}
+
 	//Pausar juego
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 		pause = !pause;

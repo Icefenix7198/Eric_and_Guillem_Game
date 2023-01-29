@@ -67,7 +67,8 @@ public:
 		INTRO,
 		GAMEMAP,
 		WIN,
-		LOSE
+		LOSE,
+		SETTINGS
 	};
 	int actualScene;
 	bool pause = false;

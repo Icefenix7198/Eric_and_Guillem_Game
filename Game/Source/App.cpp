@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Intro.h"
 #include "Victoria.h"
+#include "Settings.h"
 #include "Muerte.h"
 #include "Pathfinding.h"
 #include "ModuleFadeToBlack.h"

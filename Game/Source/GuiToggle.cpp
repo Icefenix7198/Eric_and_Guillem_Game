@@ -69,7 +69,7 @@ bool GuiToggle::Draw(Render* render)
 		render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
 		break;
 	case GuiControlState::NORMAL:
-		render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
+		render->DrawRectangle(bounds, 0, 52, 152, 219, true, false);
 		break;
 	case GuiControlState::FOCUSED:
 		render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);

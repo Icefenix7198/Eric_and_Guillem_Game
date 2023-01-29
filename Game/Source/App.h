@@ -23,6 +23,7 @@ class Map;
 class PathFinding;
 class Intro;
 class Victory;
+class Settings;
 class Lose;
 class FadeToBlack; 
 //L07 DONE 2: Add Physics module
@@ -101,6 +102,7 @@ public:
 	Intro* intro;
 	Victory* victory;
 	Lose* lose;
+	Settings* settings;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	FadeToBlack* fade;
