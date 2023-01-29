@@ -86,7 +86,7 @@ private:
 	// L15: DONE 2: Declare a GUI Button and create it using the GuiManager
 	GuiButton* button1;
 	GuiButton* button2;
-	GuiButton* button3;
+	GuiButton* button3; bool initialNone = true;
 	GuiButton* button4;
 };
 

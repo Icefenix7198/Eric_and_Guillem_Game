@@ -110,7 +110,12 @@ bool Scene::Start()
 	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE", { 240,560,200,40 }, this);
 	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS", { 240,610,200,40 }, this);
 	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "    EXIT    ", { 240,660,200,40 }, this);
-
+	if(initialNone)
+	{
+	button2->state = GuiControlState::DISABLED;
+	initialNone = false;
+	}
+	
 	if (button1->state == GuiControlState::PRESSED)
 	{
 		actualScene = Scenes::SETTINGS;
@@ -141,7 +146,10 @@ bool Scene::Update(float dt)
 
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
 		app->SaveGameRequest();
+		button2->state = GuiControlState::NORMAL;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN || button2->state == GuiControlState::PRESSED)
 		app->LoadGameRequest();
