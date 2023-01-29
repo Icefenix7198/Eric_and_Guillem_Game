@@ -105,8 +105,8 @@ bool Scene::Start()
 	// L15: DONE 2: Declare a GUI Button and create it using the GuiManager
 	uint w, h;
 	app->win->GetWindowSize(w, h);
-	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Button 1", { (int)w / 2 - 50,(int)h / 2 - 30,100,20 }, this);
-	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Button 2", { (int)w / 2 - 50,(int)h / 2,100,20 }, this);
+	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Button 1", { 30,30,100,20 }, this);
+	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Button 2", { 60,60,100,20 }, this);
 
 	return true;
 }
@@ -175,6 +175,9 @@ bool Scene::Update(float dt)
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		app->intro->Draw();
+
+		//L15: Draw GUI
+		app->guiManager->Draw();
 
 		//Cambiar al mapa de juego
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN || app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
