@@ -136,7 +136,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN || button2->state == GuiControlState::PRESSED)
 		app->LoadGameRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)

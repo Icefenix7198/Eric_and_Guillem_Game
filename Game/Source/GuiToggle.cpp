@@ -59,7 +59,7 @@ bool GuiToggle::Update(float dt)
 
 
 
-bool GuiButton::Draw(Render* render)
+bool GuiToggle::Draw(Render* render)
 {
 	//L15: DONE 4: Draw the button according the GuiControl State
 
