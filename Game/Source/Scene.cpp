@@ -139,9 +139,7 @@ bool Scene::Update(float dt)
 
 	}
 
-	//Pausar juego
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-		pause = !pause;
+	
 
 
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
@@ -280,7 +278,17 @@ bool Scene::Update(float dt)
 		break;
 	}
 
-	
+	//Pausar juego
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		pause = !pause;
+		SDL_Color color;
+		color.r = 5;
+		color.g = 5;
+		color.b = 5;
+		color.a = 255;
+		app->render->DrawText("PAUSE ||", 900, 5, 500, 300, color);
+	}
 
 	return true;
 }

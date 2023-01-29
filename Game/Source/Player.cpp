@@ -168,6 +168,12 @@ bool Player::Update()
 		playerBody->body->SetGravityScale(0);
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		app->render->DrawTexture(texture, position.x, position.y, &rect, 1.0f, NULL, NULL, NULL, Invert);
+		SDL_Color color;
+		color.r = 5;
+		color.g = 5;
+		color.b = 5;
+		color.a = 255;
+		app->render->DrawText("PAUSE ||", -app->render->camera.x , -app->render->camera.y, 500, 300, color);
 		return true;
 	}
 
