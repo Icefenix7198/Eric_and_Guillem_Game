@@ -3,6 +3,7 @@
 #include "Textures.h"
 
 #include "GuiButton.h"
+#include "GuiToggle.h"
 #include "Audio.h"
 
 GuiManager::GuiManager() :Module()
@@ -29,10 +30,11 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	case GuiControlType::BUTTON:
 		guiControl = new GuiButton(id, bounds, text);
 		break;
-	/*
+	
 	case GuiControlType::TOGGLE:
+		guiControl = new GuiToggle(id, bounds, text);
 		break;
-	case GuiControlType::CHECKBOX:
+	/*case GuiControlType::CHECKBOX:
 		break;
 	case GuiControlType::SLIDER:
 		break;
