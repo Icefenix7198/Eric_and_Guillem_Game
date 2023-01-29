@@ -17,6 +17,7 @@
 #include "Map.h"
 #include "Victoria.h"
 #include "Muerte.h"
+#include "Settings.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -107,8 +108,8 @@ bool Scene::Start()
 	app->win->GetWindowSize(w, h);
 	button1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "    PLAY    ", { 240,510,200,40 }, this);
 	button2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE", { 240,560,200,40 }, this);
-	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "SETTINGS", { 240,610,200,40 }, this);
-	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "    EXIT    ", { 240,660,200,40 }, this);
+	button3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS", { 240,610,200,40 }, this);
+	button4 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "    EXIT    ", { 240,660,200,40 }, this);
 
 	if (button1->state == GuiControlState::PRESSED)
 	{
@@ -260,6 +261,10 @@ bool Scene::Update(float dt)
 			app->entityManager->Reset();
 		}
 		break;
+
+	case Scene::SETTINGS:
+		app->settings->Draw();
+		
 	default:
 		break;
 	}
@@ -291,6 +296,13 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Button 1 click");
 		break;
 	case 2:
+		LOG("Button 2 click");
+		break;
+	case 3:
+		LOG("Button 1 click");
+		actualScene = Scenes::SETTINGS;
+		break;
+	case 4:
 		LOG("Button 2 click");
 		break;
 	}

@@ -60,9 +60,14 @@ void Settings::Draw()
 {
     if (texturePath == false)
         return;
-    if (app->scene->actualScene == app->scene->WIN)
+    if (app->scene->actualScene == app->scene->SETTINGS)
     {
         app->render->DrawTexture(texture, 0, 0);
+        button1_1->Draw(app->render);
+        button1_2->Draw(app->render);
+        button2_1->Draw(app->render);
+        button2_2->Draw(app->render);
+        
     }
 }
 
