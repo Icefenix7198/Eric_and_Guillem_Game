@@ -7,33 +7,33 @@
 	<:anonymous />
 	<pathfinding />
 	<scene>
-		<scene actualScene="1" time="8" />
-		<camara x="-178" y="-771" />
+		<scene actualScene="1" time="14" />
+		<camara x="3" y="-771" />
 	</scene>
 	<entitymanager>
-		<player x="708" y="1455" lifes="4" coins="0" />
+		<player x="317" y="1455" lifes="4" coins="0" />
 		<enemies>
-			<enemy x="734" y="143" state="0" directionX="1" directionY="1" />
-			<enemy x="2448" y="1455" state="0" directionX="1" directionY="1" />
-			<enemy x="1280" y="847" state="0" directionX="1" directionY="1" />
+			<enemy x="717" y="127" state="0" directionX="1" directionY="1" />
+			<enemy x="2408" y="1455" state="0" directionX="1" directionY="1" />
+			<enemy x="1293" y="847" state="0" directionX="1" directionY="1" />
 		</enemies>
 		<monedas>
-			<moneda x="800" y="1376" collider="1" />
-			<moneda x="2144" y="1408" collider="1" />
-			<moneda x="2048" y="992" collider="1" />
-			<moneda x="1151" y="736" collider="1" />
-			<moneda x="63" y="736" collider="1" />
-			<moneda x="703" y="160" collider="1" />
-			<moneda x="800" y="160" collider="1" />
-			<moneda x="896" y="160" collider="1" />
-			<moneda x="1632" y="384" collider="1" />
-			<moneda x="2752" y="256" collider="1" />
-			<moneda x="2560" y="351" collider="1" />
-			<moneda x="2560" y="415" collider="1" />
-			<moneda x="2560" y="480" collider="1" />
-			<vida x="926" y="287" collider="8" />
-			<vida x="207" y="1247" collider="8" />
-			<vida x="32" y="607" collider="8" />
+			<moneda x="784" y="1359" collider="1" />
+			<moneda x="2127" y="1392" collider="1" />
+			<moneda x="2032" y="976" collider="1" />
+			<moneda x="1134" y="719" collider="1" />
+			<moneda x="47" y="719" collider="1" />
+			<moneda x="687" y="143" collider="1" />
+			<moneda x="784" y="143" collider="1" />
+			<moneda x="880" y="143" collider="1" />
+			<moneda x="1616" y="368" collider="1" />
+			<moneda x="2735" y="240" collider="1" />
+			<moneda x="2543" y="335" collider="1" />
+			<moneda x="2543" y="399" collider="1" />
+			<moneda x="2543" y="463" collider="1" />
+			<vida x="910" y="271" collider="8" />
+			<vida x="191" y="1230" collider="8" />
+			<vida x="16" y="591" collider="8" />
 		</monedas>
 		<vidas />
 	</entitymanager>
@@ -44,6 +44,6 @@
 	<:anonymous />
 	<guiManager />
 	<renderer>
-		<camera x="-178" y="-771" />
+		<camera x="3" y="-771" />
 	</renderer>
 </save_state>

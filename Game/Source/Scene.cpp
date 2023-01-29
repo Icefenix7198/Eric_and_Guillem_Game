@@ -231,6 +231,7 @@ bool Scene::Update(float dt)
 		
 		break;
 	case Scene::WIN:
+		player->Reset();
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		app->victory->Draw();
@@ -242,6 +243,7 @@ bool Scene::Update(float dt)
 		}
 		break;
 	case Scene::LOSE:
+		player->Reset();
 		app->render->camera.x = 0;
 		app->render->camera.y = 0;
 		app->lose->Draw();

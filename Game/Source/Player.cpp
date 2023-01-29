@@ -432,8 +432,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collison WALL");
 		break;
 	case ColliderType::DEAD:
+		if (app->scene->actualScene == app->scene->GAMEMAP)
+		{
 		app->scene->actualScene = app->scene->LOSE;
 		app->audio->PlayFx(DeadSound);
+		}
+		
 		
 		break;
 	case ColliderType::WIN:
@@ -444,7 +448,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		break;
 	case ColliderType::ENEMY:
-		if (GodMode==false && inmune==false)
+		if (GodMode==false && inmune==false && app->scene->actualScene==app->scene->GAMEMAP)
 		{
 			if (lives>1)
 			{
@@ -454,6 +458,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			}
 			else
 			{
+				Reset();
+				playerBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 				app->scene->actualScene = app->scene->LOSE;
 				app->audio->PlayFx(DeadSound); //TODO: QUIZA HACER MODO DE VIDAS
 			}
