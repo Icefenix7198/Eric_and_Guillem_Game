@@ -45,6 +45,8 @@ private:
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	SDL_Texture* Wtexture;
+	SDL_Texture* fullHP;
+	SDL_Texture* voidHP;
 	Animation* currentAnimation = nullptr;
 	Animation* currentAnimation2 = nullptr;
 	Animation Nulle, Run, Jump, JumpIdle, Weapon;
@@ -53,6 +55,9 @@ private:
 	const char* FxJump;
 	const char* FxWin;
 	const char* FxLose;
+
+	const char* pathFullHP;
+	const char* pathNoneHP;
 	// L07 TODO 5: Add physics to the player - declare a Physics body
 
 	int pickCoinFxId;

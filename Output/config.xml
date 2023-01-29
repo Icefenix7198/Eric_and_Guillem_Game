@@ -25,7 +25,7 @@
 
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="288" y="1408" texturepath="Assets/Textures/MainCharacter.png" FxJump="Assets/Audio/Fx/SonidoSalto.ogg" FxWin="Assets/Audio/Fx/SonidoWin.ogg" FxLose="Assets/Audio/Fx/SonidoLose.ogg">
+    <player x="288" y="1408" texturepath="Assets/Textures/MainCharacter.png" FxJump="Assets/Audio/Fx/SonidoSalto.ogg" FxWin="Assets/Audio/Fx/SonidoWin.ogg" FxLose="Assets/Audio/Fx/SonidoLose.ogg" containerEmpty="Assets/Textures/VidaVoid.png" containerFull="Assets/Textures/VidaFull.png">
 
       <AnimRun1 x="0" y="0" w="27" h="36"/>
       <AnimRun2 x="27" y="0" w="27" h="36"/>
@@ -52,8 +52,9 @@
 	<enemy x="2272" y="1440" texturepath="Assets/Textures/enemy.png" level="0" speed="1,2" fly="false" alarmRange="200" loseRange="450"/>
 
 	<enemy x="1152" y="832" texturepath="Assets/Textures/enemy.png" level="0" speed="1,2" fly="false" alarmRange="250" loseRange="400"/>
-	  
-	
+
+	<containerEmpty texturepath="Assets/Textures/VidaVoid.png"/>
+	<containerFull texturepath="Assets/Textures/VidaFull.png"/>
 	
 	
 	  

@@ -65,6 +65,8 @@ bool Player::Awake() {
 	FxJump = parameters.attribute("FxJump").as_string();
 	FxWin = parameters.attribute("FxWin").as_string();
 	FxLose = parameters.attribute("FxLose").as_string();
+	pathFullHP = parameters.attribute("containerFull").as_string();
+	pathNoneHP = parameters.attribute("containerEmpty").as_string();
 	
 	/*for(nodoDePugi = parameters.child("AnimationRun"); nodoDePugi !=NULL; nodoDePugi= parameters.child("AnimationRun").next_sibling();)
 	{
@@ -81,6 +83,7 @@ bool Player::Awake() {
 	JumpSound = app->audio->LoadFx(FxJump);
 	WinSound = app->audio->LoadFx(FxWin);
 	DeadSound = app->audio->LoadFx(FxLose);
+	
 
 	return true;
 }
@@ -89,6 +92,8 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+	fullHP = app->tex->Load(pathFullHP);
+	voidHP = app->tex->Load(pathNoneHP);
 
 
 	currentAnimation = &Run;
@@ -130,6 +135,17 @@ bool Player::Update()
 	if (app->scene->actualScene!=app->scene->GAMEMAP )
 	{
 		return true;
+	}
+
+	for(int i=0;lives>i;i++)
+	{
+		app->render->DrawTexture(fullHP, -app->render->camera.x+30+i*30, -app->render->camera.y);
+
+	}
+	for (int i = lives; 4 > i; i++)
+	{
+		app->render->DrawTexture(voidHP, -app->render->camera.x + 30 + i * 30, -app->render->camera.y);
+
 	}
 
 
@@ -419,7 +435,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		if (GodMode==false && inmune==false)
 		{
-			if (lives>=0)
+			if (lives>1)
 			{
 				--lives;
 				inmunityFrames.Start();
