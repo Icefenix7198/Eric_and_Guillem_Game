@@ -55,6 +55,10 @@ bool Item::Reset()
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 
 	}
+	renderable = true;
+	pbody->listener = this;
+	pbody->ctype = ColliderType::ITEM;
+
 	return ret;
 }
 
@@ -70,6 +74,7 @@ bool Item::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+	if (renderable)
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;

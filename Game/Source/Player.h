@@ -40,6 +40,8 @@ public:
 	Timer inmunityFrames;
 	int blinkingFrames = 1;
 
+	int coinsPicked = 0;
+
 private:
 
 	//L02: DONE 1: Declare player parameters

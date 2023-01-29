@@ -41,12 +41,22 @@
       <Weapon x="27" y="36" w="27" h="36"/>
     </player>
     
-    <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-    <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
-
+    <item x="832" y="1408" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="2176" y="1440" texturepath="Assets/Textures/goldCoin.png"/>
+    <item x="2080" y="1024" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="1184" y="768" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="96" y="768" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="736" y="192" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="832" y="192" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="928" y="192" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="1664" y="416" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="2784" y="288" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="2592" y="384" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="2592" y="448" texturepath="Assets/Textures/goldCoin.png"/>
+	<item x="2592" y="512" texturepath="Assets/Textures/goldCoin.png"/>
+	  
+	  
+	  
 	<enemy x="750" y="160" texturepath="Assets/Textures/enemy.png" level="0" speed="0.8" fly="true" alarmRange="300" loseRange="650"/>
 	
 	<enemy x="2272" y="1440" texturepath="Assets/Textures/enemy.png" level="0" speed="1,2" fly="false" alarmRange="200" loseRange="450"/>

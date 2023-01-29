@@ -23,7 +23,7 @@ bool FadeToBlack::Start()
 	LOG("Preparing Fade Screen");//Quiza haya que cambiar el screen suferce con pixels to algo
 	screenRect = { app->render->camera.x,app->render->camera.y,app->render->camera.w,app->render->camera.h }; //ERIC: Mirar si funciona bien el get scale
 	// Enable blending mode for transparency
-	SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
+	//SDL_SetRenderDrawBlendMode(app->render->renderer, SDL_BLENDMODE_BLEND);
 	return true;
 }
 

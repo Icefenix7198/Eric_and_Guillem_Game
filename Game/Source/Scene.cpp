@@ -168,7 +168,11 @@ bool Scene::Update(float dt)
 			actualScene = Scenes::GAMEMAP;
 			countDown.Start();
 			timeLeft = maxTime;
-			app->fade->JustFade();
+			for (size_t i = 0; i < 255*4; i++) //Ni idea porque no transiciona
+			{
+				app->render->DrawRectangle({ 0,0,300,300 }, 215, 215, 215,i/4);
+			}
+			//app->fade->JustFade();
 		}
 		break;
 	case Scene::GAMEMAP:

@@ -127,6 +127,7 @@ bool Player::Reset()
 	GodMode = false;
 	inmune = false;
 	lives = 4;
+	coinsPicked = 0;
 	return ret;
 }
 
@@ -137,6 +138,7 @@ bool Player::Update()
 		return true;
 	}
 
+	//Print actual lives
 	for(int i=0;lives>i;i++)
 	{
 		app->render->DrawTexture(fullHP, -app->render->camera.x+30+i*30, -app->render->camera.y);
@@ -148,6 +150,17 @@ bool Player::Update()
 
 	}
 
+	//Print coins
+	SString coinToText;
+	coinToText.Create("COINS %d", coinsPicked);
+	SDL_Color colorLetras;
+	colorLetras.r = 239;
+	colorLetras.g = 164;
+	colorLetras.b = 52;
+	colorLetras.a = 255;
+	app->render->DrawText(coinToText.GetString(), 500, 5, 70, 20, colorLetras); 
+
+	
 
 	if (app->scene->pause)
 	{
@@ -403,14 +416,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		
 		app->audio->PlayFx(pickCoinFxId);
 
-		physB->body->DestroyFixture(physB->body->GetFixtureList());
-		physB->body->GetWorld()->DestroyBody(physB->body);
- 		app->entityManager->DestroyEntity(physB->listener);
+ 		//app->entityManager->DestroyEntity(physB->listener);
 		//physB->listener->Disable();
 		//TODO ERIC:Arreglar esto
+		++coinsPicked;
+		physB->listener->renderable = false;
 
-		
-		app->entityManager->DestroyEntity(physB->listener);
+		//physB->body->DestroyFixture(physB->body->GetFixtureList());
+		physB->body->GetWorld()->DestroyBody(physB->body);
+		physB->ctype = ColliderType::UNKNOWN;
+		//app->entityManager->DestroyEntity(physB->listener);
 
 		break;
 	case ColliderType::PLATFORM:
