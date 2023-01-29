@@ -15,6 +15,7 @@
 #include "Pathfinding.h"
 #include "ModuleFadeToBlack.h"
 #include "GuiManager.h"
+#include"Settings.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -43,6 +44,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	fade = new FadeToBlack(); //ERIC: Por que conchas da error? Provar a hacerlo de 0 
 	guiManager = new GuiManager();
+	settings = new Settings();
 	
 
 	// Ordered for awake / Start / Update
@@ -60,6 +62,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(victory);
 	AddModule(lose);
+	AddModule(settings);
 	AddModule(fade);
 	AddModule(guiManager);
 

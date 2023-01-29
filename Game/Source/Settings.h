@@ -8,6 +8,7 @@
 #include "Point.h"
 
 #include "GuiButton.h"
+#include "GuiToggle.h"
 
 #include "PugiXml\src\pugixml.hpp"
 

@@ -3,6 +3,8 @@
 #include "Textures.h"
 #include "Settings.h"
 #include "Scene.h"
+#include "GuiToggle.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"

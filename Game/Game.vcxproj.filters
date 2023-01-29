@@ -35,6 +35,7 @@
     <ClCompile Include="Source\GuiButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\GuiToggle.cpp" />
+    <ClCompile Include="Source\Settings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\GuiToggle.h" />
+    <ClInclude Include="Source\Settings.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
