@@ -44,15 +44,21 @@ bool Settings::Start()
 {
     texture = app->tex->Load(texturePath);
 
-    button1_1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "    PLAY    ", { 240,510,200,40 }, this);
-    button1_2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE", { 240,560,200,40 }, this);
-    button2_1 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "SETTINGS", { 240,610,200,40 }, this);
-    button2_2 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "    EXIT    ", { 240,660,200,40 }, this);
+    button1_1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "   MUSIC   ", { 415,400,200,40 }, this);
+    button1_2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "MAIN SOUND", { 415,450,200,40 }, this);
+    button1_3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "   BACK   ", { 800,660,200,40 }, this);
+
+    button2_1 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  CHEK 1  ", { 415,500,200,40 }, this);
+    button2_2 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "  CHEK 2  ", { 415,550,200,40 }, this);
     return true;
 }
 
 bool Settings::Update()
 {
+    if (button1_3->state == GuiControlState::PRESSED)
+    {
+        actualScene = Scenes::INTRO;
+    }
     return true;
 }
 
@@ -67,6 +73,7 @@ void Settings::Draw()
         button1_2->Draw(app->render);
         button2_1->Draw(app->render);
         button2_2->Draw(app->render);
+        button1_3->Draw(app->render);
         
     }
 }

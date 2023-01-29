@@ -191,7 +191,10 @@ bool Scene::Update(float dt)
 		app->intro->Draw();
 
 		//L15: Draw GUI
-		app->guiManager->Draw();
+		button1->Draw(app->render);
+		button2->Draw(app->render);
+		button3->Draw(app->render);
+		button4->Draw(app->render);
 
 		//Cambiar al mapa de juego
 		if (button1->state == GuiControlState::PRESSED || app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
@@ -304,6 +307,10 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 	case 4:
 		LOG("Button 2 click");
+		break;
+	case 5:
+		LOG("Button 2 click");
+		actualScene = Scenes::INTRO;
 		break;
 	}
 

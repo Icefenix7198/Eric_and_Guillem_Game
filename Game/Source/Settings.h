@@ -47,6 +47,7 @@ private:
 
 	GuiButton* button1_1;
 	GuiButton* button1_2;
+	GuiButton* button1_3;
 	GuiToggle* button2_1;
 	GuiToggle* button2_2;
 };
