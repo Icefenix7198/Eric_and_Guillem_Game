@@ -18,6 +18,7 @@ public:
 
 	int mouseX, mouseY;
 	unsigned int click;
+	bool active = false;
 
 	bool canClick = true;
 	bool drawBasic = false;

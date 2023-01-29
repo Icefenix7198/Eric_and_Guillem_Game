@@ -22,15 +22,17 @@ GuiToggle::~GuiToggle()
 
 bool GuiToggle::Update(float dt)
 {
+	
+
 	if (state != GuiControlState::DISABLED)
 	{
 		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		GuiControlState previousState = state;
-		bool activated;
-		if (state == GuiControlState::NORMAL) { activated = false; }
-		if (state == GuiControlState::SELECTED) { activated = true; }
+		if (active==true){ state = GuiControlState::SELECTED;}
+		else{ state = GuiControlState::NORMAL; }
+		
 		// I'm inside the limitis of the button
 		if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 			mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
@@ -49,19 +51,10 @@ bool GuiToggle::Update(float dt)
 			//
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 				NotifyObserver();
-				if (activated)
-				{
-					state = GuiControlState::NORMAL;
-				}
-				else
-				{
-					state = GuiControlState::SELECTED;
-				}
+				active = !active;
 			}
 		}
-		else {
-			state = GuiControlState::NORMAL;
-		}
+		
 	}
 
 	return false;

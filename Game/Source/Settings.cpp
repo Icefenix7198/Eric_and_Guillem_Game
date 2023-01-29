@@ -48,8 +48,8 @@ bool Settings::Start()
     button1_2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "MAIN SOUND", { 415,450,200,40 }, this);
     button1_3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "   BACK   ", { 800,660,200,40 }, this);
 
-    button2_1 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  CHEK 1  ", { 415,500,200,40 }, this);
-    button2_2 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "  CHEK 2  ", { 415,550,200,40 }, this);
+    button2_1 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::TOGGLE, 3, "  CHEK 1  ", { 415,500,200,40 }, this);
+    button2_2 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::TOGGLE, 4, "  CHEK 2  ", { 415,550,200,40 }, this);
     return true;
 }
 
