@@ -178,8 +178,13 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 {
 	float x = data.child("player").attribute("x").as_int();
 	float y = data.child("player").attribute("y").as_int();
+	int lifes= data.child("player").attribute("lifes").as_int();
+	int coins = data.child("player").attribute("lifes").as_int();
 
 	app->scene->player->playerBody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+
+	app->scene->player->lives = lifes;
+	app->scene->player->coinsPicked = coins;
 
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;
@@ -213,6 +218,8 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 
 	player.append_attribute("x") = app->scene->player->position.x;
 	player.append_attribute("y") = app->scene->player->position.y;
+	player.append_attribute("lifes") = app->scene->player->lives;
+	player.append_attribute("coins") = app->scene->player->coinsPicked;
 
 	ListItem<Entity*>* item;
 	Entity* pEntity = NULL;

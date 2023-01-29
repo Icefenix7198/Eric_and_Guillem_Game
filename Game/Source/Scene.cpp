@@ -261,6 +261,8 @@ bool Scene::LoadState(pugi::xml_node& data)
 	actualScene = data.child("scene").attribute("actualScene").as_int();
 	app->render->camera.x = data.child("camera").attribute("x").as_int();
 	app->render->camera.x = data.child("camera").attribute("y").as_int();
+	lastTime= data.child("scene").attribute("time").as_int();
+	countDown.Start();
 
 
 	return true;
@@ -276,6 +278,7 @@ bool Scene::SaveState(pugi::xml_node& data)
 	camara.append_attribute("y")= app->render->camera.y;
 
 	scene.append_attribute("actualScene") = actualScene;
+	scene.append_attribute("time") = maxTime - timeLeft;
 	
 	return true;
 }

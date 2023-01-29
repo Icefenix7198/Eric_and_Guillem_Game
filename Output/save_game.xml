@@ -7,22 +7,23 @@
 	<:anonymous />
 	<pathfinding />
 	<scene>
-		<scene actualScene="1" />
-		<camara x="2" y="-141" />
+		<scene actualScene="1" time="10" />
+		<camara x="0" y="-771" />
 	</scene>
 	<entitymanager>
-		<player x="248" y="463" />
+		<player x="256" y="1455" lifes="4" coins="4" />
 		<enemies>
-			<enemy x="768" y="130" state="0" directionX="1" directionY="-1" />
-			<enemy x="2227" y="1455" state="0" directionX="-1" directionY="1" />
-			<enemy x="1180" y="847" state="0" directionX="1" directionY="1" />
+			<enemy x="734" y="143" state="0" directionX="1" directionY="1" />
+			<enemy x="2180" y="1455" state="0" directionX="1" directionY="1" />
+			<enemy x="1169" y="847" state="0" directionX="1" directionY="1" />
 		</enemies>
 	</entitymanager>
 	<intro />
 	<map />
 	<victory />
 	<lose />
+	<:anonymous />
 	<renderer>
-		<camera x="2" y="-141" />
+		<camera x="0" y="-771" />
 	</renderer>
 </save_state>
