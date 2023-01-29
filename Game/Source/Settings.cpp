@@ -57,7 +57,7 @@ bool Settings::Update()
 {
     if (button1_3->state == GuiControlState::PRESSED)
     {
-        actualScene = Scenes::INTRO;
+        app->scene->actualScene = app->scene->Scenes::INTRO;
     }
     return true;
 }
