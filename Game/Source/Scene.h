@@ -85,6 +85,8 @@ private:
 	// L15: DONE 2: Declare a GUI Button and create it using the GuiManager
 	GuiButton* button1;
 	GuiButton* button2;
+	GuiButton* button3;
+	GuiButton* button4;
 };
 
 #endif // __SCENE_H__
