@@ -44,8 +44,8 @@ bool Settings::Start()
 {
     texture = app->tex->Load(texturePath);
 
-    button1_1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "   MUSIC   ", { 415,400,200,40 }, this);
-    button1_2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "MAIN SOUND", { 415,450,200,40 }, this);
+    button1_1 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "   MUSIC +   ", { 415,400,200,40 }, this);
+    button1_2 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "   MUSIC -   ", { 415,450,200,40 }, this);
     button1_3 = (GuiButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "   BACK   ", { 800,660,200,40 }, this);
 
     button2_1 = (GuiToggle*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "  CHEK 1  ", { 415,500,200,40 }, this);
@@ -55,10 +55,6 @@ bool Settings::Start()
 
 bool Settings::Update()
 {
-    if (button1_3->state == GuiControlState::PRESSED)
-    {
-        actualScene = Scenes::INTRO;
-    }
     return true;
 }
 
@@ -76,6 +72,34 @@ void Settings::Draw()
         button1_3->Draw(app->render);
         
     }
+}
+
+bool Settings::OnGuiMouseClickEvent(GuiControl* control)
+{
+    // L15: DONE 5: Implement the OnGuiMouseClickEvent method
+    LOG("Event by %d ", control->id);
+
+    switch (control->id)
+    {
+    case 1:
+        LOG("Button 1 click");
+        break;
+    case 2:
+        LOG("Button 2 click");
+        break;
+    case 3:
+        LOG("Button 1 click");
+        break;
+    case 4:
+        LOG("Button 2 click");
+        break;
+    case 5:
+        LOG("Button 2 click");
+        app->scene->actualScene = app->scene->Scenes::INTRO;
+        break;
+    }
+
+    return true;
 }
 
 // Called before quitting
