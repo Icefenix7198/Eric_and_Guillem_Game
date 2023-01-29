@@ -17,7 +17,7 @@ GuiToggle::GuiToggle(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(
 
 GuiToggle::~GuiToggle()
 {
-
+	
 }
 
 bool GuiToggle::Update(float dt)
@@ -28,10 +28,13 @@ bool GuiToggle::Update(float dt)
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		GuiControlState previousState = state;
-
+		bool activated;
+		if (state == GuiControlState::NORMAL) { activated = false; }
+		if (state == GuiControlState::SELECTED) { activated = true; }
 		// I'm inside the limitis of the button
 		if (mouseX >= bounds.x && mouseX <= bounds.x + bounds.w &&
 			mouseY >= bounds.y && mouseY <= bounds.y + bounds.h) {
+			
 			
 			state = GuiControlState::FOCUSED;
 			if (previousState != state) {
@@ -46,6 +49,14 @@ bool GuiToggle::Update(float dt)
 			//
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KeyState::KEY_UP) {
 				NotifyObserver();
+				if (activated)
+				{
+					state = GuiControlState::NORMAL;
+				}
+				else
+				{
+					state = GuiControlState::SELECTED;
+				}
 			}
 		}
 		else {
@@ -69,13 +80,16 @@ bool GuiToggle::Draw(Render* render)
 		render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
 		break;
 	case GuiControlState::NORMAL:
-		render->DrawRectangle(bounds, 0, 52, 152, 219, true, false);
+		render->DrawRectangle(bounds, 215, 0, 0, 200, true, false);
 		break;
 	case GuiControlState::FOCUSED:
-		render->DrawRectangle(bounds, 0, 0, 20, 255, true, false);
+		render->DrawRectangle(bounds, 100, 0, 100, 200, true, false);
 		break;
 	case GuiControlState::PRESSED:
 		render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+		break;
+	case GuiControlState::SELECTED:
+		render->DrawRectangle(bounds, 0, 215, 0, 200, true, false);
 		break;
 	}
 
