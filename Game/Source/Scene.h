@@ -6,6 +6,7 @@
 #include "Item.h"
 #include "Enemy.h"
 #include "Life.h"
+#include "GuiButton.h"
 
 struct SDL_Texture;
 
@@ -44,6 +45,9 @@ public:
 	//Save actual scene
 	bool SaveState(pugi::xml_node& data);
 
+	// Define multiple Gui Event methods
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 public:
 
 	//L02: DONE 3: Declare a Player attribute 
@@ -77,7 +81,10 @@ public:
 private:
 	SDL_Texture* img;
 	Timer fadingFrames;
-
+	
+	// L15: DONE 2: Declare a GUI Button and create it using the GuiManager
+	GuiButton* button1;
+	GuiButton* button2;
 };
 
 #endif // __SCENE_H__
