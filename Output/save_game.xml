@@ -7,16 +7,35 @@
 	<:anonymous />
 	<pathfinding />
 	<scene>
-		<scene actualScene="1" time="10" />
+		<scene actualScene="1" time="4" />
 		<camara x="0" y="-771" />
 	</scene>
 	<entitymanager>
-		<player x="256" y="1455" lifes="4" coins="4" />
+		<player x="272" y="1455" lifes="4" coins="0" />
 		<enemies>
-			<enemy x="734" y="143" state="0" directionX="1" directionY="1" />
-			<enemy x="2180" y="1455" state="0" directionX="1" directionY="1" />
-			<enemy x="1169" y="847" state="0" directionX="1" directionY="1" />
+			<enemy x="750" y="160" state="0" directionX="1" directionY="1" />
+			<enemy x="2249" y="1455" state="0" directionX="1" directionY="1" />
+			<enemy x="1093" y="847" state="0" directionX="1" directionY="1" />
 		</enemies>
+		<monedas>
+			<moneda x="816" y="1392" collider="1" />
+			<moneda x="2160" y="1424" collider="1" />
+			<moneda x="2064" y="1008" collider="1" />
+			<moneda x="1168" y="752" collider="1" />
+			<moneda x="80" y="752" collider="1" />
+			<moneda x="719" y="176" collider="1" />
+			<moneda x="816" y="176" collider="1" />
+			<moneda x="912" y="176" collider="1" />
+			<moneda x="1648" y="400" collider="1" />
+			<moneda x="2768" y="272" collider="1" />
+			<moneda x="2576" y="368" collider="1" />
+			<moneda x="2576" y="432" collider="1" />
+			<moneda x="2576" y="496" collider="1" />
+			<vida x="943" y="303" collider="8" />
+			<vida x="223" y="1263" collider="8" />
+			<vida x="48" y="623" collider="8" />
+		</monedas>
+		<vidas />
 	</entitymanager>
 	<intro />
 	<map />

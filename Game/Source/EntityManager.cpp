@@ -184,7 +184,7 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	float x = data.child("player").attribute("x").as_int();
 	float y = data.child("player").attribute("y").as_int();
 	int lifes= data.child("player").attribute("lifes").as_int();
-	int coins = data.child("player").attribute("lifes").as_int();
+	int coins = data.child("player").attribute("coins").as_int();
 
 	app->scene->player->playerBody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
 
@@ -195,6 +195,8 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	Entity* pEntity = NULL;
 
 	pugi::xml_node enemigo = data.child("enemies").first_child();
+	pugi::xml_node vida = data.child("vidas").first_child();
+	pugi::xml_node moneda = data.child("monedas").first_child();
 
 	for (item = entities.start; item != NULL; item = item->next)
 	{
@@ -205,6 +207,18 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 		{
 			pEntity->LoadState(enemigo);
 			enemigo = enemigo.next_sibling();
+		}
+
+		if (pEntity->type == EntityType::ITEM)
+		{
+			pEntity->LoadState(moneda);
+			moneda = moneda.next_sibling();
+		}
+
+		if (pEntity->type == EntityType::LIFE)
+		{
+			pEntity->LoadState(vida);
+			vida = vida.next_sibling();
 		}
 
 
@@ -220,6 +234,8 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 {
 	pugi::xml_node player = data.append_child("player");
 	pugi::xml_node enemies = data.append_child("enemies");
+	pugi::xml_node monedas = data.append_child("monedas");
+	pugi::xml_node vidas = data.append_child("vidas");
 
 	player.append_attribute("x") = app->scene->player->position.x;
 	player.append_attribute("y") = app->scene->player->position.y;
@@ -236,9 +252,21 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		{
 			pEntity->SaveState(enemies);
 		}
-
-		if (pEntity->active == false) continue;
 		
+		
+		if (pEntity->type == EntityType::ITEM)
+		{
+			pEntity->SaveState(monedas);
+		}
+
+		if (pEntity->type == EntityType::LIFE)
+		{
+			pEntity->SaveState(vidas);
+		}
+		
+		if (pEntity->active == false) continue;
+
+
 	}
 
 	

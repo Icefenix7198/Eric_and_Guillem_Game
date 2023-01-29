@@ -24,6 +24,10 @@ public:
 
 	bool CleanUp();
 
+	bool LoadState(pugi::xml_node& data);
+
+	bool SaveState(pugi::xml_node& data);
+
 	
 public:
 

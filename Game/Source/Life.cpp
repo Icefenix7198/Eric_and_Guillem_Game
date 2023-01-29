@@ -93,3 +93,28 @@ bool Life::CleanUp()
 
 	return true;
 }
+
+bool Life::LoadState(pugi::xml_node& data)
+{
+	Reset();
+	//Damos como data uno de los enemy directamente (habiendo uno por cada enemigo)
+	float x = data.attribute("x").as_int();
+	float y = data.attribute("y").as_int();
+
+	pbody->body->SetTransform({ PIXEL_TO_METERS(x),PIXEL_TO_METERS(y) }, 0);
+
+	pbody->ctype = (ColliderType)data.attribute("collider").as_int();
+
+	return true;
+}
+
+bool Life::SaveState(pugi::xml_node& data)
+{
+	pugi::xml_node vida = data.append_child("vida");
+
+	vida.append_attribute("x") = position.x;
+	vida.append_attribute("y") = position.y;
+	vida.append_attribute("collider") = (int)pbody->ctype;
+
+	return true;
+}
