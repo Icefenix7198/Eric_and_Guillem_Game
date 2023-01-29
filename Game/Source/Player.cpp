@@ -420,12 +420,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//physB->listener->Disable();
 		//TODO ERIC:Arreglar esto
 		++coinsPicked;
-		physB->listener->renderable = false;
-
-		//physB->body->DestroyFixture(physB->body->GetFixtureList());
-		physB->body->GetWorld()->DestroyBody(physB->body);
 		physB->ctype = ColliderType::UNKNOWN;
-		//app->entityManager->DestroyEntity(physB->listener);
+		
 
 		break;
 	case ColliderType::PLATFORM:

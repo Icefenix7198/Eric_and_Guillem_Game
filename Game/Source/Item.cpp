@@ -9,6 +9,9 @@
 #include "Point.h"
 #include "Physics.h"
 
+#include "EntityManager.h"
+#include "Player.h"
+
 #include "Map.h"
 
 Item::Item() : Entity(EntityType::ITEM)
@@ -55,7 +58,7 @@ bool Item::Reset()
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(position.x), PIXEL_TO_METERS(position.y)), 0);
 
 	}
-	renderable = true;
+	this->renderable = true;
 	pbody->listener = this;
 	pbody->ctype = ColliderType::ITEM;
 
@@ -74,8 +77,11 @@ bool Item::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	if (renderable)
-	app->render->DrawTexture(texture, position.x, position.y);
+	
+	if (this->pbody->ctype == ColliderType::ITEM)
+	{
+		app->render->DrawTexture(texture, position.x, position.y);
+	}
 
 	return true;
 }
@@ -86,4 +92,43 @@ bool Item::CleanUp()
 	pbody->~PhysBody();
 
 	return true;
+}
+
+void Item::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+
+
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		pbody->body->DestroyFixture(pbody->body->GetFixtureList());
+		pbody->body->GetWorld()->DestroyBody(pbody->body);
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		
+		break;
+	case ColliderType::WALL:
+		LOG("Collison WALL");
+		break;
+	case ColliderType::DEAD:
+		
+
+		break;
+	case ColliderType::WIN:
+		break;
+	case ColliderType::ENEMY:
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::WEAPON:
+		LOG("Collision WEAPON");
+
+		break;
+	}
+
+
+
 }

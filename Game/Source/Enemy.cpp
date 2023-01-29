@@ -348,13 +348,6 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 
-
-		//physB->listener->Disable();
-		//TODO ERIC:Arreglar esto
-
-
-		app->entityManager->DestroyEntity(physB->listener);
-
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
